@@ -24,6 +24,8 @@ public class MyPageActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mypage);
 
+        //asdf;
+
 
 
         // fdsafdsa;;
