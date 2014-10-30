@@ -25,6 +25,8 @@ public class MyPageActivity extends Activity {
         setContentView(R.layout.activity_mypage);
 
 
+
+        // fdsafdsa;;
         //// insert button listener for Main
         Button btnMain = (Button) findViewById(R.id.button4);
         btnMain.setOnClickListener(new View.OnClickListener() {
