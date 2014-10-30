@@ -38,7 +38,7 @@ public class PostActivity extends Activity {
     private int post_no;
     //private String Url = "http://192.168.1.10:5001/KNU_Market/"; //웹서버 URL
     //private String Url = "http://155.230.29.182:5001/KNU_Market/"; //웹서버 URL
-    private String Url = "http://211.51.176.248:5001/KNU_Market/"; //웹서버 URL
+    private String Url = "http://121.151.119.125:5001/KNU_Market/"; //웹서버 URL
     private JSONArray jArray;
     private postLoading task;
     private ViewPager mViewPager;
@@ -109,9 +109,6 @@ public class PostActivity extends Activity {
         task.execute("JSP/RequestPost.jsp?post_no="+post_no);
         //TextView textView = (TextView) findViewById(R.id.Post_textView);
         //textView.setText("post_no :"+post_no);
-
-
-
 
         //// insert button listener for MYPAGE
         Button btnMypage = (Button) findViewById(R.id.button6);

@@ -32,27 +32,6 @@
                 android:text="크누마켓icon"
                 android:id="@+id/textView" />
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/search"
-                android:id="@+id/button"
-                android:layout_weight="0.33" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/zzim"
-                android:id="@+id/button2"
-                android:layout_weight="0.33" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/notify"
-                android:id="@+id/button3"
-                android:layout_weight="0.33" />
-
         </LinearLayout>
         <ScrollView
             android:layout_width="fill_parent"
@@ -75,7 +54,7 @@
                 android:id="@+id/post_layout">
 
                 <view
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="300dp"
                     class="android.support.v4.view.ViewPager"
                     android:id="@+id/post_viewpager"
@@ -221,35 +200,6 @@
 
                     </LinearLayout>
 
-
-
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginStart="20dp"
-                        android:layout_weight="1">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:text="(카톡연락하기)"
-                            android:textSize="14sp"
-                            android:textColor="@android:color/black"
-                            android:id="@+id/ItemText07"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="40dp"
-                            android:text="(찜하기)"
-                            android:textSize="14sp"
-                            android:textColor="@android:color/black"
-                            android:id="@+id/ItemText08"/>
-
-                    </LinearLayout>
-
                     <LinearLayout
                         android:orientation="horizontal"
                         android:layout_width="fill_parent"
@@ -328,6 +278,13 @@
                             android:layout_marginTop="5dp"
                             android:text="등록"
                             android:id="@+id/ItemText12"/>
+                        <ListView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/commentList">
+
+
+                         </ListView>
                     </LinearLayout>
                 </LinearLayout>
 
@@ -351,30 +308,35 @@
                 android:layout_height="wrap_content">
 
                 <Button
-                    android:layout_width="0dp"
+                    android:layout_width="50dp"
                     android:layout_height="match_parent"
-                    android:text="@string/home"
                     android:id="@+id/button4"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:text="(카톡연락하기)"
+                    android:textSize="14sp"
+                    android:textColor="@android:color/black"/>
 
                 <Button
-                    android:layout_width="0dp"
+                    android:layout_width="50dp"
                     android:layout_height="match_parent"
-                    android:text="@string/addPost"
+                    android:text="(문자하기)"
                     android:id="@+id/button5"
                     android:layout_weight="1" />
 
                 <Button
-                    android:layout_width="0dp"
+                    android:layout_width="50dp"
                     android:layout_height="match_parent"
-                    android:text="@string/myPage"
                     android:id="@+id/button6"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:text="(찜하기)"
+                    android:textSize="14sp"
+                    android:textColor="@android:color/black"/>
+
 
                 <Button
-                    android:layout_width="0dp"
+                    android:layout_width="50dp"
                     android:layout_height="match_parent"
-                    android:text="@string/config"
+                    android:text="(임시)"
                     android:id="@+id/button7"
                     android:layout_weight="1" />
             </LinearLayout>
