@@ -3,6 +3,7 @@ package com.harold.knumarket;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
@@ -11,11 +12,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.harold.knumarket.Item_Comment.ItemComment;
+import com.harold.knumarket.Item_Comment.ItemCommentListAdapter;
 import com.knumarket.harold.knu_market.R;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -42,6 +47,8 @@ public class PostActivity extends Activity {
     private JSONArray jArray;
     private postLoading task;
     private ViewPager mViewPager;
+    ListView listView1;
+    ItemCommentListAdapter adapter;
 
     public static final int REQUEST_CODE_MAIN = 1001;
     public static final int REQUEST_CODE_MYPAGE = 1005;
@@ -110,6 +117,43 @@ public class PostActivity extends Activity {
         //TextView textView = (TextView) findViewById(R.id.Post_textView);
         //textView.setText("post_no :"+post_no);
 
+
+        // 리스트뷰 객체 참조
+        listView1 = (ListView) findViewById(R.id.commentList);
+
+        // 어댑터 객체 생성
+        adapter = new ItemCommentListAdapter(getApplicationContext());
+
+        // 아이템 데이터 만들기
+        Resources res = getResources();
+        adapter.addItem(new ItemComment("id test", "아아 id test"));
+        adapter.addItem(new ItemComment("qwer",  "asdfqwer"));
+        adapter.addItem(new ItemComment("KNU MARKET", "댓글 되요?"));
+        adapter.addItem(new ItemComment("Administrator", "댓글 확인했습니다"));
+
+
+
+        // 리스트뷰에 어댑터 설정
+        listView1.setAdapter(adapter);
+
+        // 새로 정의한 리스너로 객체를 만들어 설정
+        listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ItemComment curItem = (ItemComment) adapter.getItem(position);
+                String[] curData = curItem.getData();
+                //Toast.makeText(context, "Selected : " + curData[0], 1000).show();
+                Toast.makeText(getApplicationContext(), "comment : " + curData[1], Toast.LENGTH_SHORT).show();
+
+                Resources res = getResources();
+                // adapter.addItem(new IconTextItem(res.getDrawable(R.drawable.icon06), "추가아이템", "999 원"));
+            }
+
+        });
+
+
+
         //// insert button listener for MYPAGE
         Button btnMypage = (Button) findViewById(R.id.button6);
         btnMypage.setOnClickListener(new View.OnClickListener() {
@@ -137,6 +181,7 @@ public class PostActivity extends Activity {
         });
         ////
     }
+
 
     public  void initializeViewPager(JSONArray array){
 
