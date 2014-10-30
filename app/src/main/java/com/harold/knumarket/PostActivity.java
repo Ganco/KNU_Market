@@ -129,7 +129,7 @@ public class PostActivity extends Activity {
         adapter.addItem(new ItemComment("id test", "아아 id test"));
         adapter.addItem(new ItemComment("qwer",  "asdfqwer"));
         adapter.addItem(new ItemComment("KNU MARKET", "댓글 되요?"));
-        adapter.addItem(new ItemComment("Administrator", "댓글 확인했습니다"));
+        adapter.addItem(new ItemComment("Administrator", "댓글 확인했습니다")); // test
 
 
 
