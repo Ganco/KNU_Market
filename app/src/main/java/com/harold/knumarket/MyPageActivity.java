@@ -24,7 +24,11 @@ public class MyPageActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mypage);
 
+        //asdf;
 
+
+
+        // fdsafdsa;;
         //// insert button listener for Main
         Button btnMain = (Button) findViewById(R.id.button4);
         btnMain.setOnClickListener(new View.OnClickListener() {
