@@ -3,7 +3,9 @@ package com.harold.knumarket;
 import com.knumarket.harold.knu_market.R;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -76,22 +78,6 @@ public class Fragment_section1 extends Fragment {
 
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_section1, container, false);
-
-        //AUIL 이미지 옵션 설정
-        DisplayImageOptions options = new DisplayImageOptions.Builder()
-                .showImageOnLoading(R.drawable.ic_stub) // 로딩중 이미지 설정
-                .showImageForEmptyUri(R.drawable.ic_empty) // Uri주소가 잘못되었을경우(이미지없을때)
-                .showImageOnFail(R.drawable.ic_error) // 로딩 실패시
-                .resetViewBeforeLoading(false)  // 로딩전에 뷰를 리셋하는건데 false로 하세요 과부하!
-                .delayBeforeLoading(0) // 로딩전 딜레이라는데 필요한일이 있을까요..?ㅋㅋ
-                .cacheInMemory(true) // 메모리케시 사용여부   (사용하면 빨라지지만 많은 이미지 캐싱할경우 outOfMemory Exception발생할 수 있어요)
-                .cacheOnDisc(true) // 디스크캐쉬를 사용여부(사용하세요왠만하면)
-                        //.preProcessor(...) // 비트맵 띄우기전에 프로세스 (BitmapProcessor이라는 인터페이스를 구연하면 process(Bitmap image)라는 메소드를 사용할 수 있어요. 처리하실게 있으면 작성하셔서 이안에 넣어주시면 됩니다.)
-                        //.postProcessor(...) // 비트맵 띄운후 프로세스 (위와같이 BitmapProcessor로 처리)
-                .considerExifParams(false) // 사진이미지의 회전률 고려할건지
-                .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2) // 스케일타입설정   (일부밖에없습니다. 제가 centerCrop이 없어서 라이브러리 다 뒤져봤는데 없더라구요. 다른방법이 있습니다. 아래 설명해드릴게요.)
-                .bitmapConfig(Bitmap.Config.ARGB_8888) // 이미지 컬러방식
-                .build();
 
         //작업 부분
         boolean netStat = false;
@@ -195,8 +181,40 @@ public class Fragment_section1 extends Fragment {
                     p_button.setGravity(Gravity.FILL);
 
                     //AUIL ImageLoader 사용
+
+                    //AUIL 이미지 옵션 설정
+                    DisplayImageOptions options = new DisplayImageOptions.Builder()
+                            .showImageOnLoading(R.drawable.ic_stub) // 로딩중 이미지 설정
+                            .showImageForEmptyUri(R.drawable.ic_empty) // Uri주소가 잘못되었을경우(이미지없을때)
+                            .showImageOnFail(R.drawable.ic_error) // 로딩 실패시
+                            .resetViewBeforeLoading(false)  // 로딩전에 뷰를 리셋하는건데 false로 하세요 과부하!
+                            .delayBeforeLoading(0) // 로딩전 딜레이라는데 필요한일이 있을까요..?ㅋㅋ
+                            .cacheInMemory(true) // 메모리케시 사용여부   (사용하면 빨라지지만 많은 이미지 캐싱할경우 outOfMemory Exception발생할 수 있어요)
+                            .cacheOnDisc(true) // 디스크캐쉬를 사용여부(사용하세요왠만하면)
+                                    //.preProcessor(...) // 비트맵 띄우기전에 프로세스 (BitmapProcessor이라는 인터페이스를 구연하면 process(Bitmap image)라는 메소드를 사용할 수 있어요. 처리하실게 있으면 작성하셔서 이안에 넣어주시면 됩니다.)
+                                    //.postProcessor(...) // 비트맵 띄운후 프로세스 (위와같이 BitmapProcessor로 처리)
+                            .considerExifParams(false) // 사진이미지의 회전률 고려할건지
+                            .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2) // 스케일타입설정   (일부밖에없습니다. 제가 centerCrop이 없어서 라이브러리 다 뒤져봤는데 없더라구요. 다른방법이 있습니다. 아래 설명해드릴게요.)
+                            .bitmapConfig(Bitmap.Config.ARGB_8888) // 이미지 컬러방식
+                            .build();
+
                     ImageLoader imageLoader = ImageLoader.getInstance();
-                    imageLoader.displayImage(Url+"Image/"+json.getString("imgUrl"), p_img);
+                    imageLoader.displayImage(Url+"Image/"+json.getString("imgUrl"), p_img, options, new ImageLoadingListener() {
+                        @Override
+                        public void onLoadingStarted(String s, View view) {
+                            view.setBackgroundResource(R.drawable.ic_stub);
+                        }
+                        @Override
+                        public void onLoadingFailed(String s, View view, FailReason failReason) {
+                        }
+                        @Override
+                        public void onLoadingComplete(String s, View view, Bitmap bitmap) {
+                        }
+                        @Override
+                        public void onLoadingCancelled(String s, View view) {
+
+                        }
+                    });
                     //AUIL ImageLoader 사용
 
                     p_name.setText(json.getString("name"));
