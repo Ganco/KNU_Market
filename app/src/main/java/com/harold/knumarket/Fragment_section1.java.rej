@@ -1,0 +1,10 @@
+diff a/app/src/main/java/com/harold/knumarket/Fragment_section1.java b/app/src/main/java/com/harold/knumarket/Fragment_section1.java	(rejected hunks)
+@@ -79,7 +79,7 @@
+ 
+         //AUIL 이미지 옵션 설정
+         DisplayImageOptions options = new DisplayImageOptions.Builder()
+-                .showImageOnLoading(R.drawable.ic_stub) // 로딩중 이미지 설정
++                .showImageOnLoading(android.R.color.black) // 로딩중 이미지 설정
+                 .showImageForEmptyUri(R.drawable.ic_empty) // Uri주소가 잘못되었을경우(이미지없을때)
+                 .showImageOnFail(R.drawable.ic_error) // 로딩 실패시
+                 .resetViewBeforeLoading(false)  // 로딩전에 뷰를 리셋하는건데 false로 하세요 과부하!
