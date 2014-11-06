@@ -278,14 +278,14 @@
                             android:layout_marginTop="5dp"
                             android:text="등록"
                             android:id="@+id/ItemText12"/>
-                        <ListView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/commentList">
 
 
-                         </ListView>
                     </LinearLayout>
+
+                    <ListView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/commentList"/>
                 </LinearLayout>
 
             </LinearLayout>
