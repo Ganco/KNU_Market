@@ -49,7 +49,10 @@ public class Fragment_section1 extends Fragment {
     //private String Url = "http://192.168.0.4:5001/KNU_Market/"; //웹서버 URL
     //private String Url = "http://192.168.1.10:5001/KNU_Market/"; //웹서버 URL
     //private String Url = "http://155.230.29.182:5001/KNU_Market/"; //웹서버 URL
-    private String Url = "http://121.151.119.125:5001/KNU_Market/"; //웹서버 URL
+    //private String Url = "http://121.151.119.125:5001/KNU_Market/"; //웹서버 URL
+
+    //웹서버 url정보를 WebServer_Url클래스 하나로 관리함(싱글톤 패턴 사용)
+    private String Url;
 
     public boolean checkNetStat() {
         try {
@@ -78,6 +81,9 @@ public class Fragment_section1 extends Fragment {
 
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_section1, container, false);
+
+        Url = Webserver_Url.getInstance().getUrl();
+        Log.i("KNU_Market/Frgmt_sec1","Url="+Url);
 
         //작업 부분
         boolean netStat = false;
@@ -248,7 +254,6 @@ public class Fragment_section1 extends Fragment {
                 e.printStackTrace();
             }
         }
-
         //웹에서 정보 가져오는 부분
         @Override
         protected String doInBackground(String... urls) {
