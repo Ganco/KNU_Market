@@ -22,6 +22,7 @@ public class Webserver_Url {
         Url = "http://"+url+":5001/KNU_Market/";
     }
 
+    //싱글톤 패턴 -> 무조건 하나의 객체만 존재함
     private static Webserver_Url instance = null;
     public static synchronized Webserver_Url getInstance(){
         if(null == instance){

@@ -46,10 +46,6 @@ public class Fragment_section1 extends Fragment {
     private static final String TAG = "Fragment_section1";
     private JSONArray jArray;
     private postListLoading task;
-    //private String Url = "http://192.168.0.4:5001/KNU_Market/"; //웹서버 URL
-    //private String Url = "http://192.168.1.10:5001/KNU_Market/"; //웹서버 URL
-    //private String Url = "http://155.230.29.182:5001/KNU_Market/"; //웹서버 URL
-    //private String Url = "http://121.151.119.125:5001/KNU_Market/"; //웹서버 URL
 
     //웹서버 url정보를 WebServer_Url클래스 하나로 관리함(싱글톤 패턴 사용)
     private String Url;
@@ -89,16 +85,12 @@ public class Fragment_section1 extends Fragment {
         boolean netStat = false;
         netStat = checkNetStat();//네트워크 상태 확인
         if(netStat){//WIFI나 데이터네트워크 사용 가능
-            //TextView textView = (TextView) findViewById(R.id.textView1);
-            //textView.setText("인터넷 연결 가능");
             if(true) {
                 task = new postListLoading();
                 task.execute("JSP/RequestMainList.jsp");
             }
         }
         else{//인터넷 연결 불가
-            //TextView textView = (TextView) getActivity().findViewById(R.id.frag1_textView);
-            //textView.setText("인터넷 연결 불가능");
             Button refresh = new Button(getActivity());
             refresh.setText("새로고침");
             refresh.setOnClickListener(new View.OnClickListener() {
