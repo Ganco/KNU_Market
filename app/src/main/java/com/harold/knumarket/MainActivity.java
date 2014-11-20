@@ -78,6 +78,37 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
         }
     }
 
+    public void onClick(View v){
+
+        int id = v.getId();
+        Intent intent = null;
+
+        switch (id){
+
+            case R.id.btn_addPost:
+                intent = new Intent(getBaseContext(), add_post.class);
+                startActivity(intent);
+                finish();
+                break;
+
+            case R.id.btn_home:
+                break;
+
+            //// insert button listener for MYPAGE
+            case R.id.btn_myPage:
+                intent = new Intent(getBaseContext(), MyPageActivity.class);
+                //intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                //intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivityForResult(intent, REQUEST_CODE_MYPAGE);
+                break;
+
+            case R.id.btn_config:
+                break;
+        }
+    }
+
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,7 +126,6 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
             public void onClick(DialogInterface dialog, int which) {
 
                 Webserver_Url.getInstance().setUrl(url_Input.getText().toString());
-
 
                 // Initialise the TabHost
                 initialiseTabHost(savedInstanceState);
@@ -119,7 +149,9 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
                 .writeDebugLogs() // 마켓에 포팅하실땐 빼주세요.
                 .build();
         ImageLoader.getInstance().init(config);
-        /*DisplayImageOptions options = new DisplayImageOptions.Builder()
+
+        /*
+        DisplayImageOptions options = new DisplayImageOptions.Builder()
                 .showImageOnLoading(R.drawable.ic_stub) // 로딩중 이미지 설정
                 .showImageForEmptyUri(R.drawable.ic_empty) // Uri주소가 잘못되었을경우(이미지없을때)
                 .showImageOnFail(R.drawable.ic_error) // 로딩 실패시
@@ -132,21 +164,8 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
                 .considerExifParams(false) // 사진이미지의 회전률 고려할건지
                 .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2) // 스케일타입설정   (일부밖에없습니다. 제가 centerCrop이 없어서 라이브러리 다 뒤져봤는데 없더라구요. 다른방법이 있습니다. 아래 설명해드릴게요.)
                 .bitmapConfig(Bitmap.Config.ARGB_8888) // 이미지 컬러방식
-                .build();*/
-
-            //// insert button listener for MYPAGE
-        Button btnMypage = (Button) findViewById(R.id.button6);
-        btnMypage.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(getBaseContext(), MyPageActivity.class);
-                    //intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                    //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    //intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                    startActivityForResult(intent, REQUEST_CODE_MYPAGE);
-                }
-            });
+                .build();
+         */
     }
 
     private void initialiseTabHost(Bundle args) {

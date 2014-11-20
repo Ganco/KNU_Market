@@ -36,7 +36,23 @@
             android:name="com.harold.knumarket.PostActivity"
             android:label="@string/title_activity_post" >
         </activity>
-        <activity  android:name="com.harold.knumarket.MyPageActivity"  android:label="MyPageActivity" ></activity>
+        <activity
+            android:name="com.harold.knumarket.MyPageActivity"
+            android:label="MyPageActivity" />
+        <activity
+            android:name=".LoginActivity"
+            android:label="@string/title_activity_login"
+            android:windowSoftInputMode="adjustResize|stateVisible" >
+        </activity>
+        <activity
+            android:name="com.harold.knumarket.add_post"
+            android:label="@string/title_activity_add_post" >
+        </activity>
     </application>
+
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
 </manifest>

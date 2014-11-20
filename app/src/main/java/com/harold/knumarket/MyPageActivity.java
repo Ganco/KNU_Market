@@ -24,11 +24,6 @@ public class MyPageActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mypage);
 
-        //asdf;
-
-
-
-        // fdsafdsa;;
         //// insert button listener for Main
         Button btnMain = (Button) findViewById(R.id.button4);
         btnMain.setOnClickListener(new View.OnClickListener() {
@@ -41,8 +36,6 @@ public class MyPageActivity extends Activity {
             }
         });
         ////
-
-
         final EditText mEditText01 = (EditText) findViewById(R.id.profileTextEdit01);
 
         // 프로필 입력창이 3줄이상 넘어가지 않게 이벤트 처리
