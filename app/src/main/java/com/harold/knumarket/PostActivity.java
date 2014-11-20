@@ -159,7 +159,7 @@ public class PostActivity extends Activity {
 
 
 
-        //// insert button listener for MYPAGE
+        //// insert button listener for MYPAGE ////
         Button btnMypage = (Button) findViewById(R.id.button6);
         btnMypage.setOnClickListener(new View.OnClickListener() {
             @Override
