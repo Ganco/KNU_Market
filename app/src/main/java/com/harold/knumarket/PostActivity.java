@@ -44,7 +44,11 @@ public class PostActivity extends Activity {
     private int post_no;
     //private String Url = "http://192.168.1.10:5001/KNU_Market/"; //웹서버 URL
     //private String Url = "http://155.230.29.182:5001/KNU_Market/"; //웹서버 URL
-    private String Url = "http://121.151.119.125:5001/KNU_Market/"; //웹서버 URL
+    //private String Url = "http://121.151.119.125:5001/KNU_Market/"; //웹서버 URL
+
+    //웹서버 url정보를 WebServer_Url클래스 하나로 관리함(싱글톤 패턴 사용)
+    private String Url = Webserver_Url.getInstance().getUrl();
+
     private JSONArray jArray;
     private postLoading task;
     private ViewPager mViewPager;

@@ -1,6 +1,8 @@
 package com.harold.knumarket;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -9,11 +11,15 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TabHost;
+import android.widget.Toast;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Vector;
@@ -35,6 +41,15 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
     List<Fragment> fragments;
 
     public static final int REQUEST_CODE_MYPAGE = 1005;
+    private boolean urlInputFlag = false;
+
+    public boolean isUrlInputFlag() {
+        return urlInputFlag;
+    }
+
+    public void setUrlInputFlag(boolean urlInputFlag) {
+        this.urlInputFlag = urlInputFlag;
+    }
 
     private class TabInfo {
         private String tag;
@@ -64,21 +79,39 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-          // Initialise the TabHost
-        this.initialiseTabHost(savedInstanceState);
-        if (savedInstanceState != null) {
-            mTabHost.setCurrentTabByTag(savedInstanceState.getString("tab")); //set the tab as per the saved state
-        }
-        // Initialise ViewPager
-        this.initializeViewPager();
+        //다이얼로그를 통해 어플 실행 시작시 서버URL을 입력받아 실행함(개발용 코드)
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("서버 IP 주소 입력");
+        //builder.setMessage("Message");
+        final EditText url_Input = new EditText(this);
+        url_Input.setText("211.51.176.248");
+        builder.setView(url_Input);
+        builder.setPositiveButton("Ok",new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
 
-        //Android Universal Image Loader
+                Webserver_Url.getInstance().setUrl(url_Input.getText().toString());
+
+
+                // Initialise the TabHost
+                initialiseTabHost(savedInstanceState);
+                if (savedInstanceState != null) {
+                    mTabHost.setCurrentTabByTag(savedInstanceState.getString("tab")); //set the tab as per the saved state
+                }
+                // Initialise ViewPager
+                initializeViewPager();
+            }
+        });
+        builder.show();
+        //다이얼로그를 통해 어플 실행 시작시 서버URL을 입력받아 실행함(개발용 코드)
+
+         //Android Universal Image Loader
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext())
-                .memoryCacheExtraOptions(480,800)
+                .memoryCacheExtraOptions(480, 800)
                 .threadPriority(Thread.NORM_PRIORITY - 2)
                 .denyCacheImageMultipleSizesInMemory()
                 .discCacheFileNameGenerator(new Md5FileNameGenerator())
@@ -86,7 +119,6 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
                 .writeDebugLogs() // 마켓에 포팅하실땐 빼주세요.
                 .build();
         ImageLoader.getInstance().init(config);
-
         /*DisplayImageOptions options = new DisplayImageOptions.Builder()
                 .showImageOnLoading(R.drawable.ic_stub) // 로딩중 이미지 설정
                 .showImageForEmptyUri(R.drawable.ic_empty) // Uri주소가 잘못되었을경우(이미지없을때)
@@ -102,20 +134,19 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
                 .bitmapConfig(Bitmap.Config.ARGB_8888) // 이미지 컬러방식
                 .build();*/
 
-        //// insert button listener for MYPAGE
+            //// insert button listener for MYPAGE
         Button btnMypage = (Button) findViewById(R.id.button6);
         btnMypage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getBaseContext(), MyPageActivity.class);
-                //intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                //intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivityForResult(intent, REQUEST_CODE_MYPAGE);
-            }
-        });
-        ////
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(getBaseContext(), MyPageActivity.class);
+                    //intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    //intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    startActivityForResult(intent, REQUEST_CODE_MYPAGE);
+                }
+            });
     }
 
     private void initialiseTabHost(Bundle args) {
