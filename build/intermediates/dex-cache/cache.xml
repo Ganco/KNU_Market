@@ -2,18 +2,6 @@
 <pre-dex-items>
 
     <item
-        dex="C:\Users\Gan\Documents\KNU_Market\app\build\intermediates\pre-dexed\debug\classes-91e87940e416c0109ae1b0d93f32917fd8cdb376.jar"
-        jar="C:\Users\Gan\Documents\KNU_Market\app\build\intermediates\exploded-aar\com.android.support\support-v4\20.0.0\classes.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="8694693636ab36910c8100ce527c258ff3ebece0"/>
-    <item
-        dex="C:\Users\Gan\Documents\KNU_Market\app\build\intermediates\pre-dexed\debug\universal-image-loader-1.9.3-1bb37554c09d9538a666e3bf58c701bd08ffd8d1.jar"
-        jar="C:\Users\Gan\Documents\KNU_Market\app\libs\universal-image-loader-1.9.3.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="a85588bec3e2c4584d593d3f15df1677321bca72"/>
-    <item
         dex="C:\Users\Gan\Documents\KNU_Market\app\build\intermediates\pre-dexed\debug\support-annotations-20.0.0-3489654b36b55f1a47f34d080462c7480c16c9d6.jar"
         jar="C:\dev\Android\android-studio\sdk\extras\android\m2repository\com\android\support\support-annotations\20.0.0\support-annotations-20.0.0.jar"
         jumboMode="false"
@@ -25,5 +13,17 @@
         jumboMode="false"
         revision="20.0.0"
         sha1="e40b3078e3fbd353c9f44da8df25a8fc0078209d"/>
+    <item
+        dex="C:\Users\Gan\Documents\KNU_Market\app\build\intermediates\pre-dexed\debug\classes-91e87940e416c0109ae1b0d93f32917fd8cdb376.jar"
+        jar="C:\Users\Gan\Documents\KNU_Market\app\build\intermediates\exploded-aar\com.android.support\support-v4\20.0.0\classes.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="8694693636ab36910c8100ce527c258ff3ebece0"/>
+    <item
+        dex="C:\Users\Gan\Documents\KNU_Market\app\build\intermediates\pre-dexed\debug\universal-image-loader-1.9.3-1bb37554c09d9538a666e3bf58c701bd08ffd8d1.jar"
+        jar="C:\Users\Gan\Documents\KNU_Market\app\libs\universal-image-loader-1.9.3.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="a85588bec3e2c4584d593d3f15df1677321bca72"/>
 
 </pre-dex-items>
