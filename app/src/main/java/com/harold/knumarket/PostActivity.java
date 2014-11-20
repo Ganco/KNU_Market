@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -43,7 +44,11 @@ public class PostActivity extends Activity {
     private int post_no;
     //private String Url = "http://192.168.1.10:5001/KNU_Market/"; //웹서버 URL
     //private String Url = "http://155.230.29.182:5001/KNU_Market/"; //웹서버 URL
-    private String Url = "http://121.151.119.125:5001/KNU_Market/"; //웹서버 URL
+    //private String Url = "http://121.151.119.125:5001/KNU_Market/"; //웹서버 URL
+
+    //웹서버 url정보를 WebServer_Url클래스 하나로 관리함(싱글톤 패턴 사용)
+    private String Url = Webserver_Url.getInstance().getUrl();
+
     private JSONArray jArray;
     private postLoading task;
     private ViewPager mViewPager;
@@ -118,6 +123,7 @@ public class PostActivity extends Activity {
         //textView.setText("post_no :"+post_no);
 
 
+
         // 리스트뷰 객체 참조
         listView1 = (ListView) findViewById(R.id.commentList);
 
@@ -126,10 +132,10 @@ public class PostActivity extends Activity {
 
         // 아이템 데이터 만들기
         Resources res = getResources();
+        adapter.addItem(new ItemComment("KNU MARKET", "댓글 되요?"));
         adapter.addItem(new ItemComment("id test", "아아 id test"));
         adapter.addItem(new ItemComment("qwer",  "asdfqwer"));
-        adapter.addItem(new ItemComment("KNU MARKET", "댓글 되요?"));
-        adapter.addItem(new ItemComment("Administrator", "댓글 확인했습니다"));
+        adapter.addItem(new ItemComment("Administrator", "댓글 확인했습니다")); // test
 
 
 
@@ -147,7 +153,6 @@ public class PostActivity extends Activity {
                 Toast.makeText(getApplicationContext(), "comment : " + curData[1], Toast.LENGTH_SHORT).show();
 
                 Resources res = getResources();
-                // adapter.addItem(new IconTextItem(res.getDrawable(R.drawable.icon06), "추가아이템", "999 원"));
             }
 
         });
@@ -277,3 +282,4 @@ public class PostActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 }
+

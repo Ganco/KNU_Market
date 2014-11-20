@@ -20,7 +20,7 @@ public class ItemCommentView extends LinearLayout {
     /**
      * Icon
      */
-    private ImageView mIcon;
+    //private ImageView mIcon;
 
     /**
      * TextView 01
@@ -70,8 +70,6 @@ public class ItemCommentView extends LinearLayout {
      *
      * @param icon
      */
-    public void setIcon(Drawable icon) {
-        mIcon.setImageDrawable(icon);
-    }
+    //public void setIcon(Drawable icon) {        mIcon.setImageDrawable(icon);    }
 
 }

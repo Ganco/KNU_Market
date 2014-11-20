@@ -2,18 +2,6 @@
 <pre-dex-items>
 
     <item
-        dex="C:\Users\Gan\Documents\KNU_Market\app\build\intermediates\pre-dexed\debug\support-annotations-20.0.0-79e42da7c2657068d681cf877be8b4cc06e3cb7a.jar"
-        jar="C:\Program Files (x86)\Android\android-studio\sdk\extras\android\m2repository\com\android\support\support-annotations\20.0.0\support-annotations-20.0.0.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="9d9013e9ff35fc3756411e62873c363c70c638fa"/>
-    <item
-        dex="C:\Users\Gan\Documents\KNU_Market\app\build\intermediates\pre-dexed\debug\internal_impl-20.0.0-407b80f7bc64f70d55008377929954ac6ba29344.jar"
-        jar="C:\Users\Gan\Documents\KNU_Market\app\build\intermediates\exploded-aar\com.android.support\support-v4\20.0.0\libs\internal_impl-20.0.0.jar"
-        jumboMode="false"
-        revision="20.0.0"
-        sha1="e40b3078e3fbd353c9f44da8df25a8fc0078209d"/>
-    <item
         dex="C:\Users\Gan\Documents\KNU_Market\app\build\intermediates\pre-dexed\debug\classes-91e87940e416c0109ae1b0d93f32917fd8cdb376.jar"
         jar="C:\Users\Gan\Documents\KNU_Market\app\build\intermediates\exploded-aar\com.android.support\support-v4\20.0.0\classes.jar"
         jumboMode="false"
@@ -25,5 +13,17 @@
         jumboMode="false"
         revision="20.0.0"
         sha1="a85588bec3e2c4584d593d3f15df1677321bca72"/>
+    <item
+        dex="C:\Users\Gan\Documents\KNU_Market\app\build\intermediates\pre-dexed\debug\support-annotations-20.0.0-3489654b36b55f1a47f34d080462c7480c16c9d6.jar"
+        jar="C:\dev\Android\android-studio\sdk\extras\android\m2repository\com\android\support\support-annotations\20.0.0\support-annotations-20.0.0.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="9d9013e9ff35fc3756411e62873c363c70c638fa"/>
+    <item
+        dex="C:\Users\Gan\Documents\KNU_Market\app\build\intermediates\pre-dexed\debug\internal_impl-20.0.0-407b80f7bc64f70d55008377929954ac6ba29344.jar"
+        jar="C:\Users\Gan\Documents\KNU_Market\app\build\intermediates\exploded-aar\com.android.support\support-v4\20.0.0\libs\internal_impl-20.0.0.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="e40b3078e3fbd353c9f44da8df25a8fc0078209d"/>
 
 </pre-dex-items>
