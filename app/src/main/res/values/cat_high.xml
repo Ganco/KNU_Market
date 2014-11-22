@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="category_upper">
+        <item>중고서적</item>
+        <item>자취용품</item>
+        <item>패션잡화</item>
+        <item>기타</item>
+    </string-array>
+</resources>
