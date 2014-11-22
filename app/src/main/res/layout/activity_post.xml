@@ -284,15 +284,7 @@
 
                     <ListView
                         android:layout_width="match_parent"
-<<<<<<< HEAD
                         android:layout_height="200dp"
-=======
-<<<<<<< HEAD
-                        android:layout_height="200dp"
-=======
-                        android:layout_height="300dp"
->>>>>>> 1fc8148e132b68444384079e3e4e106e7202a341
->>>>>>> 973c24efb655b31657efcddbc5b53ec2bd5b3485
                         android:id="@+id/commentList"/>
                 </LinearLayout>
 
