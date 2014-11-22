@@ -85,7 +85,7 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
 
         switch (id){
 
-            case R.id.btn_addPost:
+            case R.id.btn_goAddPost:
                 intent = new Intent(getBaseContext(), add_post.class);
                 startActivity(intent);
                 finish();
