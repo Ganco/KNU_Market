@@ -1,6 +1,7 @@
 package com.harold.knumarket.Item_Comment;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -25,6 +26,7 @@ public class ItemCommentListAdapter extends BaseAdapter {
 	}
 
 	public void addItem(ItemComment it) {
+        Log.i("Item_comment addItem","cmment="+it.getData(0)+it.getData(1));
 		mItems.add(it);
 	}
 
@@ -61,6 +63,7 @@ public class ItemCommentListAdapter extends BaseAdapter {
         if (convertView == null) {
             itemView = new ItemCommentView(mContext, mItems.get(position));
         } else {
+            Log.i("Item_comment getView","position="+position);
             itemView = (ItemCommentView) convertView;
 
             itemView.setText(0, mItems.get(position).getData(0));

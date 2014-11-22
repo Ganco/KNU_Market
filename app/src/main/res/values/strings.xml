@@ -26,5 +26,6 @@
     <string name="mypageInfo">추가정보</string>
     <string name="mypagePublic">공개여부</string>
     <string name="title_activity_post">PostActivity</string>
+    <string name="title_activity_add_post">add_post</string>
 
 </resources>
