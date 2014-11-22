@@ -2,10 +2,34 @@
 <pre-dex-items>
 
     <item
+        dex="C:\Users\Harold\Documents\KNU_Market\app\build\intermediates\pre-dexed\debug\classes-82bb7cfa7fc52b42dbbe8799bdb20f51d7aef60c.jar"
+        jar="C:\Users\Harold\Documents\KNU_Market\app\build\intermediates\exploded-aar\com.android.support\support-v4\20.0.0\classes.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="8694693636ab36910c8100ce527c258ff3ebece0"/>
+    <item
+        dex="C:\Users\Harold\Documents\KNU_Market\app\build\intermediates\pre-dexed\debug\universal-image-loader-1.9.3-6cb1c7852c7ea5a4d8cca41df10ff5ee8eebef64.jar"
+        jar="C:\Users\Harold\Documents\KNU_Market\app\libs\universal-image-loader-1.9.3.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="a85588bec3e2c4584d593d3f15df1677321bca72"/>
+    <item
+        dex="C:\Users\Harold\Documents\KNU_Market\app\build\intermediates\pre-dexed\debug\support-annotations-20.0.0-8f851985d5072ac540fa22084768a5ed70f09f56.jar"
+        jar="C:\Users\Harold\AppData\Local\Android\android-studio\sdk\extras\android\m2repository\com\android\support\support-annotations\20.0.0\support-annotations-20.0.0.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="9d9013e9ff35fc3756411e62873c363c70c638fa"/>
+    <item
         dex="C:\Users\Harold\Documents\KNU_Market\app\build\intermediates\pre-dexed\debug\classes-8b5552a312591d7db093e438b1546211a7cfa2c4.jar"
         jar="C:\Users\Harold\Documents\KNU_Market\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\20.0.0\classes.jar"
         jumboMode="false"
         revision="20.0.0"
         sha1="f21927d22fe31889ecce94dd697a2e75b137e0ef"/>
+    <item
+        dex="C:\Users\Harold\Documents\KNU_Market\app\build\intermediates\pre-dexed\debug\internal_impl-20.0.0-a312c92ba60ffb2ab81ff06e63cd3e87418190f5.jar"
+        jar="C:\Users\Harold\Documents\KNU_Market\app\build\intermediates\exploded-aar\com.android.support\support-v4\20.0.0\libs\internal_impl-20.0.0.jar"
+        jumboMode="false"
+        revision="20.0.0"
+        sha1="e40b3078e3fbd353c9f44da8df25a8fc0078209d"/>
 
 </pre-dex-items>

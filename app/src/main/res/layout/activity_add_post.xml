@@ -24,29 +24,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="크누마켓icon"
+                android:text="상품등록"
                 android:id="@+id/textView4" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/search"
-                android:id="@+id/btn_search"
-                android:layout_weight="0.33" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/zzim"
-                android:id="@+id/btn_zzim"
-                android:layout_weight="0.33" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="@string/notify"
-                android:id="@+id/btn_notify"
-                android:layout_weight="0.33" />
+                android:id="@+id/btn_notify" />
         </LinearLayout>
 
         <ScrollView
@@ -64,29 +49,50 @@
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent">
+                android:layout_height="fill_parent"
+                android:paddingLeft="3dp"
+                android:paddingRight="3dp"
+                android:paddingTop="3dp">
 
-                <ImageButton
+                <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
-                    android:id="@+id/img_btn1" />
+                    android:id="@+id/img_btn1"
+                    android:onClick="onClick"
+                    android:src="@drawable/ic_add_image"
+                    android:background="#ff606464"
+                    android:baselineAlignBottom="false"
+                    android:padding="30dp"
+                    android:layout_margin="3dp" />
 
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="3dp"
+                    android:paddingRight="3dp">
 
-                    <ImageButton
+                    <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="100dp"
                         android:id="@+id/img_btn2"
-                        android:layout_weight="0.33" />
+                        android:layout_weight="0.33"
+                        android:onClick="onClick"
+                        android:src="@drawable/ic_add_image"
+                        android:background="#ff606464"
+                        android:padding="30dp"
+                        android:layout_margin="3dp" />
 
-                    <ImageButton
+                    <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="100dp"
                         android:id="@+id/img_btn3"
-                        android:layout_weight="0.33" />
+                        android:layout_weight="0.33"
+                        android:onClick="onClick"
+                        android:src="@drawable/ic_add_image"
+                        android:background="#ff606464"
+                        android:padding="30dp"
+                        android:layout_margin="3dp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -271,7 +277,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="등록하기"
-                        android:id="@+id/btn_addPost" />
+                        android:id="@+id/btn_addPost"
+                        android:onClick="onClick"/>
 
                 </LinearLayout>
 
