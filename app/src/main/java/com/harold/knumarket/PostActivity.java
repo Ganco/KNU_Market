@@ -158,7 +158,7 @@ public class PostActivity extends Activity {
         });
 
 
-
+        /*
         //// insert button listener for MYPAGE ////
         Button btnMypage = (Button) findViewById(R.id.button6);
         btnMypage.setOnClickListener(new View.OnClickListener() {
@@ -185,8 +185,39 @@ public class PostActivity extends Activity {
             }
         });
         ////
+        */
     }
 
+    public void onClick(View v){
+
+        int id = v.getId();
+        Intent intent = null;
+
+        switch (id){
+
+            case R.id.btn_call:
+               // intent = new Intent(getBaseContext(), add_post.class);
+               // startActivity(intent);
+                //finish();
+                break;
+
+            case R.id.btn_sms:
+                break;
+
+            //// insert button listener for MYPAGE
+            case R.id.btn_zzim:
+                //intent = new Intent(getBaseContext(), MyPageActivity.class);
+                //intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                //intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                //intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                //startActivityForResult(intent, REQUEST_CODE_MYPAGE);
+                break;
+
+            case R.id.btn_temp:
+                break;
+        }
+    }
 
     public  void initializeViewPager(JSONArray array){
 
