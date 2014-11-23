@@ -1,2 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string-array name="cat_mid_goods">
+        <item>가전</item>
+        <item>주방</item>
+        <item>가구</item>
+    </string-array>
+</resources>
