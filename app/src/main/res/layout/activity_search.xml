@@ -1,7 +1,187 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_alignParentRight="true"
+    android:orientation="vertical"
+    tools:context="com.harold.knumarket.SearchActivity">
 
-</LinearLayout>
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linear1"
+        android:background="#ffff6f58">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="크누마켓icon"
+            android:id="@+id/textView" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/search"
+            android:id="@+id/button"
+            android:layout_weight="0.33" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/zzim"
+            android:id="@+id/button2"
+            android:layout_weight="0.33" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/notify"
+            android:id="@+id/button3"
+            android:layout_weight="0.33" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/linear1"
+        android:orientation="horizontal"
+        android:background="#ffff6f58"
+        android:id="@+id/linear3">
+
+        <EditText
+            android:layout_width="280dp"
+            android:layout_height="match_parent"
+            android:hint="검색내용 상세"
+            android:textSize="16sp"
+            android:singleLine="true"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:textColor="@android:color/black"
+            android:background="@android:color/white"
+            android:id="@+id/SearchText"/>
+
+        <Button
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="검색"
+            android:id="@+id/SearchButton"/>
+    </LinearLayout>
+
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView3"
+        android:layout_below="@id/linear3"
+        android:layout_above="@id/linear2"
+        android:layout_centerHorizontal="true"
+        android:fillViewport="false"
+        android:gravity="center"
+        >
+
+        <!--
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="1"
+            android:layout_alignParentStart="true"
+            android:id="@+id/post_layout">
+
+            <view
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                class="android.support.v4.view.ViewPager"
+                android:id="@+id/post_viewpager"
+                android:layout_weight="0.23" />
+
+            <LinearLayout
+                android:id="@+id/SlideButton"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal" >
+            </LinearLayout>
+        </LinearLayout>
+        -->
+
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/list_vertical">
+
+        <!--<TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:id="@+id/frag1_textView" />-->
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/linear2"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:baselineAligned="false"
+        android:layout_gravity="bottom"
+        android:background="@android:color/darker_gray"
+        android:layout_alignParentBottom="true" >
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="@string/home"
+                android:id="@+id/btn_home"
+                android:layout_weight="1"
+                android:onClick="onClick"/>
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="@string/addPost"
+                android:id="@+id/btn_goAddPost"
+                android:layout_weight="1"
+                android:onClick="onClick"/>
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="MyPage"
+                android:id="@+id/btn_myPage"
+                android:layout_weight="1"
+                android:onClick="onClick"/>
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="@string/config"
+                android:id="@+id/btn_config"
+                android:layout_weight="1"
+                android:onClick="onClick"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

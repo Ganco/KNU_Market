@@ -41,6 +41,8 @@ import java.util.ArrayList;
 
 public class PostActivity extends Activity {
 
+    public static final int REQUEST_CODE_MAIN = 1001;
+    public static final int REQUEST_CODE_MYPAGE = 1005;
     private int post_no;
     //private String Url = "http://192.168.1.10:5001/KNU_Market/"; //웹서버 URL
     //private String Url = "http://155.230.29.182:5001/KNU_Market/"; //웹서버 URL
@@ -55,8 +57,6 @@ public class PostActivity extends Activity {
     ListView listView1;
     ItemCommentListAdapter adapter;
 
-    public static final int REQUEST_CODE_MAIN = 1001;
-    public static final int REQUEST_CODE_MYPAGE = 1005;
 
     private class ImageViewAdapter extends PagerAdapter{
 

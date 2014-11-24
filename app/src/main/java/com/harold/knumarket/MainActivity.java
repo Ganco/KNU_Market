@@ -107,6 +107,15 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
 
             case R.id.btn_config:
                 break;
+            case R.id.btn_search:
+                intent = new Intent(getBaseContext(), SearchActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent);
+                break;
+            case R.id.btn_zzim:
+                break;
+            case R.id.btn_alarm:
+                break;
         }
     }
 

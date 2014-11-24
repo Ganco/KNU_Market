@@ -39,14 +39,20 @@
         <activity
             android:name="com.harold.knumarket.MyPageActivity"
             android:label="MyPageActivity" />
+        <!--
         <activity
-            android:name=".LoginActivity"
+             android:name=".LoginActivity"
             android:label="@string/title_activity_login"
             android:windowSoftInputMode="adjustResize|stateVisible" >
         </activity>
+        -->
         <activity
             android:name="com.harold.knumarket.add_post"
             android:label="@string/title_activity_add_post" >
+        </activity>
+        <activity
+            android:name="com.harold.knumarket.SearchActivity"
+            android:label="SearchActivity" >
         </activity>
     </application>
 
