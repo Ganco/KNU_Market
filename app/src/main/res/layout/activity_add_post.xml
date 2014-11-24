@@ -58,18 +58,20 @@
                 android:layout_height="fill_parent"
                 android:paddingLeft="3dp"
                 android:paddingRight="3dp"
-                android:paddingTop="3dp">
+                android:paddingTop="3dp"
+                android:id="@+id/linear_add_post">
 
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:id="@+id/img_btn1"
+                    android:tag="img_btn1"
                     android:onClick="onClick"
                     android:src="@drawable/ic_add_image"
                     android:background="#ff606464"
                     android:baselineAlignBottom="false"
-                    android:padding="30dp"
-                    android:layout_margin="3dp" />
+                    android:layout_margin="3dp"
+                    android:scaleType="center" />
 
                 <LinearLayout
                     android:orientation="horizontal"
@@ -82,23 +84,25 @@
                         android:layout_width="wrap_content"
                         android:layout_height="100dp"
                         android:id="@+id/img_btn2"
-                        android:layout_weight="0.33"
+                        android:tag="img_btn2"
                         android:onClick="onClick"
                         android:src="@drawable/ic_add_image"
                         android:background="#ff606464"
-                        android:padding="30dp"
-                        android:layout_margin="3dp" />
+                        android:layout_margin="3dp"
+                        android:layout_weight="1"
+                        android:scaleType="center" />
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="100dp"
                         android:id="@+id/img_btn3"
-                        android:layout_weight="0.33"
+                        android:tag="img_btn3"
                         android:onClick="onClick"
                         android:src="@drawable/ic_add_image"
                         android:background="#ff606464"
-                        android:padding="30dp"
-                        android:layout_margin="3dp" />
+                        android:layout_margin="3dp"
+                        android:layout_weight="1"
+                        android:scaleType="center" />
                 </LinearLayout>
 
                 <LinearLayout

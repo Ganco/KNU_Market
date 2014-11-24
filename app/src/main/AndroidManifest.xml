@@ -8,6 +8,8 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <!-- 네트워크 상태 접근 권한 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- 카메라 접근 권한 -->
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <uses-sdk android:minSdkVersion="14" />
 
@@ -47,6 +49,7 @@
         </activity>
         -->
         <activity
+            android:windowSoftInputMode="stateAlwaysHidden"
             android:name="com.harold.knumarket.add_post"
             android:label="@string/title_activity_add_post" >
         </activity>
