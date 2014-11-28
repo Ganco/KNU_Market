@@ -162,6 +162,7 @@ public class SearchActivity extends Activity{
         else{
             line_num = (array.length()/3)+1;
         }
+        line_num = array.length();
 
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
@@ -183,7 +184,7 @@ public class SearchActivity extends Activity{
                     //이미지만 웹뷰로 출력
                     LinearLayout p_button = (LinearLayout) new LinearLayout(getBaseContext());
                     LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
-                            (screenWidth)-10, 220);
+                            (screenWidth)-10, 200);
                     param.setMargins(5,5,5,5);
                     p_button.setLayoutParams(param);
                     p_button.setPadding(0, 0, 0, 0);
@@ -217,6 +218,8 @@ public class SearchActivity extends Activity{
                             ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
                     box_param.setMargins(5,5,5,5);
                     p_box.setLayoutParams(param);
+                    p_box.setOrientation(LinearLayout.VERTICAL);
+                    p_box.setGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT);
 
                     TextView p_name = (TextView) new TextView(getBaseContext());
                     TextView p_price = (TextView) new TextView(getBaseContext());
@@ -262,9 +265,9 @@ public class SearchActivity extends Activity{
                     //AUIL ImageLoader 사용
 
                     p_name.setText(json.getString("name"));
-                    p_name.setGravity(Gravity.CENTER | Gravity.BOTTOM);
+                   // p_name.setGravity(Gravity.CENTER | Gravity.BOTTOM);
                     p_price.setText("[\\"+json.getString("price")+"]");
-                    p_price.setGravity(Gravity.CENTER | Gravity.BOTTOM);
+                    //p_price.setGravity(Gravity.CENTER | Gravity.BOTTOM);
 
                     p_box.addView(p_name);
                     p_box.addView(p_price);
