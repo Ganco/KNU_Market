@@ -57,6 +57,14 @@
             android:name="com.harold.knumarket.SearchActivity"
             android:label="SearchActivity" >
         </activity>
+        <activity
+            android:name="com.harold.knumarket.AlarmActivity"
+            android:label="AlarmActivity" >
+        </activity>
+        <activity
+            android:name="com.harold.knumarket.ConfigActivity"
+            android:label="ConfigActivity" >
+        </activity>
     </application>
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->

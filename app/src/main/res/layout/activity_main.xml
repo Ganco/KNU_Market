@@ -126,7 +126,7 @@
                 <Button
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:text="@string/myPage"
+                    android:text="MyPage"
                     android:id="@+id/btn_myPage"
                     android:layout_weight="1"
                     android:onClick="onClick"/>

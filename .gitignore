@@ -1,6 +1,8 @@
 # Built application files
 ./build/
 /*/build/
+model_data.bin
+cache.xml
 
 # Crashlytics configuations
 com_crashlytics_export_strings.xml

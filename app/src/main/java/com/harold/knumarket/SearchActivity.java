@@ -365,6 +365,15 @@ public class SearchActivity extends Activity{
 
             case R.id.btn_config:
                 break;
+            case R.id.btn_search:
+                break;
+            case R.id.btn_zzim:
+                break;
+            case R.id.btn_alarm:
+                intent = new Intent(getBaseContext(), AlarmActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent);
+                break;
         }
     }
 }
