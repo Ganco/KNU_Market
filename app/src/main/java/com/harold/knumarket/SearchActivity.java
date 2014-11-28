@@ -54,6 +54,7 @@ public class SearchActivity extends Activity{
     private static final String TAG = "Search";
     private JSONArray jArray;
     private postListLoading task;
+    private int line_num = 0;
 
     //웹서버 url정보를 WebServer_Url클래스 하나로 관리함(싱글톤 패턴 사용)
     private String Url;
@@ -107,6 +108,14 @@ public class SearchActivity extends Activity{
                 Url = Webserver_Url.getInstance().getUrl();
                 Log.i("KNU_Market/Search_Act","Url="+Url);
 
+                if(line_num != 0) {
+                    LinearLayout linearLayout_vertic = (LinearLayout) findViewById(R.id.list_vertical);
+                    linearLayout_vertic.removeAllViews();   //기존의 검색된 리스트들을 모두 삭제하고, 새로고침
+                }
+
+
+
+
                 //작업 부분
                 boolean netStat = false;
                 netStat = checkNetStat();//네트워크 상태 확인
@@ -146,7 +155,6 @@ public class SearchActivity extends Activity{
     public void updateView(JSONArray array){
 
         int product_count = 0;
-        int line_num;
 
         if(array.length() == 0){
             line_num = 0;
