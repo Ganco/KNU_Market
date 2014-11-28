@@ -40,6 +40,7 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
             new HashMap<String, MainActivity .TabInfo>();
     List<Fragment> fragments;
 
+    private static final int REQUEST_CODE_ADDPOST = 1004;
     public static final int REQUEST_CODE_MYPAGE = 1005;
     private boolean urlInputFlag = false;
 
@@ -88,8 +89,7 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
             case R.id.btn_goAddPost:
                 intent = new Intent(getBaseContext(), add_post.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivity(intent);
-                finish();
+                startActivityForResult(intent, REQUEST_CODE_ADDPOST);
                 break;
 
             case R.id.btn_home:
