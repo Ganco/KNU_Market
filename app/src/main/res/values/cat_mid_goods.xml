@@ -5,4 +5,7 @@
         <item>주방</item>
         <item>가구</item>
     </string-array>
+    <string-array name="cat_low_goods">
+        <item>없음</item>
+    </string-array>
 </resources>

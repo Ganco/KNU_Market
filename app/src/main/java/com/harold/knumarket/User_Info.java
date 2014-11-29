@@ -14,9 +14,9 @@ public class User_Info {
     private static User_Info user_info = null;
 
     public User_Info() {
-        this.client_No = null;
-        this.client_Id = null;
-        this.phone_No = null;
+        this.client_No = "0";
+        this.client_Id = "Test_User1";
+        this.phone_No = "01071229615";
         this.client_keyword = null;
     }
 

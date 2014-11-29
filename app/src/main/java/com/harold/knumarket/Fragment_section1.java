@@ -13,6 +13,7 @@ import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.DisplayMetrics;
@@ -78,16 +79,17 @@ public class Fragment_section1 extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_section1, container, false);
 
-        Url = Webserver_Url.getInstance().getUrl();
-        Log.i("KNU_Market/Frgmt_sec1","Url="+Url);
-
         //작업 부분
         boolean netStat = false;
         netStat = checkNetStat();//네트워크 상태 확인
         if(netStat){//WIFI나 데이터네트워크 사용 가능
             if(true) {
                 task = new postListLoading();
-                task.execute("JSP/RequestMainList.jsp");
+                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+                    task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,"JSP/RequestMainList.jsp");
+                }else {
+                    task.execute("JSP/RequestMainList.jsp");
+                }
             }
         }
         else{//인터넷 연결 불가
@@ -240,6 +242,7 @@ public class Fragment_section1 extends Fragment {
         protected void onPostExecute(String result) {
             try {
                 JSONObject json = null;
+                Log.i("KNU_Market/Frgmt_sec1 - onPostExcute()","result="+result);
                 jArray = new JSONArray(result);//JSON 데이터 형식으로 파싱
                 updateView(jArray);//받아온 정보로 화면 표시
             } catch (JSONException e) {
@@ -250,22 +253,23 @@ public class Fragment_section1 extends Fragment {
         @Override
         protected String doInBackground(String... urls) {
 
-            String str = "";
+            String result = "";
+            Url = Webserver_Url.getInstance().getUrl();
             HttpResponse response;
             HttpClient myClient = new DefaultHttpClient();
             HttpPost myConnection = new HttpPost(Url+urls[0]);
+            Log.i("KNU_Market/Frgmt_sec1 - doInBackground()","Url="+Url+urls[0]);
 
             try {
                 response = myClient.execute(myConnection);
-                str = EntityUtils.toString(response.getEntity(), "UTF-8");
-
+                result = EntityUtils.toString(response.getEntity(), "UTF-8");
             } catch (ClientProtocolException e) {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             }
             //str = Url+urls[0];
-            return str;
+            return result;
         }
     }
 
@@ -290,5 +294,12 @@ public class Fragment_section1 extends Fragment {
             //    return -1;
             //return 0;
         }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        task.cancel(true);
+        Toast.makeText(getActivity().getApplicationContext(),"Task status = "+String.valueOf(task.isCancelled()),Toast.LENGTH_SHORT).show();
     }
 }

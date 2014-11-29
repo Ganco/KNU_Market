@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -23,7 +25,9 @@ import android.widget.Toast;
 import com.harold.knumarket.Item_Comment.ItemComment;
 import com.harold.knumarket.Item_Comment.ItemCommentListAdapter;
 import com.knumarket.harold.knu_market.R;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -74,8 +78,24 @@ public class PostActivity extends Activity {
             ImageView imageView = new ImageView(context);
 
             if(!imgUrls.get(position).equals("null")) {
+
+                DisplayImageOptions options = new DisplayImageOptions.Builder()
+                        .showImageOnLoading(R.drawable.ic_empty) // 로딩중 이미지 설정
+                        .showImageForEmptyUri(R.drawable.ic_empty) // Uri주소가 잘못되었을경우(이미지없을때)
+                        .showImageOnFail(R.drawable.ic_error) // 로딩 실패시
+                        .resetViewBeforeLoading(false)  // 로딩전에 뷰를 리셋하는건데 false로 하세요 과부하!
+                        .delayBeforeLoading(0) // 로딩전 딜레이라는데 필요한일이 있을까요..?ㅋㅋ
+                        .cacheInMemory(true) // 메모리케시 사용여부   (사용하면 빨라지지만 많은 이미지 캐싱할경우 outOfMemory Exception발생할 수 있어요)
+                        .cacheOnDisc(true) // 디스크캐쉬를 사용여부(사용하세요왠만하면)
+                                //.preProcessor(...) // 비트맵 띄우기전에 프로세스 (BitmapProcessor이라는 인터페이스를 구연하면 process(Bitmap image)라는 메소드를 사용할 수 있어요. 처리하실게 있으면 작성하셔서 이안에 넣어주시면 됩니다.)
+                                //.postProcessor(...) // 비트맵 띄운후 프로세스 (위와같이 BitmapProcessor로 처리)
+                        .considerExifParams(false) // 사진이미지의 회전률 고려할건지
+                        .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2) // 스케일타입설정   (일부밖에없습니다. 제가 centerCrop이 없어서 라이브러리 다 뒤져봤는데 없더라구요. 다른방법이 있습니다. 아래 설명해드릴게요.)
+                        .bitmapConfig(Bitmap.Config.ARGB_8888) // 이미지 컬러방식
+                        .build();
+
                 ImageLoader imageLoader = ImageLoader.getInstance();
-                imageLoader.displayImage(Url + "Image/" + imgUrls.get(position), imageView);
+                imageLoader.displayImage(Url + "Image/" + imgUrls.get(position), imageView, options);
                 //Toast.makeText(context.getApplicationContext(),imgUrls.get(position),Toast.LENGTH_SHORT).show();
                 imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 ((ViewPager) container).addView(imageView);
@@ -118,7 +138,11 @@ public class PostActivity extends Activity {
         mViewPager = (ViewPager) findViewById(R.id.post_viewpager);
 
         task = new postLoading();
-        task.execute("JSP/RequestPost.jsp?post_no="+post_no);
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,"JSP/RequestPost.jsp?post_no="+post_no);
+        }else {
+            task.execute("JSP/RequestPost.jsp?post_no="+post_no);
+        }
         //TextView textView = (TextView) findViewById(R.id.Post_textView);
         //textView.setText("post_no :"+post_no);
 
@@ -196,7 +220,7 @@ public class PostActivity extends Activity {
         switch (id){
 
             case R.id.btn_call:
-               // intent = new Intent(getBaseContext(), add_post.class);
+               // intent = new Intent(getBaseContext(), addPostActivity.class);
                // startActivity(intent);
                 //finish();
                 break;
