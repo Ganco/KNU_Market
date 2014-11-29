@@ -4,11 +4,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-<<<<<<< HEAD
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-=======
->>>>>>> c3800bdffded6b3a7a70cdeac73e296c39a17376
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -195,6 +192,10 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
         User_Info userInfo = User_Info.getUser_info();
         SharedPreferences pref = getSharedPreferences("pref", MainActivity.MODE_PRIVATE);
         userInfo.LoadPreference(pref);
+
+        if(mPopupDlg != null){
+            mPopupDlg.dismiss();
+        }
     }
 
     private void initialiseTabHost(Bundle args) {
@@ -312,11 +313,4 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
         this.mViewPager.setCurrentItem(pos);
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        if(mPopupDlg != null){
-            mPopupDlg.dismiss();
-        }
-    }
 }

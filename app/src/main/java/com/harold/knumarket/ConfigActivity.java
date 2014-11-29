@@ -103,7 +103,7 @@ public class ConfigActivity extends Activity {
         switch (id){
 
             case R.id.btn_goAddPost:
-                intent = new Intent(getBaseContext(), add_post.class);
+                intent = new Intent(getBaseContext(), addPostActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(intent);
                 finish();
