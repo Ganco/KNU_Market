@@ -383,6 +383,7 @@ public class addPostActivity extends Activity {
                 try {
 
                     bm = MediaStore.Images.Media.getBitmap(getContentResolver(), intent.getData());
+                    bm = Bitmap.createScaledBitmap(bm, (int)(bm.getWidth()*SCALE) ,(int)(bm.getHeight()*SCALE),true);
 
                     //FILE Array에 임시 저장
                     String file_path = Environment.getExternalStorageDirectory().getPath();
@@ -459,9 +460,9 @@ public class addPostActivity extends Activity {
 
                 // 임시 파일 삭제
                 File f = new File(mImageCaptureUri.getPath());
-                if(f.exists()){
+                /*if(f.exists()){
                     f.delete();
-                }
+                }*/
             }
         }
     }
@@ -581,16 +582,15 @@ public class addPostActivity extends Activity {
             super.onPostExecute(s);
             Log.i("postUploading","AsyncTask Ended!");
             Toast.makeText(getApplicationContext(),"returnCode="+s,Toast.LENGTH_SHORT).show();
+            if(s.equals("http201")){
+                Toast.makeText(getApplicationContext(),"상품 등록 완료~!",Toast.LENGTH_SHORT).show();
+                goBackToMainActivity();
+            }
         }
     }
-
-    class testAsyncTask extends AsyncTask{
-
-        @Override
-        protected Object doInBackground(Object[] params) {
-            Log.i("testAsyncTask","Task Success");
-            return null;
-        }
+    public void goBackToMainActivity(){
+        Intent intent = new Intent(getBaseContext(), MainActivity.class);
+        startActivity(intent);
     }
 
     public class CustomSpinnerAdapter extends ArrayAdapter{

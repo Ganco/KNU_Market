@@ -2,11 +2,13 @@ package com.harold.knumarket;
 
 import android.util.Log;
 
+import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -38,6 +40,7 @@ public class AndroidUploader {
                 Log.i("AndroidUploader uploadPost","server postUpload Url  = "+ savePostUrl);
 
                 HttpURLConnection conn = (HttpURLConnection) connectURL.openConnection();
+                //conn.setChunkedStreamingMode(1024);
                 conn.setDoInput(true);
                 conn.setDoOutput(true);
                 conn.setUseCaches(false);
@@ -66,13 +69,12 @@ public class AndroidUploader {
                 for (int i = 0; i < post_DTO.getImgFiles().size(); i++) {
                     dataStream.flush();
                     writeFileField("file" + (i + 1) + "Name", post_DTO.getClient_id() + System.currentTimeMillis()+".jpg", "image/jpg", fileInputStreams.get(i));
+                    fileInputStreams.get(i).close();
                 }
 
                 // final closing boundary line
                 dataStream.writeBytes(twoHyphens + boundary + twoHyphens + CRLF);
 
-                for (int i = 0; i < post_DTO.getImgFiles().size(); i++)
-                    fileInputStreams.get(i).close();
 
                 dataStream.flush();
                 dataStream.close();
@@ -80,8 +82,8 @@ public class AndroidUploader {
 
                 Log.d("업로드 테스트", "***********전송완료***********");
 
-                //String response = getResponse(conn);
-                String response = conn.getResponseMessage();
+                String response = getResponse(conn);
+                //String response = conn.getResponseMessage();
 
                 Log.d("업로드 테스트","response : "+response);
 
@@ -147,7 +149,7 @@ public class AndroidUploader {
             // read file and write it into form...
             int bytesRead = fis.read(buffer, 0, bufferSize);
             while (bytesRead > 0){
-                dataStream.write(buffer, 0, bufferSize);
+                dataStream.write(buffer, 0, bytesRead);
                 bytesAvailable = fis.available();
                 bufferSize = Math.min(bytesAvailable, maxBufferSize);
                 bytesRead = fis.read(buffer, 0, bufferSize);
@@ -165,7 +167,7 @@ public class AndroidUploader {
 
     }
 
-    /*private String getResponse(HttpURLConnection conn)	{
+    private String getResponse(HttpURLConnection conn)	{
 
         try{
             DataInputStream dis = new DataInputStream(conn.getInputStream());
@@ -185,13 +187,13 @@ public class AndroidUploader {
             Log.e(TAG, "AndroidUploader: "+e);
             return "";
         }
-    }*/
+    }
     /**
 
      *  this mode of reading response no good either
 
      */
-    private String getResponse(HttpURLConnection conn)	    {
+    private String getResponseOrign(HttpURLConnection conn)	    {
 
         InputStream is = null;
 
@@ -210,11 +212,11 @@ public class AndroidUploader {
             Log.e(TAG, "AndroidUploader: "+e);
         }
         finally {
-
             try {
                 if (is != null)
                     is.close();
-            } catch (Exception e) {}
+            }
+            catch (Exception e) {}
         }
         return "";
     }
