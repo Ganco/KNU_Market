@@ -26,9 +26,17 @@ local.properties
 .idea/modules.xml
 .idea/scopes/scope_settings.xml
 .idea/vcs.xml
+*.iml
+
 build/intermediates/dex-cache/cache.xml
 build/intermediates/model_data.bin
-*.iml
+
+build\intermediates\model_data.bin
+build\intermediates\dex-cache\cache.xml
+
+
+.build/intermediates/model_data.bin
+.build/intermediates/dex-cache/cache.xml
 
 # OS-specific files
 .DS_Store

@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -137,7 +138,7 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
         final EditText url_Input = new EditText(this);
         url_Input.setText("211.51.176.248");
         builder.setView(url_Input);
-        builder.setPositiveButton("Ok",new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
@@ -155,7 +156,7 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
         builder.show();
         //다이얼로그를 통해 어플 실행 시작시 서버URL을 입력받아 실행함(개발용 코드)
 
-         //Android Universal Image Loader
+        //Android Universal Image Loader
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext())
                 .memoryCacheExtraOptions(480, 800)
                 .threadPriority(Thread.NORM_PRIORITY - 2)
@@ -166,22 +167,32 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
                 .build();
         ImageLoader.getInstance().init(config);
 
-        /*
-        DisplayImageOptions options = new DisplayImageOptions.Builder()
-                .showImageOnLoading(R.drawable.ic_stub) // 로딩중 이미지 설정
-                .showImageForEmptyUri(R.drawable.ic_empty) // Uri주소가 잘못되었을경우(이미지없을때)
-                .showImageOnFail(R.drawable.ic_error) // 로딩 실패시
-                .resetViewBeforeLoading(false)  // 로딩전에 뷰를 리셋하는건데 false로 하세요 과부하!
-                .delayBeforeLoading(1000) // 로딩전 딜레이라는데 필요한일이 있                                     을까요..?ㅋㅋ
-                .cacheInMemory(true) // 메모리케시 사용여부   (사용하면 빨라지지만 많은 이미지 캐싱할경우 outOfMemory Exception발생할 수 있어요)
-                .cacheOnDisc(true) // 디스크캐쉬를 사용여부(사용하세요왠만하면)
-                //.preProcessor(...) // 비트맵 띄우기전에 프로세스 (BitmapProcessor이라는 인터페이스를 구연하면 process(Bitmap image)라는 메소드를 사용할 수 있어요. 처리하실게 있으면 작성하셔서 이안에 넣어주시면 됩니다.)
-                //.postProcessor(...) // 비트맵 띄운후 프로세스 (위와같이 BitmapProcessor로 처리)
-                .considerExifParams(false) // 사진이미지의 회전률 고려할건지
-                .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2) // 스케일타입설정   (일부밖에없습니다. 제가 centerCrop이 없어서 라이브러리 다 뒤져봤는데 없더라구요. 다른방법이 있습니다. 아래 설명해드릴게요.)
-                .bitmapConfig(Bitmap.Config.ARGB_8888) // 이미지 컬러방식
-                .build();
-         */
+
+
+
+    }
+    @Override
+    protected void onStart()
+    {
+        super.onStart();
+
+
+        // preference로 키워드정보 로딩
+        User_Info userInfo = User_Info.getUser_info();
+
+        SharedPreferences pref = getSharedPreferences("pref", MainActivity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        userInfo.SavePreference(editor);
+    }
+    @Override
+    protected void onStop()
+    {
+        super.onStop();
+
+        // preference로 키워드정보저장
+        User_Info userInfo = User_Info.getUser_info();
+        SharedPreferences pref = getSharedPreferences("pref", MainActivity.MODE_PRIVATE);
+        userInfo.LoadPreference(pref);
     }
 
     private void initialiseTabHost(Bundle args) {

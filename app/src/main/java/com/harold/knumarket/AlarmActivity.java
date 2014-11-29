@@ -90,7 +90,8 @@ public class AlarmActivity extends Activity {
                 ///////////////////////////////////////////////////////////////
                 //userKeyword.size();
                 String temp = userKeyword.get(0) + "," + userKeyword.get(1) + "," + userKeyword.get(2) + "," + userKeyword.get(3) + "," + userKeyword.get(4);
-                
+                Log.i("KNU_Market/Search_Act", "keywords=" + temp);
+
                 task.execute("JSP/RequestMainList.jsp");        // 지금은 메인화면 코드
                 // 검색할 키워드를 서버의 jsp에 보내는 코드 만들어야 //
                 ///////////////////////////////////////////////////////////////

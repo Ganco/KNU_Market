@@ -3,9 +3,15 @@ package com.harold.knumarket;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.knumarket.harold.knu_market.R;
+
+import java.util.ArrayList;
 
 /**
  * Created by Gan on 2014-11-28.
@@ -13,6 +19,8 @@ import com.knumarket.harold.knu_market.R;
 public class ConfigActivity extends Activity {
 
     public static final int REQUEST_CODE_MAIN = 1001;
+    private ArrayList<String> userKeyword;
+
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
@@ -20,6 +28,70 @@ public class ConfigActivity extends Activity {
         setContentView(R.layout.activity_config);
 
 
+
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        Log.i("KNU_Market/Config_Act", "before user_info=");
+        User_Info userInfo = User_Info.getUser_info();
+        userInfo.getClient_keyword();
+
+        /*
+        Log.i("KNU_Market/Config_Act", "keyword1=" + userInfo.getClient_keyword().get(0));
+        Log.i("KNU_Market/Config_Act", "keyword2=" + userInfo.getClient_keyword().get(1));
+        Log.i("KNU_Market/Config_Act", "keyword3=" + userInfo.getClient_keyword().get(2));
+        Log.i("KNU_Market/Config_Act", "keyword4=" + userInfo.getClient_keyword().get(3));
+        Log.i("KNU_Market/Config_Act", "keyword5=" + userInfo.getClient_keyword().get(4));
+        ///*/
+
+
+        ///*
+        EditText keyword1 = (EditText) findViewById(R.id.keyword1);
+        EditText keyword2 = (EditText) findViewById(R.id.keyword2);
+        EditText keyword3 = (EditText) findViewById(R.id.keyword3);
+        EditText keyword4 = (EditText) findViewById(R.id.keyword4);
+        EditText keyword5 = (EditText) findViewById(R.id.keyword5);
+
+        Log.i("KNU_Market/Config_Act", "finish findViewById");
+
+        //*/
+
+        ///*
+        keyword1.setText(userInfo.getClient_keyword().get(0));
+        keyword2.setText(userInfo.getClient_keyword().get(1));
+        keyword3.setText(userInfo.getClient_keyword().get(2));
+        keyword4.setText(userInfo.getClient_keyword().get(3));
+        keyword5.setText(userInfo.getClient_keyword().get(4));
+
+        Log.i("KNU_Market/Config_Act", "finish setText");
+        //*/
+
+    }
+
+    @Override
+    public void onPause()
+    {
+        super.onPause();
+        ///*
+        User_Info userInfo = User_Info.getUser_info();
+        //userKeyword = userInfo.getClient_keyword();
+
+
+        EditText keyword1 = (EditText) findViewById(R.id.keyword1);
+        EditText keyword2 = (EditText) findViewById(R.id.keyword2);
+        EditText keyword3 = (EditText) findViewById(R.id.keyword3);
+        EditText keyword4 = (EditText) findViewById(R.id.keyword4);
+        EditText keyword5 = (EditText) findViewById(R.id.keyword5);
+
+        userInfo.setClient_keyword(keyword1.getText().toString(),0);
+        userInfo.setClient_keyword(keyword2.getText().toString(),1);
+        userInfo.setClient_keyword(keyword3.getText().toString(),2);
+        userInfo.setClient_keyword(keyword4.getText().toString(),3);
+        userInfo.setClient_keyword(keyword5.getText().toString(),4);
+
+        //*/
 
     }
 
