@@ -102,7 +102,7 @@ public class Fragment_section1 extends Fragment {
                     //onResume();
                 }
             });
-            ((LinearLayout)getActivity().findViewById(R.id.linear_horiz)).addView(refresh);
+            ((LinearLayout)getActivity().findViewById(R.id.f_sec1_linear_horiz)).addView(refresh);
         }
         //작업 부분
         //Bundle args = getArguments();
@@ -117,7 +117,7 @@ public class Fragment_section1 extends Fragment {
     //웹서버에서 받아온 정보(상품명,가격,이미지파일명)를 출력
     public void updateView(JSONArray array){
 
-        int product_count = 0;
+        int product_count = array.length()-1;
         int line_num;
 
         if(array.length() == 0){
@@ -137,7 +137,7 @@ public class Fragment_section1 extends Fragment {
             for(int j = 0; j < 3; j++){
                 JSONObject json = null;
                 try {
-                    json = array.getJSONObject(product_count++);
+                    json = array.getJSONObject(product_count--);
 
                     //임시로 웹뷰 사용 -> 이미지 버튼 형식으로 바꿔야함
                     //WebView webView = (WebView) new WebView(getActivity());
@@ -232,7 +232,7 @@ public class Fragment_section1 extends Fragment {
                     e.printStackTrace();
                 }
             }
-            LinearLayout linearLayout_vertic = (LinearLayout)getActivity().findViewById(R.id.linear_vertic);
+            LinearLayout linearLayout_vertic = (LinearLayout)getActivity().findViewById(R.id.f_sec1_linear_vertic);
             linearLayout_vertic.addView(new_linearLayout);
         }
     }
