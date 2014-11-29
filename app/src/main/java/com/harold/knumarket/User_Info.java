@@ -18,10 +18,17 @@ public class User_Info {
     private static User_Info user_info = null;
 
     public User_Info() {
+<<<<<<< HEAD
         this.client_No = null;
         this.client_Id = null;
         this.phone_No = null;
         this.client_keyword = new ArrayList<String>(5);
+=======
+        this.client_No = "0";
+        this.client_Id = "Test_User1";
+        this.phone_No = "01071229615";
+        this.client_keyword = null;
+>>>>>>> c3800bdffded6b3a7a70cdeac73e296c39a17376
     }
 
     public User_Info(String client_No, String client_Id, String phone_No, ArrayList<String> client_keyword) {

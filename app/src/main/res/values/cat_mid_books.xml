@@ -5,4 +5,20 @@
         <item>교양</item>
         <item>일반</item>
     </string-array>
+    <string-array name="cat_low_major">
+        <item>IT대</item>
+        <item>공대</item>
+        <item>경상대</item>
+        <item>인문대</item>
+    </string-array>
+    <string-array name="cat_low_libreal">
+        <item>자연과학</item>
+        <item>기초수학</item>
+        <item>스포츠</item>
+    </string-array>
+    <string-array name="cat_low_general">
+        <item>소설</item>
+        <item>자기계발</item>
+        <item>전문서적</item>
+    </string-array>
 </resources>

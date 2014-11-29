@@ -4,32 +4,30 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+<<<<<<< HEAD
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+=======
+>>>>>>> c3800bdffded6b3a7a70cdeac73e296c39a17376
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TabHost;
-import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Vector;
 import com.knumarket.harold.knu_market.R;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 
 public class MainActivity extends FragmentActivity implements TabHost.OnTabChangeListener, ViewPager.OnPageChangeListener {
@@ -44,6 +42,9 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
     private static final int REQUEST_CODE_ADDPOST = 1004;
     public static final int REQUEST_CODE_MYPAGE = 1005;
     private boolean urlInputFlag = false;
+
+    private AlertDialog.Builder builder;
+    private DialogInterface mPopupDlg = null;
 
     public boolean isUrlInputFlag() {
         return urlInputFlag;
@@ -88,7 +89,7 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
         switch (id){
 
             case R.id.btn_goAddPost:
-                intent = new Intent(getBaseContext(), add_post.class);
+                intent = new Intent(getBaseContext(), addPostActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivityForResult(intent, REQUEST_CODE_ADDPOST);
                 break;
@@ -132,7 +133,7 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
         setContentView(R.layout.activity_main);
 
         //다이얼로그를 통해 어플 실행 시작시 서버URL을 입력받아 실행함(개발용 코드)
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder = new AlertDialog.Builder(this);
         builder.setTitle("서버 IP 주소 입력");
         //builder.setMessage("Message");
         final EditText url_Input = new EditText(this);
@@ -153,7 +154,7 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
                 initializeViewPager();
             }
         });
-        builder.show();
+        mPopupDlg = builder.show();
         //다이얼로그를 통해 어플 실행 시작시 서버URL을 입력받아 실행함(개발용 코드)
 
         //Android Universal Image Loader
@@ -310,4 +311,11 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
         this.mViewPager.setCurrentItem(pos);
     }
 
-   }
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if(mPopupDlg != null){
+            mPopupDlg.dismiss();
+        }
+    }
+}
