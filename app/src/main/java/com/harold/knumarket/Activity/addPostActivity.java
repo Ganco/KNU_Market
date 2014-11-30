@@ -663,7 +663,6 @@ public class addPostActivity extends Activity {
 
     @Override
     protected void onPause() {
-        img_btn.setImageBitmap(null);
         if(bm != null){
             bm.recycle();
             bm = null;
