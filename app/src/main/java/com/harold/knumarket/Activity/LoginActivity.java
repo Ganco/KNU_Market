@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 import com.harold.knumarket.User_Info;
 import com.harold.knumarket.Webserver_Url;
+import com.knumarket.harold.knu_market.R;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
@@ -58,6 +60,7 @@ public class LoginActivity extends Activity {
                 // Switching to Register screen
                 Intent i = new Intent(getApplicationContext(), RegisterActivity.class);
                 startActivity(i);
+                finish();
             }
         });*/
     }
@@ -111,6 +114,7 @@ public class LoginActivity extends Activity {
                 }
                 catch (JSONException e) {
                     e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "일치하는 회원정보가 없습니다.", Toast.LENGTH_SHORT).show();
                 }
             }
         }
