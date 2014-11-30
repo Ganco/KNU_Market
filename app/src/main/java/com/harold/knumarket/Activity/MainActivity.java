@@ -32,6 +32,7 @@ import com.harold.knumarket.fragment.Fragment_section2;
 import com.harold.knumarket.fragment.Fragment_section3;
 import com.knumarket.harold.knu_market.R;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
+import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
@@ -196,14 +197,25 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
         //다이얼로그를 통해 어플 실행 시작시 서버URL을 입력받아 실행함(개발용 코드)
 
         //Android Universal Image Loader
-        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext())
+        /*ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext())
+                .memoryCache(new WeakMemoryCache())
                 .memoryCacheExtraOptions(480, 800)
                 .threadPriority(Thread.NORM_PRIORITY - 2)
                 .denyCacheImageMultipleSizesInMemory()
                 .discCacheFileNameGenerator(new Md5FileNameGenerator())
                 .tasksProcessingOrder(QueueProcessingType.LIFO)
                 //.writeDebugLogs() // 마켓에 포팅하실땐 빼주세요.
+                .build();*/
+
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext())
+                .threadPriority(Thread.NORM_PRIORITY - 2)
+                .denyCacheImageMultipleSizesInMemory()
+                .diskCacheFileNameGenerator(new Md5FileNameGenerator())
+                .diskCacheSize(50 * 1024 * 1024) // 50 Mb
+                .tasksProcessingOrder(QueueProcessingType.LIFO)
+                .writeDebugLogs() // Remove for release app
                 .build();
+
         ImageLoader.getInstance().init(config);
     }
     @Override

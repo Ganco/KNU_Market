@@ -16,12 +16,13 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_alignParentTop="true"
             android:weightSum="1"
             android:id="@+id/linear1"
             android:background="#ffff6f58"
-            android:layout_gravity="top">
+            android:layout_gravity="top"
+            android:gravity="center_vertical">
 
             <ImageView
                 android:layout_width="50dp"
