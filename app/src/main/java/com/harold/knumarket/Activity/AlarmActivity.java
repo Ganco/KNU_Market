@@ -130,28 +130,28 @@ public class AlarmActivity extends Activity {
 
                 ///*
                 //if(key1 != null && key1 != "" && key1 != " ")
-                if(key1.length() != 0)
+                if(key1.length() != 0 && !key1.contains(" "))
                     task.execute("JSP/RequestSearch.jsp?search_keyword="+key1);
                 else
                     keywordCount++;
 
-                if(key2.length() != 0)
+                if(key2.length() != 0 && !key2.contains(" "))
                     task2.execute("JSP/RequestSearch.jsp?search_keyword="+key2);
                 else
                     keywordCount++;
 
                 //if(key3 != null && key3 != "" && key3 != " ")
-                if(key3.length() != 0)
+                if(key3.length() != 0 && !key3.contains(" "))
                     task3.execute("JSP/RequestSearch.jsp?search_keyword="+key3);
                 else
                     keywordCount++;
 
-                if(key4.length() != 0)
+                if(key4.length() != 0 && !key4.contains(" "))
                     task4.execute("JSP/RequestSearch.jsp?search_keyword="+key4);
                 else
                     keywordCount++;
 
-                if(key5.length() != 0)
+                if(key5.length() != 0 && !key5.contains(" "))
                     task5.execute("JSP/RequestSearch.jsp?search_keyword="+key5);
                 else {
                     Log.i("KNU_Market/Alarm_Act", "keywordCount0=" + keywordCount);
