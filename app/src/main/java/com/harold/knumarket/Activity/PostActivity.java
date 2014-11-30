@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -250,6 +251,15 @@ public class PostActivity extends Activity {
             p_keyword1.setText(json.getString("keyword1"));
             p_keyword2.setText(json.getString("keyword2"));
             p_keyword3.setText(json.getString("keyword3"));
+
+            TextView p_text1 = (TextView) findViewById(R.id.ItemText01);
+            TextView p_text2 = (TextView) findViewById(R.id.ItemText02);
+            if(json.getString("product_state").equals("Sell")){
+                p_text1.setTextColor(Color.parseColor("#82979797"));
+            }
+            else{
+                p_text2.setTextColor(Color.parseColor("#82979797"));
+            }
 
             String categoryID = json.getString("category_id");
             Log.i("KNU_Market/Post_Act", "category_code=" + categoryID);
