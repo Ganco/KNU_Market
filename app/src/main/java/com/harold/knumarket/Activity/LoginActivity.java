@@ -12,6 +12,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.harold.knumarket.User_Info;
 import com.harold.knumarket.Webserver_Url;
+import com.knumarket.harold.knu_market.R;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
@@ -34,8 +36,8 @@ public class LoginActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        username = (EditText)findViewById(R.id.editText1);
-        password = (EditText)findViewById(R.id.editText2);
+        username = (EditText)findViewById(R.id.edit_c_id);
+        password = (EditText)findViewById(R.id.edit_c_pw);
 
         Button loginBtn = (Button)findViewById(R.id.loginBtn);
         loginBtn.setOnClickListener(new View.OnClickListener() {
@@ -59,6 +61,7 @@ public class LoginActivity extends Activity {
                 // Switching to Register screen
                 Intent i = new Intent(getApplicationContext(), RegisterActivity.class);
                 startActivity(i);
+                finish();
             }
         });
     }
@@ -111,6 +114,7 @@ public class LoginActivity extends Activity {
                 }
                 catch (JSONException e) {
                     e.printStackTrace();
+                    Toast.makeText(getApplicationContext(), "일치하는 회원정보가 없습니다.", Toast.LENGTH_SHORT).show();
                 }
             }
         }

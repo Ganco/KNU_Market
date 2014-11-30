@@ -75,4 +75,14 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="46dp" />
 
+    <Button
+        android:id="@+id/link_to_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="login"
+        android:text="회원가입"
+        android:layout_alignTop="@+id/loginBtn"
+        android:layout_alignRight="@+id/edit_c_pw"
+        android:layout_alignEnd="@+id/edit_c_pw" />
+
 </RelativeLayout>
