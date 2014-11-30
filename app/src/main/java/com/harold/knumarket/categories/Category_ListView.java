@@ -174,7 +174,15 @@ public class Category_ListView extends Activity {
                 p_button.setLayoutParams(param);
                 p_button.setPadding(0, 0, 0, 0);
                 p_button.setOrientation(LinearLayout.HORIZONTAL);
-                p_button.setBackgroundColor(Color.LTGRAY);
+
+                if(json.getString("product_state").equals("Sell")){
+                    p_button.setBackgroundColor(Color.parseColor("#B2CCFF"));
+                }
+                else{
+                    p_button.setBackgroundColor(Color.parseColor("#CEF279"));
+                }
+
+                //p_button.setBackgroundColor(Color.LTGRAY);
                 p_button.setGravity(Gravity.FILL);
                 p_button.setId(json.getInt("post_no"));//Post의 번호를 각 버튼의 ID값으로 사용
                 p_button.setOnClickListener(new View.OnClickListener() {
@@ -207,6 +215,8 @@ public class Category_ListView extends Activity {
 
                 p_name.setTextSize(15);
                 p_price.setTextSize(15);
+                p_name.setTextColor(Color.BLACK);
+                p_price.setTextColor(Color.BLACK);
                 p_name.setGravity(Gravity.FILL);
                 p_button.setGravity(Gravity.FILL);
 
