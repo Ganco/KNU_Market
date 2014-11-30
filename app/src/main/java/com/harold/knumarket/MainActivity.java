@@ -170,15 +170,14 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
         builder.setTitle("서버 IP 주소 입력");
         //builder.setMessage("Message");
         final EditText url_Input = new EditText(this);
-        //url_Input.setText("211.51.176.248");//내 방 공유기 외부 아이피 주소
-        url_Input.setText("220.94.32.180");
+        url_Input.setText("211.51.176.248");//내 방 공유기 외부 아이피 주소
+        //url_Input.setText("220.94.32.180");
         builder.setView(url_Input);
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
                 Webserver_Url.getInstance().setUrl(url_Input.getText().toString());
-
                 // Initialise the TabHost
                 initialiseTabHost(savedInstanceState);
                 if (savedInstanceState != null) {
@@ -198,13 +197,9 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
                 .denyCacheImageMultipleSizesInMemory()
                 .discCacheFileNameGenerator(new Md5FileNameGenerator())
                 .tasksProcessingOrder(QueueProcessingType.LIFO)
-                .writeDebugLogs() // 마켓에 포팅하실땐 빼주세요.
+                //.writeDebugLogs() // 마켓에 포팅하실땐 빼주세요.
                 .build();
         ImageLoader.getInstance().init(config);
-
-
-
-
     }
     @Override
     protected void onStart()

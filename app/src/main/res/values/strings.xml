@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">크누마켓</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="hello_world">로그인화면</string>
     <string name="action_settings">Settings</string>
     <string name="tab1">탭1</string>
     <string name="tab2">탭2</string>
@@ -30,5 +30,10 @@
     <string name="cat_high">대분류</string>
     <string name="cat_mid">중분류</string>
     <string name="cat_low">소분류</string>
+
+    <string name="login_activity">Login화면Screen</string>
+    <string name="username">폰번호:</string>
+    <string name="password">  비번:</string>
+    <string name="Login">로그인</string>
 
 </resources>

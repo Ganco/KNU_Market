@@ -10,6 +10,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -254,10 +255,147 @@ public class PostActivity extends Activity {
             p_price.setText("[\\"+json.getString("price")+"]");
             p_client.setText(json.getString("client"));
             p_detail.setText(json.getString("detail"));
-        } catch (JSONException e) {
+
+            String categoryID = json.getString("category_id");
+            setDecodeCatID(categoryID);
+        }
+        catch (JSONException e) {
             e.printStackTrace();
         }
      }
+
+    public void setDecodeCatID(String categoryID){
+
+        Log.i("PostActivity setDecodeCatId","Category_ID = "+categoryID);
+        TextView cat_hig =(TextView) findViewById(R.id.ItemText04); //대분류
+        TextView cat_mid =(TextView) findViewById(R.id.ItemText05); //중분류
+        TextView cat_low =(TextView) findViewById(R.id.ItemText06); //소분류
+
+        int cat_high_Code = Character.getNumericValue(categoryID.charAt(0));
+        int cat_mid_Code =  Character.getNumericValue(categoryID.charAt(1));
+        int cat_low_Code = Character.getNumericValue(categoryID.charAt(2));
+
+        Log.i("PostActivity setDecodeCatId","Category_ID = "+cat_high_Code+cat_mid_Code+cat_low_Code);
+
+        switch(cat_high_Code){
+            case 0:
+                cat_hig.setText("중고서적");
+                switch (cat_mid_Code){
+                    case 0:
+                        cat_mid.setText("전공");
+                        switch (cat_low_Code){
+                            case 0:
+                                cat_low.setText("IT대");
+                                break;
+                            case 1:
+                                cat_low.setText("공대");
+                                break;
+                            case 2:
+                                cat_low.setText("경상대");
+                                break;
+                            case 3:
+                                cat_low.setText("인문대");
+                                break;
+                        }
+                        break;
+                    case 1:
+                        cat_mid.setText("교양");
+                        switch (cat_low_Code){
+                            case 0:
+                                cat_low.setText("자연과학");
+                                break;
+                            case 1:
+                                cat_low.setText("기초수학");
+                                break;
+                            case 2:
+                                cat_low.setText("인문사회");
+                                break;
+                            case 3:
+                                cat_low.setText("스포츠");
+                                break;
+                        }
+                        break;
+                    case 2:
+                        cat_mid.setText("일반");
+                        switch (cat_low_Code){
+                            case 0:
+                                cat_low.setText("소설");
+                                break;
+                            case 1:
+                                cat_low.setText("자기계발");
+                                break;
+                            case 2:
+                                cat_low.setText("전문서적");
+                                break;
+                        }
+                        break;
+                }
+                break;
+            case 1:
+                cat_hig.setText("자취용품");
+                switch (cat_mid_Code){
+                    case 0:
+                        cat_mid.setText("가전");
+                        switch (cat_low_Code) {
+                            case 0:
+                                cat_low.setText("없음");
+                                break;
+                        }
+                        break;
+                    case 1:
+                        cat_mid.setText("주방");
+                        switch (cat_low_Code) {
+                            case 0:
+                                cat_low.setText("없음");
+                                break;
+                        }
+                        break;
+                    case 2:
+                        cat_mid.setText("가구");
+                        switch (cat_low_Code) {
+                            case 0:
+                                cat_low.setText("없음");
+                                break;
+                        }
+                        break;
+                }
+                break;
+            case 2:
+                cat_hig.setText("패션잡화");
+                switch (cat_mid_Code){
+                    case 0:
+                        cat_mid.setText("남성");
+                        switch (cat_low_Code) {
+                            case 0:
+                                cat_low.setText("없음");
+                                break;
+                        }
+                        break;
+                    case 1:
+                        cat_mid.setText("여성");
+                        switch (cat_low_Code) {
+                            case 0:
+                                cat_low.setText("없음");
+                                break;
+                        }
+                        break;
+                }
+                break;
+            case 3:
+                cat_hig.setText("기타");
+                switch (cat_mid_Code){
+                    case 0:
+                        cat_mid.setText("없음");
+                        switch (cat_low_Code) {
+                            case 0:
+                                cat_low.setText("없음");
+                                break;
+                        }
+                        break;
+                }
+                break;
+        }
+    }
 
     class postLoading extends AsyncTask<String, Void, String> {
         @Override
