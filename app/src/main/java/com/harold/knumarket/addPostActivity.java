@@ -252,6 +252,7 @@ public class addPostActivity extends Activity {
     public void onClick(View v) {
 
         int id = v.getId();
+        Intent intent = null;
 
         switch(id){
             case R.id.img_btn1:
@@ -311,6 +312,42 @@ public class addPostActivity extends Activity {
                     Toast.makeText(getApplicationContext(),"Upload 실패",Toast.LENGTH_SHORT).show();
                 }
                 break;
+
+            case R.id.btn_home:
+                intent = new Intent(getBaseContext(), MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent);
+                break;
+
+            //// insert button listener for MYPAGE
+            case R.id.btn_myPage:
+                intent = new Intent(getBaseContext(), MyPageActivity.class);
+                //intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                //intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent);
+                break;
+
+            case R.id.btn_config:
+                intent = new Intent(getBaseContext(), ConfigActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent);
+                break;
+            case R.id.btn_search:
+                intent = new Intent(getBaseContext(), SearchActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent);
+                break;
+            case R.id.btn_zzim:
+                break;
+            case R.id.btn_alarm:
+                intent = new Intent(getBaseContext(), AlarmActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent);
+                break;
+
         }
     }
 
