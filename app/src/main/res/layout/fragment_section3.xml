@@ -5,29 +5,13 @@
 
 
     <LinearLayout
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp">
 
         <Button
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="패션잡화"
-            android:id="@+id/btn_f200"
-            android:layout_weight="1"
-            android:onClick="onClick" />
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="기타"
-            android:id="@+id/btn_f300"
-            android:layout_weight="1"
-            android:onClick="onClick" />
-
-        <Button
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:text="중고서적"
             android:id="@+id/btn_f000"
@@ -35,10 +19,26 @@
             android:onClick="onClick" />
 
         <Button
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:text="자취용품"
             android:id="@+id/btn_f100"
+            android:layout_weight="1"
+            android:onClick="onClick" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="패션잡화"
+            android:id="@+id/btn_f200"
+            android:layout_weight="1"
+            android:onClick="onClick" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="기타"
+            android:id="@+id/btn_f300"
             android:layout_weight="1"
             android:onClick="onClick" />
     </LinearLayout>

@@ -142,6 +142,12 @@ public class Category_ListView extends Activity {
 
         int product_count = 0;
 
+        if (array.length() == 0) {
+            line_num = 0;
+        } else {
+            line_num = (array.length() / 3) + 1;
+        }
+
         line_num = array.length();
 
         DisplayMetrics metrics = new DisplayMetrics();
@@ -152,20 +158,15 @@ public class Category_ListView extends Activity {
             LinearLayout new_linearLayout = new LinearLayout(getBaseContext());
             //new_linearLayout.setWeightSum(1);
             // for(int j = 0; j < 3; j++){
+            JSONObject json = null;
             try {
-                JSONObject json = null;
                 json = array.getJSONObject(product_count++);
 
-                String category_code = json.getString("category_code");
-
-                //Log.i("KNU_Market/Category_Act", "category_code=" + category_code);
-
-                if(isCategory(category_code, category_no) == false) {
-                    //line_num -= 1;
-                    //i++;
-                    continue;
-                }
-
+                //임시로 웹뷰 사용 -> 이미지 버튼 형식으로 바꿔야함
+                //WebView webView = (WebView) new WebView(getActivity());
+                //webView.getSettings().setDefaultZoom(WebSettings.ZoomDensity.FAR);
+                //webView.loadUrl(Url+"Image/"+json.getString("imgUrl"));
+                //new_linearLayout.addView(webView);
                 //이미지만 웹뷰로 출력
                 LinearLayout p_button = (LinearLayout) new LinearLayout(getBaseContext());
                 LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
@@ -174,15 +175,7 @@ public class Category_ListView extends Activity {
                 p_button.setLayoutParams(param);
                 p_button.setPadding(0, 0, 0, 0);
                 p_button.setOrientation(LinearLayout.HORIZONTAL);
-
-                if(json.getString("product_state").equals("Sell")){
-                    p_button.setBackgroundColor(Color.parseColor("#C3FF7961"));
-                }
-                else{
-                    p_button.setBackgroundColor(Color.parseColor("#B2CCFF"));
-                }
-
-                //p_button.setBackgroundColor(Color.LTGRAY);
+                p_button.setBackgroundColor(Color.LTGRAY);
                 p_button.setGravity(Gravity.FILL);
                 p_button.setId(json.getInt("post_no"));//Post의 번호를 각 버튼의 ID값으로 사용
                 p_button.setOnClickListener(new View.OnClickListener() {
@@ -197,8 +190,10 @@ public class Category_ListView extends Activity {
 
                 ImageView p_img = (ImageView) new ImageView(getBaseContext());
                 LinearLayout.LayoutParams img_param =
+                        //new LinearLayout.LayoutParams(200,235);
                         new LinearLayout.LayoutParams(200, 200);
                 p_img.setLayoutParams(img_param);
+                //p_img.setImageDrawable(null);
                 p_img.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
 
@@ -215,8 +210,6 @@ public class Category_ListView extends Activity {
 
                 p_name.setTextSize(15);
                 p_price.setTextSize(15);
-                p_name.setTextColor(Color.BLACK);
-                p_price.setTextColor(Color.BLACK);
                 p_name.setGravity(Gravity.FILL);
                 p_button.setGravity(Gravity.FILL);
 
@@ -242,14 +235,18 @@ public class Category_ListView extends Activity {
                     @Override
                     public void onLoadingStarted(String s, View view) {
                     }
+
                     @Override
                     public void onLoadingFailed(String s, View view, FailReason failReason) {
                     }
+
                     @Override
                     public void onLoadingComplete(String s, View view, Bitmap bitmap) {
                     }
+
                     @Override
                     public void onLoadingCancelled(String s, View view) {
+
                     }
                 });
                 //AUIL ImageLoader 사용
@@ -345,7 +342,6 @@ public class Category_ListView extends Activity {
                 intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivityForResult(intent, REQUEST_CODE_MAIN);
-                finish();
                 break;
 
             //// insert button listener for MYPAGE
@@ -353,20 +349,17 @@ public class Category_ListView extends Activity {
                 intent = new Intent(getBaseContext(), MyPageActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(intent);
-                finish();
                 break;
 
             case R.id.btn_config:
                 intent = new Intent(getBaseContext(), ConfigActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(intent);
-                finish();
                 break;
             case R.id.btn_search:
                 intent = new Intent(getBaseContext(), SearchActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(intent);
-                finish();
                 break;
             case R.id.btn_zzim:
                 break;
@@ -374,83 +367,7 @@ public class Category_ListView extends Activity {
                 intent = new Intent(getBaseContext(), AlarmActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(intent);
-                finish();
                 break;
         }
-    }
-
-    public boolean isCategory(String code, String num) {
-
-        int icode = 0;      // code of object from server
-        int inum = 0;       // user-click code
-        icode = Integer.parseInt(code);
-        inum = Integer.parseInt(num);
-
-        //Log.i("KNU_Market/Category_Act", "icode=" + icode);
-        //Log.i("KNU_Market/Category_Act", "inum=" + inum);
-        if(inum == 300) {
-            if(icode == 300)
-                return true;
-            else
-                return false;
-        }
-        if(icode == inum) {
-            return true;
-        }
-
-        if(icode / 100 == inum / 100) {
-            // 100의 자리
-            switch (icode / 100) {
-
-                case 0: // 000~099
-                    if((inum % 100 == 99)) { // 099
-                        return true;
-                    }
-                    // another
-                    else if(icode / 10 == inum / 10) {
-
-                        // 10의 자리
-                        switch (icode / 10) {
-                            case 0: // 000~009
-                                if(inum % 10 == 9) {   // 009
-                                    return true;
-                                }
-                                break;
-
-                            case 1: // 010~019
-                                if(inum % 10 == 9) {   // 019
-                                    return true;
-                                }
-                                break;
-
-                            case 2: // 020~029
-                                if(inum % 10 == 9) {   // 029
-                                    return true;
-                                }
-                                break;
-                        }
-                    }
-
-                    break;
-                case 1: // 100~199
-                    // 199
-                    if(inum % 100 == 99) {
-                        return true;
-                    }
-                    break;
-
-                case 2:
-                    // 200~299
-                    if(inum % 100 == 99) {
-                        return true;
-                    }
-                    break;
-            }
-            // end switch
-        }
-        // end if
-
-
-        return false;
     }
 }

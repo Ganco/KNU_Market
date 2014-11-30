@@ -16,61 +16,38 @@
             android:layout_height="wrap_content"
             android:weightSum="1"
             android:id="@+id/linear1"
-            android:background="#ffff6f58"
-            android:gravity="center_vertical">
+            android:background="#ffff6f58">
 
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="match_parent"
-                android:id="@+id/Log"
-                android:src="@drawable/logo"
-                android:layout_margin="3dp" />
-
-            <ImageView
-                android:layout_width="120dp"
-                android:layout_height="30dp"
-                android:id="@+id/knuMarketTitle"
-                android:background="@drawable/knu_market_title_crop"
-                android:scaleType="fitXY"
-                android:cropToPadding="false" />
-
-            <Space
+            <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="0.94" />
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="크누마켓icon"
+                android:id="@+id/textView" />
 
             <Button
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="@drawable/search_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/search"
                 android:id="@+id/btn_search"
-                android:onClick="onClick"
-                android:adjustViewBounds="true"
-                android:padding="0sp"
-                android:scaleType="fitXY"
-                android:layout_marginLeft="10dp" />
+                android:layout_weight="0.33"
+                android:onClick="onClick" />
 
             <Button
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="@drawable/zzim_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/zzim"
                 android:id="@+id/btn_zzim"
-                android:onClick="onClick"
-                android:adjustViewBounds="true"
-                android:padding="0sp"
-                android:scaleType="center"
-                android:layout_marginLeft="10dp" />
+                android:layout_weight="0.33"
+                android:onClick="onClick" />
 
             <Button
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="@drawable/notify_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/notify"
                 android:id="@+id/btn_alarm"
-                android:onClick="onClick"
-                android:adjustViewBounds="true"
-                android:padding="0sp"
-                android:scaleType="center"
-                android:layout_marginLeft="10dp" />
+                android:layout_weight="0.33"
+                android:onClick="onClick" />
 
         </LinearLayout>
 
@@ -93,7 +70,7 @@
                 android:layout_marginLeft="10dp">
 
                 <Button
-                    android:layout_width="match_parent"
+                    android:layout_width="100dp"
                     android:layout_height="match_parent"
                     android:text="교양 전체"
                     android:id="@+id/btn_019"
@@ -101,7 +78,7 @@
                     android:onClick="onClick" />
 
                 <Button
-                    android:layout_width="match_parent"
+                    android:layout_width="100dp"
                     android:layout_height="match_parent"
                     android:text="자연과학"
                     android:id="@+id/btn_010"
@@ -109,7 +86,7 @@
                     android:onClick="onClick" />
 
                 <Button
-                    android:layout_width="match_parent"
+                    android:layout_width="100dp"
                     android:layout_height="match_parent"
                     android:text="기초수학"
                     android:id="@+id/btn_011"
@@ -117,7 +94,7 @@
                     android:onClick="onClick" />
 
                 <Button
-                    android:layout_width="match_parent"
+                    android:layout_width="100dp"
                     android:layout_height="match_parent"
                     android:text="인문사회"
                     android:id="@+id/btn_012"
@@ -125,7 +102,7 @@
                     android:onClick="onClick" />
 
                 <Button
-                    android:layout_width="match_parent"
+                    android:layout_width="100dp"
                     android:layout_height="match_parent"
                     android:text="스포츠"
                     android:id="@+id/btn_013"
@@ -144,62 +121,45 @@
             android:layout_height="wrap_content"
             android:baselineAligned="false"
             android:gravity="bottom"
-            android:background="@android:color/darker_gray">
+            android:background="@android:color/darker_gray"
+            android:id="@+id/linear2">
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical">
+                android:layout_height="wrap_content">
 
                 <Button
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/home"
                     android:id="@+id/btn_home"
-                    android:onClick="onClick"
-                    android:background="@drawable/home_btn"
-                    android:adjustViewBounds="true"
-                    android:padding="0sp"
-                    android:scaleType="center"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp" />
+                    android:layout_weight="1"
+                    android:onClick="onClick" />
 
                 <Button
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/addPost"
                     android:id="@+id/btn_goAddPost"
-                    android:onClick="onClick"
-                    android:background="@drawable/addpost_btn"
-                    android:adjustViewBounds="true"
-                    android:padding="0sp"
-                    android:scaleType="center"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp" />
+                    android:layout_weight="1"
+                    android:onClick="onClick" />
 
                 <Button
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="MyPage"
                     android:id="@+id/btn_myPage"
-                    android:onClick="onClick"
-                    android:background="@drawable/mypage_btn"
-                    android:adjustViewBounds="true"
-                    android:padding="0sp"
-                    android:scaleType="center"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp" />
+                    android:layout_weight="1"
+                    android:onClick="onClick" />
 
                 <Button
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/config"
                     android:id="@+id/btn_config"
-                    android:background="@drawable/config_btn"
-                    android:onClick="onClick"
-                    android:padding="0sp"
-                    android:adjustViewBounds="true"
-                    android:scaleType="fitXY"
-                    android:maxHeight="20dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp" />
+                    android:layout_weight="1"
+                    android:onClick="onClick" />
             </LinearLayout>
 
         </LinearLayout>

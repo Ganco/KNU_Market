@@ -81,7 +81,6 @@ public class Category_Book0 extends Activity {
                 intent = new Intent(getBaseContext(), MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                finish();
                 break;
 
             //// insert button listener for MYPAGE
@@ -89,20 +88,17 @@ public class Category_Book0 extends Activity {
                 intent = new Intent(getBaseContext(), MyPageActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(intent);
-                finish();
                 break;
 
             case R.id.btn_config:
                 intent = new Intent(getBaseContext(), ConfigActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(intent);
-                finish();
                 break;
             case R.id.btn_search:
                 intent = new Intent(getBaseContext(), SearchActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(intent);
-                finish();
                 break;
             case R.id.btn_zzim:
                 break;
@@ -110,7 +106,6 @@ public class Category_Book0 extends Activity {
                 intent = new Intent(getBaseContext(), AlarmActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(intent);
-                finish();
                 break;
         }
     }

@@ -116,9 +116,7 @@ public class SearchActivity extends Activity{
                     if(true) {
                         task = new postListLoading();
                         ///////////////////////////////////////////////////////////////
-                        String key1 = searchText.getText().toString();
-                        if(key1.length() != 0 && !key1.contains(" "))
-                            task.execute("JSP/RequestSearch.jsp?search_keyword="+key1);        // 검색어로 쿼리 요청
+                        task.execute("JSP/RequestSearch.jsp?search_keyword="+searchText.getText());        // 지금은 메인화면 코드
                         // 검색할 text를 서버의 jsp에 보내는 코드 만들어야 //
                         ///////////////////////////////////////////////////////////////
                     }
@@ -186,10 +184,10 @@ public class SearchActivity extends Activity{
 
                     //판매-구매 상품 상태 색상으로 구분
                     if(json.getString("product_state").equals("Sell")){
-                        p_button.setBackgroundColor(Color.parseColor("#C3FF7961"));
+                        p_button.setBackgroundColor(Color.parseColor("#B2CCFF"));
                     }
                     else{
-                        p_button.setBackgroundColor(Color.parseColor("#B2CCFF"));
+                        p_button.setBackgroundColor(Color.parseColor("#CEF279"));
                     }
 
                     p_button.setGravity(Gravity.FILL);
@@ -212,6 +210,9 @@ public class SearchActivity extends Activity{
                     //p_img.setImageDrawable(null);
                     p_img.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
+
+
+
                     LinearLayout p_box = (LinearLayout) new LinearLayout(getBaseContext());
                     LinearLayout.LayoutParams box_param = new LinearLayout.LayoutParams(
                             ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
@@ -225,8 +226,6 @@ public class SearchActivity extends Activity{
 
                     p_name.setTextSize(15);
                     p_price.setTextSize(15);
-                    p_name.setTextColor(Color.BLACK);
-                    p_price.setTextColor(Color.BLACK);
                     p_name.setGravity(Gravity.FILL);
                     p_button.setGravity(Gravity.FILL);
 
@@ -366,7 +365,6 @@ public class SearchActivity extends Activity{
                 intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivityForResult(intent, REQUEST_CODE_MAIN);
-                finish();
                 break;
 
             //// insert button listener for MYPAGE
@@ -374,14 +372,9 @@ public class SearchActivity extends Activity{
                 intent = new Intent(getBaseContext(), MyPageActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivityForResult(intent, REQUEST_CODE_MYPAGE);
-                finish();
                 break;
 
             case R.id.btn_config:
-                intent = new Intent(getBaseContext(), ConfigActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivity(intent);
-                finish();
                 break;
             case R.id.btn_search:
                 break;
@@ -391,7 +384,6 @@ public class SearchActivity extends Activity{
                 intent = new Intent(getBaseContext(), AlarmActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(intent);
-                finish();
                 break;
         }
     }

@@ -41,9 +41,6 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
 
 /**
  * Created by Gan on 2014-11-28.
@@ -62,12 +59,6 @@ public class AlarmActivity extends Activity {
     private int line_num = 0;
     //웹서버 url정보를 WebServer_Url클래스 하나로 관리함(싱글톤 패턴 사용)
     private String Url;
-    private static int keywordCount = 0;
-    Map m = new TreeMap();
-    private postListLoading task2;
-    private postListLoading task3;
-    private postListLoading task4;
-    private postListLoading task5;
 
 
     @Override
@@ -81,7 +72,7 @@ public class AlarmActivity extends Activity {
         userKeyword = userInfo.getClient_keyword();
 
         Url = Webserver_Url.getInstance().getUrl();
-        Log.i("KNU_Market/Alarm_Act", "Url=" + Url);
+        Log.i("KNU_Market/Search_Act", "Url=" + Url);
 
         if(line_num != 0) {
             LinearLayout linearLayout_vertic = (LinearLayout) findViewById(R.id.list_vertical);
@@ -94,78 +85,12 @@ public class AlarmActivity extends Activity {
         if(netStat){//WIFI나 데이터네트워크 사용 가능
             if(true) {
                 task = new postListLoading();
-                task2 = new postListLoading();
-                task3 = new postListLoading();
-                task4 = new postListLoading();
-                task5 = new postListLoading();
                 ///////////////////////////////////////////////////////////////
+                //userKeyword.size();
+                String temp = userKeyword.get(0) + "," + userKeyword.get(1) + "," + userKeyword.get(2) + "," + userKeyword.get(3) + "," + userKeyword.get(4);
+                Log.i("KNU_Market/Search_Act", "keywords=" + temp);
 
-                keywordCount = 0;
-                m.clear();
-
-                /*
-                task.execute("JSP/RequestSearch.jsp?search_keyword="+userKeyword.get(0));
-                while(keywordCount < 1);
-                task2.execute("JSP/RequestSearch.jsp?search_keyword="+userKeyword.get(1));
-                while(keywordCount < 2);
-                task3.execute("JSP/RequestSearch.jsp?search_keyword="+userKeyword.get(2));
-                while(keywordCount < 3);
-                task4.execute("JSP/RequestSearch.jsp?search_keyword="+userKeyword.get(3));
-                while(keywordCount < 4);
-                task5.execute("JSP/RequestSearch.jsp?search_keyword="+userKeyword.get(4));
-                //*/
-
-                String key1 = userKeyword.get(0);
-                String key2 = userKeyword.get(1);
-                String key3 = userKeyword.get(2);
-                String key4 = userKeyword.get(3);
-                String key5 = userKeyword.get(4);
-
-                Log.i("KNU_Market/Alarm_Act", "keyword1=" + userKeyword.get(0));
-                Log.i("KNU_Market/Alarm_Act", "keyword2=" + userKeyword.get(1));
-                Log.i("KNU_Market/Alarm_Act", "keyword3=" + userKeyword.get(2));
-                Log.i("KNU_Market/Alarm_Act", "keyword4=" + userKeyword.get(3));
-                Log.i("KNU_Market/Alarm_Act", "keyword5=" + userKeyword.get(4));
-
-
-                ///*
-                //if(key1 != null && key1 != "" && key1 != " ")
-                if(key1.length() != 0 && !key1.contains(" "))
-                    task.execute("JSP/RequestSearch.jsp?search_keyword="+key1);
-                else
-                    keywordCount++;
-
-                if(key2.length() != 0 && !key2.contains(" "))
-                    task2.execute("JSP/RequestSearch.jsp?search_keyword="+key2);
-                else
-                    keywordCount++;
-
-                //if(key3 != null && key3 != "" && key3 != " ")
-                if(key3.length() != 0 && !key3.contains(" "))
-                    task3.execute("JSP/RequestSearch.jsp?search_keyword="+key3);
-                else
-                    keywordCount++;
-
-                if(key4.length() != 0 && !key4.contains(" "))
-                    task4.execute("JSP/RequestSearch.jsp?search_keyword="+key4);
-                else
-                    keywordCount++;
-
-                if(key5.length() != 0 && !key5.contains(" "))
-                    task5.execute("JSP/RequestSearch.jsp?search_keyword="+key5);
-                else {
-                    Log.i("KNU_Market/Alarm_Act", "keywordCount0=" + keywordCount);
-                    keywordCount++;
-                    //updateView(jArray);
-                }
-                   // keywordCount++;
-                //*/
-
-
-               // while(keywordCount < 5);    // wait for threads
-
-
-                //task.execute("JSP/RequestMainList.jsp");        // 지금은 메인화면 코드
+                task.execute("JSP/RequestMainList.jsp");        // 지금은 메인화면 코드
                 // 검색할 키워드를 서버의 jsp에 보내는 코드 만들어야 //
                 ///////////////////////////////////////////////////////////////
             }
@@ -214,31 +139,26 @@ public class AlarmActivity extends Activity {
 
         int product_count = 0;
 
+        if(array.length() == 0){
+            line_num = 0;
+        }
+        else{
+            line_num = (array.length()/3)+1;
+        }
+
+        line_num = array.length();
+
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
         int screenWidth = metrics.widthPixels;
 
-        Set set = m.keySet();
-        line_num = set.size();
-        Object []hmKeys = set.toArray();
-
-
-        for(int i = 0; i < line_num  ; i++){
+        for(int i = 1; i <= line_num  ; i++){
             LinearLayout new_linearLayout = new LinearLayout(getBaseContext());
             //new_linearLayout.setWeightSum(1);
             // for(int j = 0; j < 3; j++){
             JSONObject json = null;
             try {
-                //json = (JSONObject)hmKeys[i-1];
-
-
-                //Object key = hmKeys[i-1];
-                Integer key = (Integer)hmKeys[i];
-                Log.i("KNU_Market/Alarm_Act", "key=" + key);
-                json = (JSONObject)m.get(key);
-                Log.i("KNU_Market/Alarm_Act", "catch post_no=" + json.getInt("post_no"));
-
-                //json = array.getJSONObject(product_count++);
+                json = array.getJSONObject(product_count++);
 
                 //임시로 웹뷰 사용 -> 이미지 버튼 형식으로 바꿔야함
                 //WebView webView = (WebView) new WebView(getActivity());
@@ -253,14 +173,7 @@ public class AlarmActivity extends Activity {
                 p_button.setLayoutParams(param);
                 p_button.setPadding(0, 0, 0, 0);
                 p_button.setOrientation(LinearLayout.HORIZONTAL);
-
-                if(json.getString("product_state").equals("Sell")){
-                    p_button.setBackgroundColor(Color.parseColor("#C3FF7961"));
-                }
-                else{
-                    p_button.setBackgroundColor(Color.parseColor("#B2CCFF"));
-                }
-               //p_button.setBackgroundColor(Color.LTGRAY);
+                p_button.setBackgroundColor(Color.LTGRAY);
                 p_button.setGravity(Gravity.FILL);
                 p_button.setId(json.getInt("post_no"));//Post의 번호를 각 버튼의 ID값으로 사용
                 p_button.setOnClickListener(new View.OnClickListener() {
@@ -297,8 +210,6 @@ public class AlarmActivity extends Activity {
 
                 p_name.setTextSize(15);
                 p_price.setTextSize(15);
-                p_name.setTextColor(Color.BLACK);
-                p_price.setTextColor(Color.BLACK);
                 p_name.setGravity(Gravity.FILL);
                 p_button.setGravity(Gravity.FILL);
 
@@ -366,40 +277,6 @@ public class AlarmActivity extends Activity {
             LinearLayout linearLayout_vertic = (LinearLayout)findViewById(R.id.list_vertical);
             linearLayout_vertic.addView(new_linearLayout);
         }
-        Log.i("KNU_Market/Alarm_Act", "///////////// END UPDATE VIEW //////////////");
-    }
-    public void mergeKeyword(JSONArray jArray) {
-
-        JSONObject json = null;
-        int product_count = 0;
-
-        line_num = jArray.length();
-        Log.i("KNU_Market/Alarm_Act", "keywordCount1=" + keywordCount);
-        for(int i = 1; i <= line_num  ; i++) {
-            try {
-                json = jArray.getJSONObject(product_count++);
-                m.put(json.getInt("post_no"), json);
-                Log.i("KNU_Market/Alarm_Act", "catch post_no=" + json.getInt("post_no"));
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-
-        keywordCount++;
-        Log.i("KNU_Market/Alarm_Act", "keywordCount2=" + keywordCount);
-        if(keywordCount == 5)
-            updateView(jArray);
-
-        /*//keywordCount++;
-
-        if(keywordCount == 5) {
-            JSONArray jArray2 = null;
-            for(int i=0; i < m.size(); i++) {
-                jArray2.
-            }
-            updateView(jArray);
-        }*/
-
     }
 
     class postListLoading extends AsyncTask<String, Void, String> {
@@ -408,12 +285,9 @@ public class AlarmActivity extends Activity {
             try {
                 JSONObject json = null;
                 jArray = new JSONArray(result);//JSON 데이터 형식으로 파싱
-                //updateView(jArray);//받아온 정보로 화면 표시
-                mergeKeyword(jArray);
-
+                updateView(jArray);//받아온 정보로 화면 표시
             } catch (JSONException e) {
                 e.printStackTrace();
-                keywordCount++;     // no results makes exception?
             }
         }
         //웹에서 정보 가져오는 부분
@@ -481,7 +355,6 @@ public class AlarmActivity extends Activity {
                 intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivityForResult(intent, REQUEST_CODE_MAIN);
-                finish();
                 break;
 
             //// insert button listener for MYPAGE
@@ -493,20 +366,17 @@ public class AlarmActivity extends Activity {
                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 //startActivityForResult(intent, REQUEST_CODE_MYPAGE);
                 startActivity(intent);
-                finish();
                 break;
 
             case R.id.btn_config:
                 intent = new Intent(getBaseContext(), ConfigActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(intent);
-                finish();
                 break;
             case R.id.btn_search:
                 intent = new Intent(getBaseContext(), SearchActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(intent);
-                finish();
                 break;
             case R.id.btn_zzim:
                 break;

@@ -1,7 +1,6 @@
 package com.harold.knumarket.Activity;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -53,17 +52,6 @@ public class LoginActivity extends Activity {
                 String url = Webserver_Url.getInstance().getUrl();
                 Login_attempt.onPostExecute(url+"JSP/RequestLogin.jsp?login_id="+login_id+"&login_pass="+login_pass);
                 //
-            }
-        });
-        TextView registerScreen = (TextView) findViewById(R.id.link_to_login);
-
-        // Listening to register new account link
-        registerScreen.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View v) {
-                // Switching to Register screen
-                Intent i = new Intent(getApplicationContext(), RegisterActivity.class);
-                startActivity(i);
             }
         });
     }
