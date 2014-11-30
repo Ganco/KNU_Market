@@ -34,10 +34,13 @@
                 android:layout_weight="1" />
 
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/notify"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@drawable/notify_btn"
                 android:id="@+id/btn_alarm"
+                android:adjustViewBounds="true"
+                android:padding="0sp"
+                android:scaleType="fitXY"
                 android:onClick="onClick" />
         </LinearLayout>
 
@@ -313,39 +316,60 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical">
 
                 <Button
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:text="@string/home"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/home_btn"
                     android:id="@+id/btn_home"
                     android:layout_weight="1"
-                    android:onClick="onClick" />
+                    android:onClick="onClick"
+                    android:adjustViewBounds="true"
+                    android:padding="0sp"
+                    android:scaleType="fitXY"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp" />
 
                 <Button
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:text="@string/addPost"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/addpost_btn"
                     android:id="@+id/btn_goAddPost"
                     android:layout_weight="1"
-                    android:onClick="onClick" />
+                    android:onClick="onClick"
+                    android:adjustViewBounds="true"
+                    android:padding="0sp"
+                    android:scaleType="fitXY"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp" />
 
                 <Button
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:text="MyPage"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/mypage_btn"
                     android:id="@+id/btn_myPage"
                     android:layout_weight="1"
-                    android:onClick="onClick" />
+                    android:onClick="onClick"
+                    android:adjustViewBounds="true"
+                    android:padding="0sp"
+                    android:scaleType="fitXY"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp" />
 
                 <Button
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:text="@string/config"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/config_btn"
                     android:id="@+id/btn_config"
                     android:layout_weight="1"
-                    android:onClick="onClick" />
+                    android:onClick="onClick"
+                    android:adjustViewBounds="true"
+                    android:padding="0sp"
+                    android:scaleType="fitXY"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

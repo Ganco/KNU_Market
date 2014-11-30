@@ -219,8 +219,7 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
         userInfo.SavePreference(editor);
     }
     @Override
-    protected void onStop()
-    {
+    protected void onStop(){
         super.onStop();
 
         // preference로 키워드정보저장
