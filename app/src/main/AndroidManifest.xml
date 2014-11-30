@@ -95,6 +95,17 @@
             android:name="com.harold.knumarket.categories.Category_Living"
             android:label="Category_Living" >
         </activity>
+        <activity android:name="com.harold.knumarket.Activity.LoginActivity"
+            android:label="Login_Activity">
+
+        </activity>
+
+        <!--  Entry for RegisterActivity.class -->
+        <activity android:name="com.harold.knumarket.Activity.RegisterActivity"
+            android:label="판매/구매를 위하여 회원가입을 해주세요">
+
+            </activity>
+
     </application>
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
