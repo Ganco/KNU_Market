@@ -8,8 +8,6 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.harold.knumarket.Activity.PostActivity">
 
-
-
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -18,19 +16,28 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_alignParentTop="true"
             android:weightSum="1"
             android:id="@+id/linear1"
             android:background="#ffff6f58"
-            android:layout_gravity="top">
+            android:layout_gravity="top"
+            android:gravity="center_vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="크누마켓icon"
-                android:id="@+id/textView" />
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:id="@+id/Log"
+                android:src="@drawable/logo"
+                android:layout_margin="3dp" />
+
+            <ImageView
+                android:layout_width="120dp"
+                android:layout_height="30dp"
+                android:id="@+id/knuMarketTitle"
+                android:background="@drawable/knu_market_title_crop"
+                android:scaleType="fitXY"
+                android:cropToPadding="false" />
 
         </LinearLayout>
         <ScrollView
@@ -75,6 +82,32 @@
                     android:orientation="vertical">
 
 
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center">
+
+                        <TextView
+                            android:layout_width="90dp"
+                            android:layout_height="match_parent"
+                            android:text="구매중"
+                            android:textSize="25sp"
+                            android:textColor="@android:color/holo_blue_dark"
+                            android:id="@+id/ItemText01"
+                            android:gravity="center"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="90dp"
+                            android:layout_height="match_parent"
+                            android:text="판매중"
+                            android:textSize="25sp"
+                            android:textColor="@android:color/holo_red_dark"
+                            android:id="@+id/ItemText02"
+                            android:gravity="center"
+                            android:textStyle="bold" />
+                    </LinearLayout>
 
 
                     <LinearLayout
@@ -89,8 +122,7 @@
                             android:layout_marginStart="20dp"
                             android:textSize="14sp"
                             android:textColor="@android:color/black"
-                            android:layout_marginTop="10dp"
-                            android:id="@+id/ItemText01"/>
+                            android:layout_marginTop="10dp"/>
 
                         <TextView
                             android:layout_width="match_parent"
@@ -141,8 +173,7 @@
                             android:layout_marginStart="20dp"
                             android:textSize="14sp"
                             android:textColor="@android:color/black"
-                            android:layout_marginTop="10dp"
-                            android:id="@+id/ItemText02"/>
+                            android:layout_marginTop="10dp"/>
 
                         <TextView
                             android:layout_width="match_parent"
@@ -167,8 +198,7 @@
                             android:text="카테고리"
                             android:layout_marginStart="20dp"
                             android:textSize="14sp"
-                            android:textColor="@android:color/black"
-                            android:id="@+id/ItemText03"/>
+                            android:textColor="@android:color/black"/>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -200,6 +230,49 @@
 
                     </LinearLayout>
 
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp">
+
+                        <TextView
+                            android:layout_width="90dp"
+                            android:layout_height="match_parent"
+                            android:text="키워드"
+                            android:layout_marginStart="20dp"
+                            android:textSize="14sp"
+                            android:textColor="@android:color/black"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:hint="키워드"
+                            android:layout_marginStart="20dp"
+                            android:textSize="14sp"
+                            android:singleLine="true"
+                            android:textColor="@android:color/black"
+                            android:id="@+id/ItemText07"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:hint="키워드"
+                            android:layout_marginStart="20dp"
+                            android:textSize="14sp"
+                            android:singleLine="true"
+                            android:textColor="@android:color/black"
+                            android:id="@+id/ItemText08"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:hint="키워드"
+                            android:layout_marginStart="20dp"
+                            android:textSize="14sp"
+                            android:singleLine="true"
+                            android:textColor="@android:color/black"
+                            android:id="@+id/ItemText03"/>
+
+                    </LinearLayout>
                     <LinearLayout
                         android:orientation="horizontal"
                         android:layout_width="fill_parent"
@@ -282,10 +355,6 @@
 
                     </LinearLayout>
 
-                    <ListView
-                        android:layout_width="match_parent"
-                        android:layout_height="200dp"
-                        android:id="@+id/commentList"/>
                 </LinearLayout>
 
             </LinearLayout>
@@ -308,37 +377,55 @@
                 android:layout_height="wrap_content">
 
                 <Button
-                    android:layout_width="50dp"
-                    android:layout_height="match_parent"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:id="@+id/btn_call"
-                    android:layout_weight="1"
-                    android:text="(연락)"
-                    android:textSize="14sp"
-                    android:textColor="@android:color/black"/>
+                    android:background="@drawable/call_btn"
+                    android:adjustViewBounds="true"
+                    android:padding="0sp"
+                    android:scaleType="center"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:onClick="onClick"
+                    />
 
                 <Button
-                    android:layout_width="50dp"
-                    android:layout_height="match_parent"
-                    android:text="(문자)"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/sms_btn"
                     android:id="@+id/btn_sms"
-                    android:layout_weight="1" />
+                    android:adjustViewBounds="true"
+                    android:padding="0sp"
+                    android:scaleType="center"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:onClick="onClick"/>
 
                 <Button
-                    android:layout_width="50dp"
-                    android:layout_height="match_parent"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:id="@+id/btn_zzim"
-                    android:layout_weight="1"
-                    android:text="(찜하기)"
-                    android:textSize="14sp"
-                    android:textColor="@android:color/black"/>
-
+                    android:background="@drawable/dozzim_btn"
+                    android:adjustViewBounds="true"
+                    android:padding="0sp"
+                    android:scaleType="center"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:onClick="onClick"/>
 
                 <Button
-                    android:layout_width="50dp"
-                    android:layout_height="match_parent"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/config_btn"
                     android:text="(임시)"
+                    android:textSize="14sp"
                     android:id="@+id/btn_temp"
-                    android:layout_weight="1" />
+                    android:onClick="onClick"
+                    android:adjustViewBounds="true"
+                    android:padding="0sp"
+                    android:scaleType="center"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"/>
             </LinearLayout>
 
         </LinearLayout>

@@ -18,7 +18,8 @@
         android:allowBackup="true"
         android:icon="@drawable/icon"
         android:label="@string/app_name"
-        android:theme="@android:style/Theme.Holo.Light.NoActionBar" >
+        android:theme="@android:style/Theme.Holo.Light.NoActionBar"
+        android:largeHeap="true">
         <activity
             android:name="com.harold.knumarket.Activity.MainActivity"
             android:label="@string/app_name"
@@ -30,7 +31,6 @@
             android:theme="@android:style/Theme.NoTitleBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -94,6 +94,24 @@
             android:name="com.harold.knumarket.categories.Category_Living"
             android:label="Category_Living" >
         </activity>
+<<<<<<< HEAD
+        <activity android:name="com.harold.knumarket.Activity.LoginActivity"
+            android:label="Login_Activity">
+
+        </activity>
+
+        <!--  Entry for RegisterActivity.class -->
+        <activity android:name="com.harold.knumarket.Activity.RegisterActivity"
+            android:label="판매/구매를 위하여 회원가입을 해주세요">
+
+            </activity>
+
+=======
+        <service
+            android:name="com.harold.knumarket.AlarmService"
+            android:label="AlarmService" >
+        </service>
+>>>>>>> 5c9ed57f037c3a4634ea9444c5f5c11e8baefa1b
     </application>
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->

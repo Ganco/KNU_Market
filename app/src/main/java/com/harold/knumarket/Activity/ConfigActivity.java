@@ -25,17 +25,14 @@ public class ConfigActivity extends Activity {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_config);
-
-
-
     }
     @Override
     public void onStart() {
         super.onStart();
 
-        Log.i("KNU_Market/Config_Act", "before user_info=");
+        //Log.i("KNU_Market/Config_Act", "before user_info=");
         User_Info userInfo = User_Info.getUser_info();
-        userInfo.getClient_keyword();
+        //userInfo.getClient_keyword();
 
         /*
         Log.i("KNU_Market/Config_Act", "keyword1=" + userInfo.getClient_keyword().get(0));
@@ -52,9 +49,6 @@ public class ConfigActivity extends Activity {
         EditText keyword3 = (EditText) findViewById(R.id.keyword3);
         EditText keyword4 = (EditText) findViewById(R.id.keyword4);
         EditText keyword5 = (EditText) findViewById(R.id.keyword5);
-
-        Log.i("KNU_Market/Config_Act", "finish findViewById");
-
         //*/
 
         ///*
@@ -63,8 +57,6 @@ public class ConfigActivity extends Activity {
         keyword3.setText(userInfo.getClient_keyword().get(2));
         keyword4.setText(userInfo.getClient_keyword().get(3));
         keyword5.setText(userInfo.getClient_keyword().get(4));
-
-        Log.i("KNU_Market/Config_Act", "finish setText");
         //*/
 
     }
@@ -113,6 +105,7 @@ public class ConfigActivity extends Activity {
                 intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivityForResult(intent, REQUEST_CODE_MAIN);
+                finish();
                 break;
 
             //// insert button listener for MYPAGE
@@ -124,6 +117,7 @@ public class ConfigActivity extends Activity {
                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 //startActivityForResult(intent, REQUEST_CODE_MYPAGE);
                 startActivity(intent);
+                finish();
                 break;
 
             case R.id.btn_config:
@@ -132,6 +126,7 @@ public class ConfigActivity extends Activity {
                 intent = new Intent(getBaseContext(), SearchActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(intent);
+                finish();
                 break;
             case R.id.btn_zzim:
                 break;
@@ -139,6 +134,7 @@ public class ConfigActivity extends Activity {
                 intent = new Intent(getBaseContext(), AlarmActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(intent);
+                finish();
                 break;
         }
     }

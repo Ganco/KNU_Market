@@ -5,9 +5,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+import com.harold.knumarket.User_Info;
 import com.knumarket.harold.knu_market.R;
 
 /**
@@ -22,19 +24,7 @@ public class MyPageActivity extends Activity {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mypage);
-        /*
-        //// insert button listener for Main
-        Button btnMain = (Button) findViewById(R.id.button4);
-        btnMain.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getBaseContext(), MainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivityForResult(intent, REQUEST_CODE_MAIN);
-            }
-        });
-        */
+
 
         final EditText mEditText01 = (EditText) findViewById(R.id.profileTextEdit01);
 
@@ -66,6 +56,47 @@ public class MyPageActivity extends Activity {
         });
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        Log.i("KNU_Market/Config_Act", "before user_info=");
+        User_Info userInfo = User_Info.getUser_info();
+        userInfo.getClient_keyword();
+
+        EditText client_Id = (EditText) findViewById(R.id.profileTextEdit02);
+        EditText phone_No = (EditText) findViewById(R.id.profileTextEdit03);
+        EditText profile = (EditText) findViewById(R.id.profileTextEdit01);
+        EditText addition = (EditText) findViewById(R.id.profileTextEdit04);
+
+        client_Id.setText(userInfo.getClient_Id());
+        phone_No.setText(userInfo.getPhone_No());
+        profile.setText(userInfo.getProfile());
+        addition.setText(userInfo.getAddition());
+
+    }
+
+
+    @Override
+    public void onPause()
+    {
+        super.onPause();
+        User_Info userInfo = User_Info.getUser_info();
+        //userKeyword = userInfo.getClient_keyword();
+
+        EditText client_Id = (EditText) findViewById(R.id.profileTextEdit02);
+        EditText phone_No = (EditText) findViewById(R.id.profileTextEdit03);
+        EditText profile = (EditText) findViewById(R.id.profileTextEdit01);
+        EditText addition = (EditText) findViewById(R.id.profileTextEdit04);
+
+        userInfo.setClient_Id(client_Id.getText().toString());
+        userInfo.setPhone_No(phone_No.getText().toString());
+        userInfo.setProfile(profile.getText().toString());
+        userInfo.setAddition(addition.getText().toString());
+
+    }
+
+
     public void onClick(View v){
 
         int id = v.getId();
@@ -85,27 +116,24 @@ public class MyPageActivity extends Activity {
                 intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivityForResult(intent, REQUEST_CODE_MAIN);
+                finish();
                 break;
 
             //// insert button listener for MYPAGE
             case R.id.btn_myPage:
-                intent = new Intent(getBaseContext(), MyPageActivity.class);
-                //intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                //intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                //startActivityForResult(intent, REQUEST_CODE_MYPAGE);
                 break;
 
             case R.id.btn_config:
                 intent = new Intent(getBaseContext(), ConfigActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(intent);
+                finish();
                 break;
             case R.id.btn_search:
                 intent = new Intent(getBaseContext(), SearchActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(intent);
+                finish();
                 break;
             case R.id.btn_zzim:
                 break;
@@ -113,6 +141,7 @@ public class MyPageActivity extends Activity {
                 intent = new Intent(getBaseContext(), AlarmActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(intent);
+                finish();
                 break;
         }
     }

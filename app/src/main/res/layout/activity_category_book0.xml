@@ -16,38 +16,61 @@
             android:layout_height="wrap_content"
             android:weightSum="1"
             android:id="@+id/linear1"
-            android:background="#ffff6f58">
+            android:background="#ffff6f58"
+            android:gravity="center_vertical">
 
-            <TextView
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:id="@+id/Log"
+                android:src="@drawable/logo"
+                android:layout_margin="3dp" />
+
+            <ImageView
+                android:layout_width="120dp"
+                android:layout_height="30dp"
+                android:id="@+id/knuMarketTitle"
+                android:background="@drawable/knu_market_title_crop"
+                android:scaleType="fitXY"
+                android:cropToPadding="false" />
+
+            <Space
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="크누마켓icon"
-                android:id="@+id/textView" />
+                android:layout_height="match_parent"
+                android:layout_weight="0.94" />
 
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/search"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@drawable/search_btn"
                 android:id="@+id/btn_search"
-                android:layout_weight="0.33"
-                android:onClick="onClick" />
+                android:onClick="onClick"
+                android:adjustViewBounds="true"
+                android:padding="0sp"
+                android:scaleType="fitXY"
+                android:layout_marginLeft="10dp" />
 
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/zzim"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@drawable/zzim_btn"
                 android:id="@+id/btn_zzim"
-                android:layout_weight="0.33"
-                android:onClick="onClick" />
+                android:onClick="onClick"
+                android:adjustViewBounds="true"
+                android:padding="0sp"
+                android:scaleType="center"
+                android:layout_marginLeft="10dp" />
 
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/notify"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@drawable/notify_btn"
                 android:id="@+id/btn_alarm"
-                android:layout_weight="0.33"
-                android:onClick="onClick" />
+                android:onClick="onClick"
+                android:adjustViewBounds="true"
+                android:padding="0sp"
+                android:scaleType="center"
+                android:layout_marginLeft="10dp" />
 
         </LinearLayout>
 
@@ -67,10 +90,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:layout_marginLeft="10dp">
+                android:layout_marginLeft="10dp"
+                >
 
                 <Button
-                    android:layout_width="100dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="전공 전체"
                     android:id="@+id/btn_009"
@@ -78,7 +102,7 @@
                     android:onClick="onClick" />
 
                 <Button
-                    android:layout_width="100dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="IT대"
                     android:id="@+id/btn_000"
@@ -86,7 +110,7 @@
                     android:onClick="onClick" />
 
                 <Button
-                    android:layout_width="100dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="공대"
                     android:id="@+id/btn_001"
@@ -94,7 +118,7 @@
                     android:onClick="onClick" />
 
                 <Button
-                    android:layout_width="100dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="경상대"
                     android:id="@+id/btn_002"
@@ -102,7 +126,7 @@
                     android:onClick="onClick" />
 
                 <Button
-                    android:layout_width="100dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="인문대"
                     android:id="@+id/btn_003"
@@ -121,45 +145,62 @@
             android:layout_height="wrap_content"
             android:baselineAligned="false"
             android:gravity="bottom"
-            android:background="@android:color/darker_gray"
-            android:id="@+id/linear2">
+            android:background="@android:color/darker_gray">
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical">
 
                 <Button
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:text="@string/home"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:id="@+id/btn_home"
-                    android:layout_weight="1"
-                    android:onClick="onClick" />
+                    android:onClick="onClick"
+                    android:background="@drawable/home_btn"
+                    android:adjustViewBounds="true"
+                    android:padding="0sp"
+                    android:scaleType="center"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp" />
 
                 <Button
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:text="@string/addPost"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:id="@+id/btn_goAddPost"
-                    android:layout_weight="1"
-                    android:onClick="onClick" />
+                    android:onClick="onClick"
+                    android:background="@drawable/addpost_btn"
+                    android:adjustViewBounds="true"
+                    android:padding="0sp"
+                    android:scaleType="center"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp" />
 
                 <Button
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:text="MyPage"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:id="@+id/btn_myPage"
-                    android:layout_weight="1"
-                    android:onClick="onClick" />
+                    android:onClick="onClick"
+                    android:background="@drawable/mypage_btn"
+                    android:adjustViewBounds="true"
+                    android:padding="0sp"
+                    android:scaleType="center"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp" />
 
                 <Button
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:text="@string/config"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:id="@+id/btn_config"
-                    android:layout_weight="1"
-                    android:onClick="onClick" />
+                    android:background="@drawable/config_btn"
+                    android:onClick="onClick"
+                    android:padding="0sp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitXY"
+                    android:maxHeight="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp" />
             </LinearLayout>
 
         </LinearLayout>
