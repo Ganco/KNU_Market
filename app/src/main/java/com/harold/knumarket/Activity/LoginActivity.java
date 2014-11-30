@@ -9,7 +9,6 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 import com.harold.knumarket.User_Info;
 import com.harold.knumarket.Webserver_Url;
@@ -31,10 +30,11 @@ public class LoginActivity extends Activity {
 
     private EditText  username=null;
     private EditText  password=null;
-    private TextView attempts;
+    private LoginTask task;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         username = (EditText)findViewById(R.id.edit_c_id);
@@ -44,17 +44,17 @@ public class LoginActivity extends Activity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                postLoading Login_attempt = new postLoading();
+                task = new LoginTask();
                 String login_id = username.getText().toString();
                 String login_pass = password.getText().toString();
-
                 String url = Webserver_Url.getInstance().getUrl();
-                Login_attempt.execute("JSP/RequestLogin.jsp?client_id="+login_id+"&client_pw="+login_pass);
-                //
+                
+                task.execute(url+"JSP/RequestLogin.jsp?client_id="+login_id+"&client_pw="+login_pass);
+
             }
         });
-        TextView registerScreen = (TextView) findViewById(R.id.link_to_login);
 
+        /*TextView registerScreen = (TextView) findViewById(R.id.link_to_login);
         // Listening to register new account link
         registerScreen.setOnClickListener(new View.OnClickListener() {
 
@@ -64,7 +64,7 @@ public class LoginActivity extends Activity {
                 startActivity(i);
                 finish();
             }
-        });
+        });*/
     }
 
     public void recordUserInfo(JSONArray array) {
@@ -98,7 +98,8 @@ public class LoginActivity extends Activity {
     }
 
     //서버에 폰번,비번 보내기
-    class postLoading extends AsyncTask<String, Void, String> {
+    class LoginTask extends AsyncTask<String, Void, String> {
+
         private String Url = Webserver_Url.getInstance().getUrl();
         private JSONArray jArray;
 
@@ -142,11 +143,5 @@ public class LoginActivity extends Activity {
             return str;
         }
     }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
 }
 
