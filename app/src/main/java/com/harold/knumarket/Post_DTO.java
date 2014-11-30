@@ -17,10 +17,10 @@ public class Post_DTO {
         private ArrayList<File> upLoadFiles = new ArrayList<File>(3);
         private String product_state;
 
-        Post_DTO(String client_id, String category_id, String product_name,
-                 String product_price, String product_detail,
-                 ArrayList<String> post_keyword,
-                 ArrayList<File> imgFiles, String product_state) {
+        public Post_DTO(String client_id, String category_id, String product_name,
+                        String product_price, String product_detail,
+                        ArrayList<String> post_keyword,
+                        ArrayList<File> imgFiles, String product_state) {
             this.client_id = client_id;
             this.category_id = category_id;
             this.product_name = product_name;

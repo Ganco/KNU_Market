@@ -1,4 +1,4 @@
-package com.harold.knumarket;
+package com.harold.knumarket.Activity;
 
 /**
  * Created by Administrator on 2014-11-30.

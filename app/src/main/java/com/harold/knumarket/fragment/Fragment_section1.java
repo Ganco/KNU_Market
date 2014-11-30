@@ -1,5 +1,7 @@
-package com.harold.knumarket;
+package com.harold.knumarket.fragment;
 
+import com.harold.knumarket.Activity.PostActivity;
+import com.harold.knumarket.Webserver_Url;
 import com.knumarket.harold.knu_market.R;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -24,7 +26,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 import org.apache.http.HttpResponse;
@@ -37,7 +38,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.IOException;
-import java.text.CollationElementIterator;
 import java.util.Comparator;
 
 public class Fragment_section1 extends Fragment {

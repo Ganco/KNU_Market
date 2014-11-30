@@ -1,4 +1,4 @@
-package com.harold.knumarket;
+package com.harold.knumarket.fragment;
 
 import com.harold.knumarket.categories.Category_Book;
 import com.harold.knumarket.categories.Category_Fashion;

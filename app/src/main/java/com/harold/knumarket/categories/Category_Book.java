@@ -5,12 +5,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.harold.knumarket.AlarmActivity;
-import com.harold.knumarket.ConfigActivity;
-import com.harold.knumarket.MainActivity;
-import com.harold.knumarket.MyPageActivity;
-import com.harold.knumarket.SearchActivity;
-import com.harold.knumarket.addPostActivity;
+import com.harold.knumarket.Activity.AlarmActivity;
+import com.harold.knumarket.Activity.ConfigActivity;
+import com.harold.knumarket.Activity.MainActivity;
+import com.harold.knumarket.Activity.MyPageActivity;
+import com.harold.knumarket.Activity.SearchActivity;
+import com.harold.knumarket.Activity.addPostActivity;
 import com.knumarket.harold.knu_market.R;
 
 /**

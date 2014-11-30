@@ -6,7 +6,7 @@
     android:layout_height="fill_parent"
     android:layout_alignParentRight="true"
     android:orientation="vertical"
-    tools:context="com.harold.knumarket.SearchActivity">
+    tools:context="com.harold.knumarket.Activity.SearchActivity">
 
 
 

@@ -1,4 +1,4 @@
-package com.harold.knumarket;
+package com.harold.knumarket.Activity;
 
 import com.knumarket.harold.knu_market.R;
 
@@ -7,8 +7,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.Window;
 
 public class LoadingActivity extends Activity {

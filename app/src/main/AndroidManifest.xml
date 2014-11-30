@@ -20,12 +20,12 @@
         android:label="@string/app_name"
         android:theme="@android:style/Theme.Holo.Light.NoActionBar" >
         <activity
-            android:name="com.harold.knumarket.MainActivity"
+            android:name="com.harold.knumarket.Activity.MainActivity"
             android:label="@string/app_name"
             android:theme="@android:style/Theme.Holo.Light.NoActionBar" >
         </activity>
         <activity
-            android:name="com.harold.knumarket.LoadingActivity"
+            android:name="com.harold.knumarket.Activity.LoadingActivity"
             android:label="@string/app_name"
             android:theme="@android:style/Theme.NoTitleBar" >
             <intent-filter>
@@ -36,11 +36,11 @@
         </activity>
         <!-- 주석 -->
         <activity
-            android:name="com.harold.knumarket.PostActivity"
+            android:name="com.harold.knumarket.Activity.PostActivity"
             android:label="@string/title_activity_post" >
         </activity>
         <activity
-            android:name="com.harold.knumarket.MyPageActivity"
+            android:name="com.harold.knumarket.Activity.MyPageActivity"
             android:label="MyPageActivity" />
         <!--
         <activity
@@ -51,19 +51,19 @@
         -->
         <activity
             android:windowSoftInputMode="stateAlwaysHidden"
-            android:name="com.harold.knumarket.addPostActivity"
+            android:name="com.harold.knumarket.Activity.addPostActivity"
             android:label="@string/title_activity_add_post" >
         </activity>
         <activity
-            android:name="com.harold.knumarket.SearchActivity"
+            android:name="com.harold.knumarket.Activity.SearchActivity"
             android:label="SearchActivity" >
         </activity>
         <activity
-            android:name="com.harold.knumarket.AlarmActivity"
+            android:name="com.harold.knumarket.Activity.AlarmActivity"
             android:label="AlarmActivity" >
         </activity>
         <activity
-            android:name="com.harold.knumarket.ConfigActivity"
+            android:name="com.harold.knumarket.Activity.ConfigActivity"
             android:label="ConfigActivity" >
         </activity>
         <activity

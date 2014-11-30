@@ -1,4 +1,4 @@
-package com.harold.knumarket;
+package com.harold.knumarket.Activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -26,15 +26,16 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.harold.knumarket.AndroidUploader;
+import com.harold.knumarket.Post_DTO;
+import com.harold.knumarket.User_Info;
 import com.knumarket.harold.knu_market.R;
 
-import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 
 import static android.R.layout.simple_spinner_dropdown_item;
 import static com.harold.knumarket.Webserver_Url.getInstance;

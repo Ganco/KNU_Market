@@ -1,11 +1,10 @@
-package com.harold.knumarket;
+package com.harold.knumarket.Activity;
 
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -22,10 +21,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Vector;
 
+import com.harold.knumarket.User_Info;
+import com.harold.knumarket.Webserver_Url;
 import com.harold.knumarket.categories.Category_Book;
 import com.harold.knumarket.categories.Category_Fashion;
 import com.harold.knumarket.categories.Category_ListView;
 import com.harold.knumarket.categories.Category_Living;
+import com.harold.knumarket.fragment.Fragment_section1;
+import com.harold.knumarket.fragment.Fragment_section2;
+import com.harold.knumarket.fragment.Fragment_section3;
 import com.knumarket.harold.knu_market.R;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.ImageLoader;

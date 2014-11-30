@@ -1,5 +1,7 @@
-package com.harold.knumarket;
+package com.harold.knumarket.fragment;
 
+import com.harold.knumarket.Activity.PostActivity;
+import com.harold.knumarket.Webserver_Url;
 import com.knumarket.harold.knu_market.R;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;

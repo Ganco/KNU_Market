@@ -7,9 +7,7 @@ import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
@@ -21,15 +19,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.harold.knumarket.AlarmActivity;
-import com.harold.knumarket.ConfigActivity;
-import com.harold.knumarket.MainActivity;
-import com.harold.knumarket.MyPageActivity;
-import com.harold.knumarket.PostActivity;
-import com.harold.knumarket.SearchActivity;
-import com.harold.knumarket.User_Info;
+import com.harold.knumarket.Activity.AlarmActivity;
+import com.harold.knumarket.Activity.ConfigActivity;
+import com.harold.knumarket.Activity.MainActivity;
+import com.harold.knumarket.Activity.MyPageActivity;
+import com.harold.knumarket.Activity.PostActivity;
+import com.harold.knumarket.Activity.SearchActivity;
 import com.harold.knumarket.Webserver_Url;
-import com.harold.knumarket.addPostActivity;
+import com.harold.knumarket.Activity.addPostActivity;
 import com.knumarket.harold.knu_market.R;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -48,7 +45,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Comparator;
 
 /**

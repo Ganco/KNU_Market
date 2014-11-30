@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class AndroidUploader {
 
     private String serverUrl;
-    enum ReturnCode { noPicture, unknown, http201, http400, http401, http403, http404, http500};
+    public enum ReturnCode { noPicture, unknown, http201, http400, http401, http403, http404, http500};
     private DataOutputStream dataStream = null;
     static String CRLF = "\r\n";
     static String twoHyphens = "--";
@@ -58,6 +58,7 @@ public class AndroidUploader {
                 writeFormField("Product_name", post_DTO.getProduct_name());
                 writeFormField("Product_price", post_DTO.getProduct_price());
                 writeFormField("Product_detail", post_DTO.getProduct_detail());
+                writeFormField("Product_state", post_DTO.getProduct_state());
 
                 for (int i = 0; i < post_DTO.getPost_keyword().size(); i++)
                     writeFormField("keyword"+(i+1), post_DTO.getPost_keyword().get(i));

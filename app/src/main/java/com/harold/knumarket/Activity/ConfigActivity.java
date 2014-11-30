@@ -1,4 +1,4 @@
-package com.harold.knumarket;
+package com.harold.knumarket.Activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -6,9 +6,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
+import com.harold.knumarket.User_Info;
 import com.knumarket.harold.knu_market.R;
 
 import java.util.ArrayList;
