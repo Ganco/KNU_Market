@@ -6,7 +6,6 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
-
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -152,7 +151,14 @@ public class Fragment_section1 extends Fragment {
                         p_button.setLayoutParams(param);
                         p_button.setPadding(0, 0, 0, 0);
                         p_button.setOrientation(LinearLayout.VERTICAL);
-                        p_button.setBackgroundColor(Color.LTGRAY);
+
+                        if(json.getString("product_state").equals("Sell")){
+                            p_button.setBackgroundColor(Color.BLUE);
+                        }
+                        else{
+                            p_button.setBackgroundColor(Color.RED);
+                        }
+
                         p_button.setGravity(Gravity.FILL);
                         p_button.setId(json.getInt("post_no"));//Post의 번호를 각 버튼의 ID값으로 사용
                         p_button.setOnClickListener(new View.OnClickListener() {
@@ -302,6 +308,6 @@ public class Fragment_section1 extends Fragment {
     public void onPause() {
         super.onPause();
         task.cancel(true);
-        Toast.makeText(getActivity().getApplicationContext(),"Task status = "+String.valueOf(task.isCancelled()),Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity().getApplicationContext(),"Task status = "+String.valueOf(task.isCancelled()),Toast.LENGTH_SHORT).show();
     }
 }

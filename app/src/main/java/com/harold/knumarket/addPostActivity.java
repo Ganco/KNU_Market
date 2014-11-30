@@ -21,6 +21,8 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -70,22 +72,12 @@ public class addPostActivity extends Activity {
     //불러온 이미지 파일 객체를 임시저장하는 배열
     private ArrayList<File> imgFiles = new ArrayList<File>(3);
 
-   //멀티파트 전송에 필요한 변수들
-   private String serverUrl;
-    enum ReturnCode { noPicture, unknown, http201, http400, http401, http403, http404, http500};
-    private DataOutputStream dataStream = null;
-    static String CRLF = "\r\n";
-    static String twoHyphens = "--";
-    static String boundary = "*****b*o*u*n*d*a*r*y*****";
-    private String TAG = "멀티파트 테스트";
-    //멀티파트 전송에 필요한 변수들
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_post);
 
-        serverUrl = getInstance().getUrl();
+        String serverUrl = getInstance().getUrl();
         initializeSpinner();
     }
 
@@ -492,6 +484,11 @@ public class addPostActivity extends Activity {
                 String.valueOf(cat_mid.getSelectedItemPosition())+
                 String.valueOf(cat_low.getSelectedItemPosition());
 
+        String postState;
+        RadioGroup radioGroup = (RadioGroup)findViewById(R.id.addPost_radioGroup);
+        RadioButton rbtn = (RadioButton) findViewById(radioGroup.getCheckedRadioButtonId());
+        postState = rbtn.getTag().toString();
+
         /*Toast.makeText(getApplicationContext(),
                 String.valueOf(cat_high.getSelectedItemPosition())+
                 String.valueOf(cat_mid.getSelectedItemPosition())+
@@ -507,7 +504,8 @@ public class addPostActivity extends Activity {
                         editPrice.getText().toString(),
                         editDetail.getText().toString(),
                         postKeword,
-                        imgFiles
+                        imgFiles,
+                        postState
                 );
                 if(post_DTO != null){
                     Log.i("AddPost/setContents()", "post_dto 생성완료");

@@ -304,6 +304,6 @@ public class Fragment_section2 extends Fragment {
     public void onPause() {
         super.onPause();
         task.cancel(true);
-        Toast.makeText(getActivity().getApplicationContext(),"Task status = "+String.valueOf(task.isCancelled()),Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity().getApplicationContext(),"Task status = "+String.valueOf(task.isCancelled()),Toast.LENGTH_SHORT).show();
     }
 }

@@ -134,7 +134,8 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
         builder.setTitle("서버 IP 주소 입력");
         //builder.setMessage("Message");
         final EditText url_Input = new EditText(this);
-        url_Input.setText("211.51.176.248");//내 방 공유기 외부 아이피 주소
+        //url_Input.setText("211.51.176.248");//내 방 공유기 외부 아이피 주소
+        url_Input.setText("155.230.29.162");
         //url_Input.setText("220.94.32.180");
         builder.setView(url_Input);
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
