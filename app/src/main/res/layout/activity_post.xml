@@ -75,6 +75,30 @@
                     android:orientation="vertical">
 
 
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center">
+
+                        <TextView
+                            android:layout_width="90dp"
+                            android:layout_height="match_parent"
+                            android:text="구매중"
+                            android:textSize="14sp"
+                            android:textColor="@android:color/holo_blue_dark"
+                            android:id="@+id/ItemText01"
+                            android:gravity="center"/>
+
+                        <TextView
+                            android:layout_width="90dp"
+                            android:layout_height="match_parent"
+                            android:text="판매중"
+                            android:textSize="14sp"
+                            android:textColor="@android:color/holo_red_dark"
+                            android:id="@+id/ItemText02"
+                            android:gravity="center"/>
+                    </LinearLayout>
 
 
                     <LinearLayout
@@ -89,8 +113,7 @@
                             android:layout_marginStart="20dp"
                             android:textSize="14sp"
                             android:textColor="@android:color/black"
-                            android:layout_marginTop="10dp"
-                            android:id="@+id/ItemText01"/>
+                            android:layout_marginTop="10dp"/>
 
                         <TextView
                             android:layout_width="match_parent"
@@ -141,8 +164,7 @@
                             android:layout_marginStart="20dp"
                             android:textSize="14sp"
                             android:textColor="@android:color/black"
-                            android:layout_marginTop="10dp"
-                            android:id="@+id/ItemText02"/>
+                            android:layout_marginTop="10dp"/>
 
                         <TextView
                             android:layout_width="match_parent"
