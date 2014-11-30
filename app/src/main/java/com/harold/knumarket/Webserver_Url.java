@@ -10,23 +10,28 @@ MainActivity에서 다이얼로그를 통해 서버의 Url 정보를 입력받�
  */
 public class Webserver_Url {
 
-    private String Url;
+    private String Url = "http://211.51.176.248:5001/KNU_Market/";
 
     public Webserver_Url(String url) {
         Url = url;
     }
+
+    public Webserver_Url() {
+    }
+
     public String getUrl() {
         return Url;
     }
+
     public void setUrl(String url) {
         Url = "http://"+url+":5001/KNU_Market/";
     }
 
     //싱글톤 패턴 -> 무조건 하나의 객체만 존재함
-    private static Webserver_Url instance = null;
+    private static Webserver_Url instance = new Webserver_Url();
     public static synchronized Webserver_Url getInstance(){
-        if(null == instance){
-            instance = new Webserver_Url(null);
+        if(instance == null){
+            instance = new Webserver_Url();
         }
         return instance;
     }

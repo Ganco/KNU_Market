@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="cat_mid_fashion">
+        <item>남성복</item>
+        <item>여성복</item>
+    </string-array>
+    <string-array name="cat_low_fashion">
+        <item>없음</item>
+    </string-array>
+</resources>

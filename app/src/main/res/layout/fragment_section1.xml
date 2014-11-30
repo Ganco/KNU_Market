@@ -2,19 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/f_section_linear">
+    android:id="@+id/f_section1_linear">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/scrollView"
+        android:id="@+id/f_sec1_scrollView"
         android:fillViewport="false">
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/linear_vertic">
+            android:id="@+id/f_sec1_linear_vertic">
 
             <!--<TextView
                 android:layout_width="wrap_content"
@@ -29,7 +29,7 @@
                 android:weightSum="1"
                 android:layout_weight="1"
                 android:padding="10dp"
-                android:id="@+id/linear_horiz"
+                android:id="@+id/f_sec1_linear_horiz"
                 android:duplicateParentState="true">
 
                <!-- <WebView

@@ -1,6 +1,6 @@
 # Built application files
+./build/
 /*/build/
-.build/*
 
 # Crashlytics configuations
 com_crashlytics_export_strings.xml
@@ -27,6 +27,16 @@ local.properties
 .idea/scopes/scope_settings.xml
 .idea/vcs.xml
 *.iml
+
+build/intermediates/dex-cache/cache.xml
+build/intermediates/model_data.bin
+
+build\intermediates\model_data.bin
+build\intermediates\dex-cache\cache.xml
+
+
+.build/intermediates/model_data.bin
+.build/intermediates/dex-cache/cache.xml
 
 # OS-specific files
 .DS_Store

@@ -27,6 +27,9 @@
     <string name="mypagePublic">공개여부</string>
     <string name="title_activity_post">PostActivity</string>
     <string name="title_activity_add_post">add_post</string>
+    <string name="cat_high">대분류</string>
+    <string name="cat_mid">중분류</string>
+    <string name="cat_low">소분류</string>
 
     <string name="login_activity">Login화면Screen</string>
     <string name="username">폰번호mobile:</string>

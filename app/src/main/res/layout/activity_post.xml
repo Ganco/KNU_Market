@@ -310,23 +310,23 @@
                 <Button
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
-                    android:id="@+id/button4"
+                    android:id="@+id/btn_call"
                     android:layout_weight="1"
-                    android:text="(카톡연락하기)"
+                    android:text="(연락)"
                     android:textSize="14sp"
                     android:textColor="@android:color/black"/>
 
                 <Button
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
-                    android:text="(문자하기)"
-                    android:id="@+id/button5"
+                    android:text="(문자)"
+                    android:id="@+id/btn_sms"
                     android:layout_weight="1" />
 
                 <Button
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
-                    android:id="@+id/button6"
+                    android:id="@+id/btn_zzim"
                     android:layout_weight="1"
                     android:text="(찜하기)"
                     android:textSize="14sp"
@@ -337,7 +337,7 @@
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
                     android:text="(임시)"
-                    android:id="@+id/button7"
+                    android:id="@+id/btn_temp"
                     android:layout_weight="1" />
             </LinearLayout>
 

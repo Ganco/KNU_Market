@@ -34,22 +34,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/search"
-                android:id="@+id/button"
-                android:layout_weight="0.33" />
+                android:id="@+id/btn_search"
+                android:layout_weight="0.33"
+                android:onClick="onClick" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/zzim"
-                android:id="@+id/button2"
-                android:layout_weight="0.33" />
+                android:id="@+id/btn_zzim"
+                android:layout_weight="0.33"
+                android:onClick="onClick" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/notify"
-                android:id="@+id/button3"
-                android:layout_weight="0.33" />
+                android:id="@+id/btn_alarm"
+                android:layout_weight="0.33"
+                android:onClick="onClick" />
 
         </LinearLayout>
 
@@ -123,7 +126,7 @@
                 <Button
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:text="@string/myPage"
+                    android:text="MyPage"
                     android:id="@+id/btn_myPage"
                     android:layout_weight="1"
                     android:onClick="onClick"/>
