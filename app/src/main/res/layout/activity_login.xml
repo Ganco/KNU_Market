@@ -14,30 +14,32 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="44dp"
         android:text="@string/hello_world"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView1"
-        android:layout_marginTop="50dp"
         android:text="@string/username"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_toStartOf="@+id/textView1"
+        android:layout_marginRight="33dp"
+        android:layout_below="@+id/textView1"
+        android:layout_toLeftOf="@+id/textView1"
+        android:layout_marginTop="36dp" />
 
     <EditText
-        android:id="@+id/editText1"
+        android:id="@+id/edit_c_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textView2"
-        android:layout_marginLeft="32dp"
-        android:layout_toRightOf="@+id/textView2"
-        android:ems="10" >
+        android:ems="10"
+        android:layout_toEndOf="@+id/textView2"
+        android:layout_alignTop="@+id/textView2"
+        android:layout_toRightOf="@+id/textView2">
 
         <requestFocus />
     </EditText>
@@ -46,29 +48,31 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView2"
-        android:layout_below="@+id/textView2"
-        android:layout_marginTop="38dp"
         android:text="@string/password"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_below="@+id/edit_c_id"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_alignStart="@+id/textView2" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/edit_c_pw"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textView3"
-        android:layout_alignLeft="@+id/editText1"
         android:ems="10"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:layout_toEndOf="@+id/textView2"
+        android:layout_alignTop="@+id/textView3"
+        android:layout_alignLeft="@+id/edit_c_id"
+        android:layout_alignStart="@+id/edit_c_id" />
 
     <Button
         android:id="@+id/loginBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editText2"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="94dp"
         android:onClick="login"
-        android:text="@string/Login" />
+        android:text="@string/Login"
+        android:layout_below="@+id/textView3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="46dp" />
 
 </RelativeLayout>

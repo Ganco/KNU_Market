@@ -13,6 +13,15 @@ public class User_Info {
 
     private String client_No;
     private String client_Id;
+    private boolean client_State;
+
+    public boolean isClient_State() {
+        return client_State;
+    }
+
+    public void setClient_State(boolean client_State) {
+        this.client_State = client_State;
+    }
 
     public void setPhone_No(String phone_No) {
         this.phone_No = phone_No;
@@ -58,6 +67,7 @@ public class User_Info {
         this.phone_No = "01071229615";
         this.profile = null;
         this.addition = null;
+        this.client_State = false;
         //this.client_keyword = null;
     }
 

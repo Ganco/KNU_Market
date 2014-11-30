@@ -80,10 +80,18 @@ public class addPostActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_post);
 
-        String serverUrl = getInstance().getUrl();
-        initializeSpinner();
+        User_Info user_info = User_Info.getUser_info();
+        if(user_info.isClient_State()) {
+            setContentView(R.layout.activity_add_post);
+            String serverUrl = getInstance().getUrl();
+            initializeSpinner();
+        }
+        else{
+            Intent intent = new Intent(getBaseContext(), LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
     public void initializeSpinner(){
