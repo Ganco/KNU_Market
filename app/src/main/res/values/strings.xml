@@ -32,8 +32,8 @@
     <string name="cat_low">소분류</string>
 
     <string name="login_activity">Login화면Screen</string>
-    <string name="username">폰번호mobile:</string>
-    <string name="password">비번Password:</string>
-    <string name="Login">Login:</string>
+    <string name="username">폰번호:</string>
+    <string name="password">  비번:</string>
+    <string name="Login">로그인</string>
 
 </resources>
