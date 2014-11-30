@@ -13,8 +13,11 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.method.KeyListener;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -53,6 +56,7 @@ import static com.knumarket.harold.knu_market.R.array.cat_mid_goods;
 public class addPostActivity extends Activity {
 
     //카메라,갤러리에서 이미지 가져올때 필요한 변수들
+    private Bitmap bm = null;
     private ImageView img_btn;
     private static final double SCALE = 0.4;
     private int TAKE_CAMERA = 1;
@@ -405,7 +409,6 @@ public class addPostActivity extends Activity {
             LinearLayout linearLayout = (LinearLayout) findViewById(R.id.linear_add_post);
             String tag = "img_btn"+id;
             img_btn = (ImageView) linearLayout.findViewWithTag(tag);
-            Bitmap bm = null;
 
             //갤러리에서 받아온 이미지를 처리
             if(requestCode == TAKE_GALLARY) {
@@ -509,6 +512,28 @@ public class addPostActivity extends Activity {
 
         EditText editName = (EditText) findViewById(R.id.edit_p_name);
         EditText editPrice = (EditText) findViewById(R.id.edit_p_price);
+        editPrice.setKeyListener(new KeyListener() {
+            @Override
+            public int getInputType() {
+                return 0;
+            }
+            @Override
+            public boolean onKeyDown(View view, Editable text, int keyCode, KeyEvent event) {
+                Toast.makeText(getApplicationContext(),"onKeyDown="+text.toString(),Toast.LENGTH_SHORT).show();
+                return false;
+            }
+            @Override
+            public boolean onKeyUp(View view, Editable text, int keyCode, KeyEvent event) {
+                return false;
+            }
+            @Override
+            public boolean onKeyOther(View view, Editable text, KeyEvent event) {
+                return false;
+            }
+            @Override
+            public void clearMetaKeyState(View view, Editable content, int states) {
+            }
+        });
         EditText editDetail = (EditText) findViewById(R.id.edit_p_detail);
         EditText editKeyword_1 = (EditText) findViewById(R.id.editText3);
         EditText editKeyword_2 = (EditText) findViewById(R.id.editText5);
@@ -533,7 +558,6 @@ public class addPostActivity extends Activity {
                 String.valueOf(cat_low.getSelectedItemPosition()), Toast.LENGTH_SHORT).show();*/
 
         if(User_Info.getUser_info().getClient_Id() != null) {
-
              try {
                 post_DTO = new Post_DTO(
                         User_Info.getUser_info().getClient_Id(),
@@ -627,6 +651,7 @@ public class addPostActivity extends Activity {
     public void goBackToMainActivity(){
         Intent intent = new Intent(getBaseContext(), MainActivity.class);
         startActivity(intent);
+        finish();
     }
 
     public class CustomSpinnerAdapter extends ArrayAdapter{
@@ -636,4 +661,13 @@ public class addPostActivity extends Activity {
         }
     }
 
+    @Override
+    protected void onPause() {
+        img_btn.setImageBitmap(null);
+        if(bm != null){
+            bm.recycle();
+            bm = null;
+        }
+        super.onPause();
+    }
 }

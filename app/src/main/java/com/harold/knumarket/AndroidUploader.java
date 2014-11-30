@@ -117,7 +117,7 @@ public class AndroidUploader {
             dataStream.writeBytes("Content-Disposition: form-data; name=\"" + fieldName + "\"" + CRLF);
             dataStream.writeBytes(CRLF);
             //dataStream.writeBytes(fieldValue);
-            dataStream.writeBytes(fieldValue);
+            dataStream.write(fieldValue.getBytes("UTF-8"));
             dataStream.writeBytes(CRLF);
             Log.e(TAG, "AndroidUploader.writeFormField DataStream"+ fieldName+":"+ fieldValue+ " 입력 완료");
 

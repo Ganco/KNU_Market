@@ -207,10 +207,9 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
         ImageLoader.getInstance().init(config);
     }
     @Override
-    protected void onStart()
-    {
-        super.onStart();
+    protected void onStart(){
 
+        super.onStart();
 
         // preference로 키워드정보 로딩
         User_Info userInfo = User_Info.getUser_info();
@@ -348,5 +347,4 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
         int pos = this.mTabHost.getCurrentTab();
         this.mViewPager.setCurrentItem(pos);
     }
-
 }

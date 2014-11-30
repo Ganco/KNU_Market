@@ -181,7 +181,15 @@ public class SearchActivity extends Activity{
                     p_button.setLayoutParams(param);
                     p_button.setPadding(0, 0, 0, 0);
                     p_button.setOrientation(LinearLayout.HORIZONTAL);
-                    p_button.setBackgroundColor(Color.LTGRAY);
+
+                    //판매-구매 상품 상태 색상으로 구분
+                    if(json.getString("product_state").equals("Sell")){
+                        p_button.setBackgroundColor(Color.parseColor("#B2CCFF"));
+                    }
+                    else{
+                        p_button.setBackgroundColor(Color.parseColor("#CEF279"));
+                    }
+
                     p_button.setGravity(Gravity.FILL);
                     p_button.setId(json.getInt("post_no"));//Post의 번호를 각 버튼의 ID값으로 사용
                     p_button.setOnClickListener(new View.OnClickListener() {
