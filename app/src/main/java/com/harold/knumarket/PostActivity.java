@@ -22,8 +22,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.harold.knumarket.Item_Comment.ItemComment;
-import com.harold.knumarket.Item_Comment.ItemCommentListAdapter;
+//import com.harold.knumarket.Item_Comment.ItemComment;
+//import com.harold.knumarket.Item_Comment.ItemCommentListAdapter;
 import com.knumarket.harold.knu_market.R;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -59,7 +59,7 @@ public class PostActivity extends Activity {
     private postLoading task;
     private ViewPager mViewPager;
     ListView listView1;
-    ItemCommentListAdapter adapter;
+    //ItemCommentListAdapter adapter;
 
 
     private class ImageViewAdapter extends PagerAdapter{
@@ -143,10 +143,9 @@ public class PostActivity extends Activity {
         }else {
             task.execute("JSP/RequestPost.jsp?post_no="+post_no);
         }
-        //TextView textView = (TextView) findViewById(R.id.Post_textView);
-        //textView.setText("post_no :"+post_no);
 
 
+        /*
 
         // 리스트뷰 객체 참조
         listView1 = (ListView) findViewById(R.id.commentList);
@@ -182,34 +181,12 @@ public class PostActivity extends Activity {
         });
 
 
-        /*
-        //// insert button listener for MYPAGE ////
-        Button btnMypage = (Button) findViewById(R.id.button6);
-        btnMypage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getBaseContext(), MyPageActivity.class);
-                //intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                //intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivityForResult(intent, REQUEST_CODE_MYPAGE);
-            }
-        });
-        ////
-        //// insert button listener for Main
-        Button btnMain = (Button) findViewById(R.id.button4);
-        btnMain.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getBaseContext(), MainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivityForResult(intent, REQUEST_CODE_MAIN);
-            }
-        });
-        ////
         */
+
+
+
+
+
     }
 
     public void onClick(View v){

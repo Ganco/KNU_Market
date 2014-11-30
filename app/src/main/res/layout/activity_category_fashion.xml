@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentRight="true"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="1"
+            android:id="@+id/linear1"
+            android:background="#ffff6f58">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="크누마켓icon"
+                android:id="@+id/textView" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/search"
+                android:id="@+id/btn_search"
+                android:layout_weight="0.33"
+                android:onClick="onClick" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/zzim"
+                android:id="@+id/btn_zzim"
+                android:layout_weight="0.33"
+                android:onClick="onClick" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/notify"
+                android:id="@+id/btn_alarm"
+                android:layout_weight="0.33"
+                android:onClick="onClick" />
+
+        </LinearLayout>
+
+
+
+        <!-- MyPage Layout -->
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@android:color/white">
+
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="10dp">
+
+                <Button
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:text="패션잡화 전체"
+                    android:id="@+id/btn_299"
+                    android:layout_weight="1"
+                    android:onClick="onClick" />
+
+                <Button
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:text="남성"
+                    android:id="@+id/btn_200"
+                    android:layout_weight="1"
+                    android:onClick="onClick" />
+
+                <Button
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:text="여성"
+                    android:id="@+id/btn_210"
+                    android:layout_weight="1"
+                    android:onClick="onClick" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+        <!-- bottom buttons -->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:baselineAligned="false"
+            android:gravity="bottom"
+            android:background="@android:color/darker_gray"
+            android:id="@+id/linear2">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/home"
+                    android:id="@+id/btn_home"
+                    android:layout_weight="1"
+                    android:onClick="onClick" />
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/addPost"
+                    android:id="@+id/btn_goAddPost"
+                    android:layout_weight="1"
+                    android:onClick="onClick" />
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="MyPage"
+                    android:id="@+id/btn_myPage"
+                    android:layout_weight="1"
+                    android:onClick="onClick" />
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="@string/config"
+                    android:id="@+id/btn_config"
+                    android:layout_weight="1"
+                    android:onClick="onClick" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

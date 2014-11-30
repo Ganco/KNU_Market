@@ -21,6 +21,11 @@ import android.widget.TabHost;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Vector;
+
+import com.harold.knumarket.categories.Category_Book;
+import com.harold.knumarket.categories.Category_Fashion;
+import com.harold.knumarket.categories.Category_ListView;
+import com.harold.knumarket.categories.Category_Living;
 import com.knumarket.harold.knu_market.R;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -121,7 +126,38 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(intent);
                 break;
+
+
+            case R.id.btn_f000:
+                intent = new Intent(getBaseContext(), Category_Book.class);
+                //intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                intent.putExtra("category_no", "000");
+                startActivity(intent);
+                break;
+
+            case R.id.btn_f100:
+                intent = new Intent(getBaseContext(), Category_Living.class);
+                //intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                intent.putExtra("category_no", "100");
+                startActivity(intent);
+                break;
+
+            case R.id.btn_f200:
+                intent = new Intent(getBaseContext(), Category_Fashion.class);
+                //intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                intent.putExtra("category_no", "200");
+                startActivity(intent);
+                break;
+
+            case R.id.btn_f300:
+                intent = new Intent(getBaseContext(), Category_ListView.class);
+                //intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                intent.putExtra("category_no", "300");
+                startActivity(intent);
+                break;
+           // */
         }
+
     }
 
     @Override

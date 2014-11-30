@@ -66,6 +66,34 @@
             android:name="com.harold.knumarket.ConfigActivity"
             android:label="ConfigActivity" >
         </activity>
+        <activity
+            android:name="com.harold.knumarket.categories.Category_Book"
+            android:label="Category_Book" >
+        </activity>
+        <activity
+            android:name="com.harold.knumarket.categories.Category_Book0"
+            android:label="Category_Book0" >
+        </activity>
+        <activity
+            android:name="com.harold.knumarket.categories.Category_Book1"
+            android:label="Category_Book1" >
+        </activity>
+        <activity
+            android:name="com.harold.knumarket.categories.Category_Book2"
+            android:label="Category_Book2" >
+        </activity>
+        <activity
+            android:name="com.harold.knumarket.categories.Category_Fashion"
+            android:label="Category_Fashion" >
+        </activity>
+        <activity
+            android:name="com.harold.knumarket.categories.Category_ListView"
+            android:label="Category_ListView" >
+        </activity>
+        <activity
+            android:name="com.harold.knumarket.categories.Category_Living"
+            android:label="Category_Living" >
+        </activity>
     </application>
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
