@@ -175,10 +175,10 @@ public class AlarmActivity extends Activity {
                 p_button.setOrientation(LinearLayout.HORIZONTAL);
 
                 if(json.getString("product_state").equals("Sell")){
-                    p_button.setBackgroundColor(Color.parseColor("#B2CCFF"));
+                    p_button.setBackgroundColor(Color.parseColor("#ffff6f58"));
                 }
                 else{
-                    p_button.setBackgroundColor(Color.parseColor("#CEF279"));
+                    p_button.setBackgroundColor(Color.parseColor("#B2CCFF"));
                 }
                //p_button.setBackgroundColor(Color.LTGRAY);
                 p_button.setGravity(Gravity.FILL);

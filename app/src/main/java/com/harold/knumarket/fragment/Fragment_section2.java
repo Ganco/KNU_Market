@@ -158,10 +158,10 @@ public class Fragment_section2 extends Fragment {
 
                             //판매-구매 상품 상태 색상으로 구분
                             if(json.getString("product_state").equals("Sell")){
-                                p_button.setBackgroundColor(Color.parseColor("#B2CCFF"));
+                                p_button.setBackgroundColor(Color.parseColor("#ffff6f58"));
                             }
                             else{
-                                p_button.setBackgroundColor(Color.parseColor("#CEF279"));
+                                p_button.setBackgroundColor(Color.parseColor("#B2CCFF"));
                             }
 
                             p_button.setGravity(Gravity.FILL);
