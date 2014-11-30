@@ -90,10 +90,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:layout_marginLeft="10dp">
+                android:layout_marginLeft="10dp"
+                >
 
                 <Button
-                    android:layout_width="100dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="전공 전체"
                     android:id="@+id/btn_009"
@@ -101,7 +102,7 @@
                     android:onClick="onClick" />
 
                 <Button
-                    android:layout_width="100dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="IT대"
                     android:id="@+id/btn_000"
@@ -109,7 +110,7 @@
                     android:onClick="onClick" />
 
                 <Button
-                    android:layout_width="100dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="공대"
                     android:id="@+id/btn_001"
@@ -117,7 +118,7 @@
                     android:onClick="onClick" />
 
                 <Button
-                    android:layout_width="100dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="경상대"
                     android:id="@+id/btn_002"
@@ -125,7 +126,7 @@
                     android:onClick="onClick" />
 
                 <Button
-                    android:layout_width="100dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="인문대"
                     android:id="@+id/btn_003"

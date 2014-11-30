@@ -90,7 +90,7 @@
                 android:layout_marginLeft="10dp">
 
                 <Button
-                    android:layout_width="100dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="자취용품 전체"
                     android:id="@+id/btn_199"
@@ -98,7 +98,7 @@
                     android:onClick="onClick" />
 
                 <Button
-                    android:layout_width="100dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="가전"
                     android:id="@+id/btn_100"
@@ -106,7 +106,7 @@
                     android:onClick="onClick" />
 
                 <Button
-                    android:layout_width="100dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="주방"
                     android:id="@+id/btn_110"
@@ -114,7 +114,7 @@
                     android:onClick="onClick" />
 
                 <Button
-                    android:layout_width="100dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="가구"
                     android:id="@+id/btn_120"

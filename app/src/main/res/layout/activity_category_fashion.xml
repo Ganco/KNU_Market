@@ -91,7 +91,7 @@
                 android:layout_marginLeft="10dp">
 
                 <Button
-                    android:layout_width="100dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="패션잡화 전체"
                     android:id="@+id/btn_299"
@@ -99,7 +99,7 @@
                     android:onClick="onClick" />
 
                 <Button
-                    android:layout_width="100dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="남성"
                     android:id="@+id/btn_200"
@@ -107,7 +107,7 @@
                     android:onClick="onClick" />
 
                 <Button
-                    android:layout_width="100dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="여성"
                     android:id="@+id/btn_210"

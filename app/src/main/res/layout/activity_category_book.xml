@@ -93,7 +93,7 @@
                 android:layout_marginLeft="10dp">
 
                 <Button
-                    android:layout_width="100dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="중고서적 전체"
                     android:id="@+id/btn_099"
@@ -101,7 +101,7 @@
                     android:onClick="onClick" />
 
                 <Button
-                    android:layout_width="100dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="전공"
                     android:id="@+id/btn_009"
@@ -109,7 +109,7 @@
                     android:onClick="onClick" />
 
                 <Button
-                    android:layout_width="100dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="교양"
                     android:id="@+id/btn_019"
@@ -117,7 +117,7 @@
                     android:onClick="onClick" />
 
                 <Button
-                    android:layout_width="100dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="일반"
                     android:id="@+id/btn_029"
