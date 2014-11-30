@@ -317,44 +317,6 @@
 
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="fill_parent"
-                        android:layout_height="0dp"
-                        android:id="@+id/profile08"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_weight="1">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:text="댓글목록"
-                            android:textSize="14sp"
-                            android:textColor="@android:color/black"
-                            android:id="@+id/ItemText11"/>
-
-                        <TextView
-                            android:layout_width="180dp"
-                            android:layout_height="match_parent"
-                            android:text="댓글내용"
-                            android:layout_marginStart="20dp"
-                            android:textSize="14sp"
-                            android:maxLines="3"
-                            android:textColor="@android:color/black"
-                            android:id="@+id/ItemEditText3"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="5dp"
-                            android:layout_marginTop="5dp"
-                            android:text="등록"
-                            android:id="@+id/ItemText12"/>
-
-
-                    </LinearLayout>
-
                 </LinearLayout>
 
             </LinearLayout>
