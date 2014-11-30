@@ -256,9 +256,11 @@ public class PostActivity extends Activity {
             TextView p_text2 = (TextView) findViewById(R.id.ItemText02);
             if(json.getString("product_state").equals("Sell")){
                 p_text1.setTextColor(Color.parseColor("#82979797"));
+                p_text1.setTextSize(15);
             }
             else{
                 p_text2.setTextColor(Color.parseColor("#82979797"));
+                p_text2.setTextSize(15);
             }
 
             String categoryID = json.getString("category_id");
