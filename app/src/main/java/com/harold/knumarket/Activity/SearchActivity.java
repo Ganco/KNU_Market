@@ -184,7 +184,7 @@ public class SearchActivity extends Activity{
 
                     //판매-구매 상품 상태 색상으로 구분
                     if(json.getString("product_state").equals("Sell")){
-                        p_button.setBackgroundColor(Color.parseColor("#ffff6f58"));
+                        p_button.setBackgroundColor(Color.parseColor("#C3FF7961"));
                     }
                     else{
                         p_button.setBackgroundColor(Color.parseColor("#B2CCFF"));
@@ -210,9 +210,6 @@ public class SearchActivity extends Activity{
                     //p_img.setImageDrawable(null);
                     p_img.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
-
-
-
                     LinearLayout p_box = (LinearLayout) new LinearLayout(getBaseContext());
                     LinearLayout.LayoutParams box_param = new LinearLayout.LayoutParams(
                             ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
@@ -226,6 +223,8 @@ public class SearchActivity extends Activity{
 
                     p_name.setTextSize(15);
                     p_price.setTextSize(15);
+                    p_name.setTextColor(Color.BLACK);
+                    p_price.setTextColor(Color.BLACK);
                     p_name.setGravity(Gravity.FILL);
                     p_button.setGravity(Gravity.FILL);
 

@@ -153,7 +153,7 @@ public class Fragment_section1 extends Fragment {
                         p_button.setOrientation(LinearLayout.VERTICAL);
 
                         if(json.getString("product_state").equals("Sell")){
-                            p_button.setBackgroundColor(Color.parseColor("#ffff6f58"));
+                            p_button.setBackgroundColor(Color.parseColor("#C3FF7961"));
                         }
                         else{
                             p_button.setBackgroundColor(Color.parseColor("#B2CCFF"));
@@ -183,6 +183,8 @@ public class Fragment_section1 extends Fragment {
 
                         p_name.setTextSize(15);
                         p_price.setTextSize(15);
+                         p_name.setTextColor(Color.BLACK);
+                         p_price.setTextColor(Color.BLACK);
                         p_name.setGravity(Gravity.FILL);
                         p_button.setGravity(Gravity.FILL);
 
