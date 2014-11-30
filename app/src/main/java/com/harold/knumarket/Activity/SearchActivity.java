@@ -116,7 +116,7 @@ public class SearchActivity extends Activity{
                     if(true) {
                         task = new postListLoading();
                         ///////////////////////////////////////////////////////////////
-                        task.execute("JSP/RequestSearch.jsp?search_keyword="+searchText.getText());        // 지금은 메인화면 코드
+                        task.execute("JSP/RequestSearch.jsp?search_keyword="+searchText.getText());        // 검색어로 쿼리 요청
                         // 검색할 text를 서버의 jsp에 보내는 코드 만들어야 //
                         ///////////////////////////////////////////////////////////////
                     }
