@@ -85,7 +85,6 @@ public class SearchActivity extends Activity{
 
         // Inflate the layout for this fragment
         //View rootView = inflater.inflate(R.layout.fragment_section1, container, false);
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         Intent intent = getIntent();
@@ -103,8 +102,6 @@ public class SearchActivity extends Activity{
                 */
 
                 EditText searchText = (EditText) findViewById(R.id.SearchText);
-
-
                 Url = Webserver_Url.getInstance().getUrl();
                 Log.i("KNU_Market/Search_Act","Url="+Url);
 
@@ -113,9 +110,6 @@ public class SearchActivity extends Activity{
                     linearLayout_vertic.removeAllViews();   //기존의 검색된 리스트들을 모두 삭제하고, 새로고침
                 }
 
-
-
-
                 //작업 부분
                 boolean netStat = false;
                 netStat = checkNetStat();//네트워크 상태 확인
@@ -123,8 +117,7 @@ public class SearchActivity extends Activity{
                     if(true) {
                         task = new postListLoading();
                         ///////////////////////////////////////////////////////////////
-
-                        task.execute("JSP/RequestMainList.jsp");        // 지금은 메인화면 코드
+                        task.execute("JSP/RequestSearch.jsp?search_keyword="+searchText.getText());        // 지금은 메인화면 코드
                         // 검색할 text를 서버의 jsp에 보내는 코드 만들어야 //
                         ///////////////////////////////////////////////////////////////
                     }
