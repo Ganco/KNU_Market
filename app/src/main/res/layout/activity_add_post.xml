@@ -105,26 +105,34 @@
                         android:scaleType="center" />
                 </LinearLayout>
 
-                <LinearLayout
-                    android:orientation="horizontal"
+                <RadioGroup
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:gravity="center">
+                    android:id="@+id/addPost_radioGroup">
 
-                    <RadioButton
+                    <LinearLayout
+                        android:orientation="horizontal"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="판매"
-                        android:id="@+id/rbtn_sell"
-                        android:checked="false" />
+                        android:layout_height="fill_parent"
+                        android:layout_gravity="center_horizontal">
 
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="구매"
-                        android:id="@+id/rbtn_buy"
-                        android:checked="false" />
-                </LinearLayout>
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="구매"
+                            android:id="@+id/rbtn_buy"
+                            android:checked="false"
+                            android:tag="Buy"/>
+
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="판매"
+                            android:id="@+id/rbtn_sell"
+                            android:checked="false"
+                            android:tag="Sell"/>
+                    </LinearLayout>
+                </RadioGroup>
 
                 <LinearLayout
                     android:orientation="horizontal"
