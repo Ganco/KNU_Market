@@ -1,5 +1,6 @@
 package com.harold.knumarket.Activity;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -21,6 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Vector;
 
+import com.harold.knumarket.AlarmService;
 import com.harold.knumarket.User_Info;
 import com.harold.knumarket.Webserver_Url;
 import com.harold.knumarket.categories.Category_Book;
@@ -169,6 +171,18 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Intent intent = new Intent(this, AlarmService.class);
+        startService(intent);
+        // 알람 서비스 시작
+
+
+        // preference로 키워드정보 로딩
+        // onStart -> 메인Activity 볼때마다 강제갱신된다. onCreate에 넣는게 맞는듯
+        User_Info userInfo = User_Info.getUser_info();
+        SharedPreferences pref = getSharedPreferences("pref", Activity.MODE_PRIVATE);
+        userInfo.LoadPreference(pref);
+        //
+
         //다이얼로그를 통해 어플 실행 시작시 서버URL을 입력받아 실행함(개발용 코드)
         builder = new AlertDialog.Builder(this);
         builder.setTitle("서버 IP 주소 입력");
@@ -211,22 +225,25 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
 
         super.onStart();
 
+        // service로 역할 이전
+        /*
         // preference로 키워드정보 로딩
         User_Info userInfo = User_Info.getUser_info();
-
-        SharedPreferences pref = getSharedPreferences("pref", MainActivity.MODE_PRIVATE);
-        SharedPreferences.Editor editor = pref.edit();
-        userInfo.SavePreference(editor);
+        SharedPreferences pref = getSharedPreferences("pref", Activity.MODE_PRIVATE);
+        userInfo.LoadPreference(pref);
+        //*/
     }
     @Override
     protected void onStop()
     {
         super.onStop();
 
-        // preference로 키워드정보저장
+        // preference로 키워드정보 저장
         User_Info userInfo = User_Info.getUser_info();
-        SharedPreferences pref = getSharedPreferences("pref", MainActivity.MODE_PRIVATE);
-        userInfo.LoadPreference(pref);
+
+        SharedPreferences pref = getSharedPreferences("pref",Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        userInfo.SavePreference(editor);
 
         if(mPopupDlg != null){
             mPopupDlg.dismiss();

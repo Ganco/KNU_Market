@@ -211,7 +211,7 @@ android:layout_height="match_parent"
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="내 알림(버튼)"
+                android:text="내 알림"
                 android:textSize="14sp"
                 android:textColor="@android:color/black"
                 android:id="@+id/profileText05"/>
@@ -229,7 +229,7 @@ android:layout_height="match_parent"
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="내키워드(버튼"
+                android:text="내키워드"
                 android:textSize="14sp"
                 android:textColor="@android:color/black"
                 android:id="@+id/profileText06"/>
@@ -247,7 +247,7 @@ android:layout_height="match_parent"
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="내 찜(버튼)"
+                android:text="내 찜"
                 android:textSize="14sp"
                 android:textColor="@android:color/black"
                 android:id="@+id/profileText07"/>
@@ -265,7 +265,7 @@ android:layout_height="match_parent"
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="내 글(버튼)"
+                android:text="내 글"
                 android:textSize="14sp"
                 android:textColor="@android:color/black"
                 android:id="@+id/profileText08"/>

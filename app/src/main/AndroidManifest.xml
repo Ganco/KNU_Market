@@ -94,6 +94,10 @@
             android:name="com.harold.knumarket.categories.Category_Living"
             android:label="Category_Living" >
         </activity>
+        <service
+            android:name="com.harold.knumarket.AlarmService"
+            android:label="AlarmService" >
+        </service>
     </application>
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
