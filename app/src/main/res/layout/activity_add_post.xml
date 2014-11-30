@@ -16,17 +16,17 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:id="@+id/linearLayout3"
             android:background="#ffff6f58"
             android:weightSum="1">
 
-            <TextView
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="상품등록"
-                android:id="@+id/textView4" />
+                android:id="@+id/imageView"
+                android:src="@drawable/add_post_title"
+                android:scaleType="centerCrop" />
 
             <Space
                 android:layout_width="wrap_content"
@@ -72,7 +72,7 @@
                     android:tag="img_btn1"
                     android:onClick="onClick"
                     android:src="@drawable/ic_add_image"
-                    android:background="#ff606464"
+                    android:background="#ffd8e0e0"
                     android:baselineAlignBottom="false"
                     android:layout_margin="3dp"
                     android:scaleType="center" />
@@ -91,7 +91,7 @@
                         android:tag="img_btn2"
                         android:onClick="onClick"
                         android:src="@drawable/ic_add_image"
-                        android:background="#ff606464"
+                        android:background="#ffd8e0e0"
                         android:layout_margin="3dp"
                         android:layout_weight="1"
                         android:scaleType="center" />
@@ -103,7 +103,7 @@
                         android:tag="img_btn3"
                         android:onClick="onClick"
                         android:src="@drawable/ic_add_image"
-                        android:background="#ff606464"
+                        android:background="#ffd8e0e0"
                         android:layout_margin="3dp"
                         android:layout_weight="1"
                         android:scaleType="center" />
@@ -294,9 +294,9 @@
                     <Button
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="등록하기"
                         android:id="@+id/btn_addPost"
-                        android:onClick="onClick"/>
+                        android:onClick="onClick"
+                        android:background="@drawable/ic_custom_add_post" />
 
                 </LinearLayout>
 

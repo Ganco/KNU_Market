@@ -7,5 +7,5 @@
     android:drawable="@drawable/ic_find_in_page_black_36dp"/>
  <item
      android:state_pressed="false"
-     android:drawable="@drawable/ic_find_in_page_grey600_36dp"/>
+     android:drawable="@drawable/ic_find_in_page_white_48dp"/>
 </selector>
