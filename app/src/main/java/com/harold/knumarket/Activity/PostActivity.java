@@ -142,8 +142,9 @@ public class PostActivity extends Activity {
         }
 
 
-        /*
 
+        // 댓글기능 -> 임시 삭제
+        /*
         // 리스트뷰 객체 참조
         listView1 = (ListView) findViewById(R.id.commentList);
 
@@ -156,8 +157,6 @@ public class PostActivity extends Activity {
         adapter.addItem(new ItemComment("id test", "아아 id test"));
         adapter.addItem(new ItemComment("qwer",  "asdfqwer"));
         adapter.addItem(new ItemComment("Administrator", "댓글 확인했습니다")); // test
-
-
 
         // 리스트뷰에 어댑터 설정
         listView1.setAdapter(adapter);
@@ -174,14 +173,8 @@ public class PostActivity extends Activity {
 
                 Resources res = getResources();
             }
-
         });
-
-
         */
-
-
-
 
 
     }
@@ -244,6 +237,9 @@ public class PostActivity extends Activity {
         TextView p_price = (TextView) findViewById(R.id.ItemEditText03);
         TextView p_client = (TextView) findViewById(R.id.ItemText09);
         TextView p_detail = (TextView) findViewById(R.id.ItemEditText02);
+        TextView p_keyword1 = (TextView) findViewById(R.id.ItemText07);
+        TextView p_keyword2 = (TextView) findViewById(R.id.ItemText08);
+        TextView p_keyword3 = (TextView) findViewById(R.id.ItemText03);
 
         try {
             JSONObject json = array.getJSONObject(0);
@@ -251,8 +247,12 @@ public class PostActivity extends Activity {
             p_price.setText("[\\"+json.getString("price")+"]");
             p_client.setText(json.getString("client"));
             p_detail.setText(json.getString("detail"));
+            p_keyword1.setText(json.getString("keyword1"));
+            p_keyword2.setText(json.getString("keyword2"));
+            p_keyword3.setText(json.getString("keyword3"));
 
             String categoryID = json.getString("category_id");
+            Log.i("KNU_Market/Post_Act", "category_code=" + categoryID);
             setDecodeCatID(categoryID);
         }
         catch (JSONException e) {
