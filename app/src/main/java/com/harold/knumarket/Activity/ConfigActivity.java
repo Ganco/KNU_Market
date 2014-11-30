@@ -123,6 +123,7 @@ public class ConfigActivity extends Activity {
                 //intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 //startActivityForResult(intent, REQUEST_CODE_MYPAGE);
+                startActivity(intent);
                 break;
 
             case R.id.btn_config:

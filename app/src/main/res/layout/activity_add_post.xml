@@ -37,7 +37,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/notify"
-                android:id="@+id/btn_notify" />
+                android:id="@+id/btn_alarm"
+                android:onClick="onClick" />
         </LinearLayout>
 
         <ScrollView
@@ -308,38 +309,43 @@
             android:background="@android:color/darker_gray"
             android:id="@+id/linearLayout4">
 
+
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content">
 
                 <Button
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:text="@string/home"
-                    android:id="@+id/button4"
-                    android:layout_weight="1" />
+                    android:id="@+id/btn_home"
+                    android:layout_weight="1"
+                    android:onClick="onClick" />
 
                 <Button
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:text="@string/addPost"
-                    android:id="@+id/button5"
-                    android:layout_weight="1" />
+                    android:id="@+id/btn_goAddPost"
+                    android:layout_weight="1"
+                    android:onClick="onClick" />
 
                 <Button
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:text="@string/myPage"
-                    android:id="@+id/button6"
-                    android:layout_weight="1" />
+                    android:text="MyPage"
+                    android:id="@+id/btn_myPage"
+                    android:layout_weight="1"
+                    android:onClick="onClick" />
 
                 <Button
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:text="@string/config"
-                    android:id="@+id/button7"
-                    android:layout_weight="1" />
+                    android:id="@+id/btn_config"
+                    android:layout_weight="1"
+                    android:onClick="onClick" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
