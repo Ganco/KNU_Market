@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -40,7 +41,6 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 
-
 public class PostActivity extends Activity {
 
     public static final int REQUEST_CODE_MAIN = 1001;
@@ -58,7 +58,7 @@ public class PostActivity extends Activity {
     private ViewPager mViewPager;
     ListView listView1;
     //ItemCommentListAdapter adapter;
-
+    private String seller_phoneNum;
 
     private class ImageViewAdapter extends PagerAdapter{
 
@@ -126,7 +126,6 @@ public class PostActivity extends Activity {
             return view ==((ImageView) object);
         }
     }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -188,12 +187,15 @@ public class PostActivity extends Activity {
         switch (id){
 
             case R.id.btn_call:
-               // intent = new Intent(getBaseContext(), addPostActivity.class);
-               // startActivity(intent);
-                //finish();
+                intent = new Intent( Intent.ACTION_DIAL );
+                intent.setData( Uri.parse("tel:"+seller_phoneNum) );
+                startActivity( intent );
                 break;
 
             case R.id.btn_sms:
+                intent = new Intent( Intent.ACTION_VIEW );
+                intent.setData( Uri.parse("sms:"+seller_phoneNum) );
+                startActivity( intent );
                 break;
 
             //// insert button listener for MYPAGE
@@ -253,6 +255,8 @@ public class PostActivity extends Activity {
             p_keyword1.setText(json.getString("keyword1"));
             p_keyword2.setText(json.getString("keyword2"));
             p_keyword3.setText(json.getString("keyword3"));
+
+            seller_phoneNum = json.getString("seller_phone_num");
 
             TextView p_text1 = (TextView) findViewById(R.id.ItemText01);
             TextView p_text2 = (TextView) findViewById(R.id.ItemText02);

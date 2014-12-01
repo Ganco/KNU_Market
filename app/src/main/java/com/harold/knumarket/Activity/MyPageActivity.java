@@ -22,7 +22,6 @@ public class MyPageActivity extends Activity {
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
 
-
         User_Info user_info = User_Info.getUser_info();
         if(user_info.isClient_State()) {
             setContentView(R.layout.activity_mypage);
@@ -75,8 +74,6 @@ public class MyPageActivity extends Activity {
         addition.setText(userInfo.getAddition());
 
     }
-
-
     @Override
     public void onPause()
     {
@@ -95,8 +92,6 @@ public class MyPageActivity extends Activity {
         userInfo.setAddition(addition.getText().toString());
 
     }
-
-
     public void onClick(View v){
 
         int id = v.getId();
