@@ -677,11 +677,11 @@ public class addPostActivity extends Activity {
     }
 
     @Override
-    protected void onPause() {
+    protected void onDestroy() {
+        super.onDestroy();
         if(bm != null){
             bm.recycle();
             bm = null;
         }
-        super.onPause();
     }
 }
