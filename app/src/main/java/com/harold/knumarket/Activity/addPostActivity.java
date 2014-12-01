@@ -663,8 +663,8 @@ public class addPostActivity extends Activity {
     }
     public void goBackToMainActivity(){
         Intent intent = new Intent(getBaseContext(), MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        //intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        //intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(intent);
         finish();
     }
