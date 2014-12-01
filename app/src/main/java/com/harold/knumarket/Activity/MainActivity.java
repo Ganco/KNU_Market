@@ -102,7 +102,7 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
                 intent = new Intent(getBaseContext(), addPostActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivityForResult(intent, REQUEST_CODE_ADDPOST);
-                finish();
+                //finish();
                 break;
 
             case R.id.btn_home:
