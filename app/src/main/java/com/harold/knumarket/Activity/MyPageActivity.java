@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import com.harold.knumarket.User_Info;
+import com.knumarket.harold.knu_market.R;
 
 /**
  * Created by Gan on 2014-10-10.
@@ -20,7 +21,6 @@ public class MyPageActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-
 
         User_Info user_info = User_Info.getUser_info();
         if(user_info.isClient_State()) {
@@ -74,8 +74,6 @@ public class MyPageActivity extends Activity {
         addition.setText(userInfo.getAddition());
 
     }
-
-
     @Override
     public void onPause()
     {
@@ -94,8 +92,6 @@ public class MyPageActivity extends Activity {
         userInfo.setAddition(addition.getText().toString());
 
     }
-
-
     public void onClick(View v){
 
         int id = v.getId();
