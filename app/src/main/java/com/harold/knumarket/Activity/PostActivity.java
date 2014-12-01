@@ -242,6 +242,7 @@ public class PostActivity extends Activity {
         TextView p_name = (TextView) findViewById(R.id.ItemEditText01);
         TextView p_price = (TextView) findViewById(R.id.ItemEditText03);
         TextView p_client = (TextView) findViewById(R.id.ItemText09);
+        TextView p_profile = (TextView) findViewById(R.id.ItemText10);
         TextView p_detail = (TextView) findViewById(R.id.ItemEditText02);
         TextView p_keyword1 = (TextView) findViewById(R.id.ItemText07);
         TextView p_keyword2 = (TextView) findViewById(R.id.ItemText08);
@@ -252,6 +253,7 @@ public class PostActivity extends Activity {
             p_name.setText(json.getString("name"));
             p_price.setText("[\\"+json.getString("price")+"]");
             p_client.setText(json.getString("client"));
+            p_profile.setText(json.getString("profile"));
             p_detail.setText(json.getString("detail"));
             p_keyword1.setText(json.getString("keyword1"));
             p_keyword2.setText(json.getString("keyword2"));

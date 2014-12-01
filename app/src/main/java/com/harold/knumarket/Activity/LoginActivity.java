@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -47,6 +48,7 @@ public class LoginActivity extends Activity {
                 String login_id = username.getText().toString();
                 String login_pass = password.getText().toString();
                 String url = Webserver_Url.getInstance().getUrl();
+                
                 task.execute(url+"JSP/RequestLogin.jsp?client_id="+login_id+"&client_pw="+login_pass);
 
             }
@@ -104,6 +106,7 @@ public class LoginActivity extends Activity {
         @Override
         protected void onPostExecute(String result) {
 
+            Log.i("KNU_Market/Login result= ", result);
             if (result.equals("false")) {
                 Toast.makeText(getApplicationContext(), "일치하는 회원정보가 없습니다.", Toast.LENGTH_SHORT).show();
             }
