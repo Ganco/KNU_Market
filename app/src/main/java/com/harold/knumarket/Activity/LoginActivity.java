@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.harold.knumarket.User_Info;
 import com.harold.knumarket.Webserver_Url;
@@ -32,6 +33,7 @@ public class LoginActivity extends Activity {
     private EditText  password=null;
     private LoginTask task;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -40,7 +42,7 @@ public class LoginActivity extends Activity {
         username = (EditText)findViewById(R.id.edit_c_id);
         password = (EditText)findViewById(R.id.edit_c_pw);
 
-        Button loginBtn = (Button)findViewById(R.id.loginBtn);
+        Button loginBtn = (Button) findViewById(R.id.loginBtn);
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -49,22 +51,22 @@ public class LoginActivity extends Activity {
                 String login_pass = password.getText().toString();
                 String url = Webserver_Url.getInstance().getUrl();
 
-                task.execute(url+"JSP/RequestLogin.jsp?client_id="+login_id+"&client_pw="+login_pass);
+                task.execute("JSP/RequestLogin.jsp?client_id="+login_id+"&client_pw="+login_pass);
 
             }
         });
 
-        /*TextView registerScreen = (TextView) findViewById(R.id.link_to_login);
+        TextView registerScreen = (TextView) findViewById(R.id.link_to_login);
         // Listening to register new account link
+        // Listening to activity_register new account link
         registerScreen.setOnClickListener(new View.OnClickListener() {
-
             public void onClick(View v) {
                 // Switching to Register screen
                 Intent i = new Intent(getApplicationContext(), RegisterActivity.class);
                 startActivity(i);
                 finish();
             }
-        });*/
+        });
     }
 
     public void recordUserInfo(JSONArray array) {
@@ -151,6 +153,20 @@ public class LoginActivity extends Activity {
             //str = Url+urls[0];
             return str;
         }
+
+        public void login(View view) { //서버에 아이디(폰번), 비번 확인
+            String str = doInBackground();
+
+            String login_id = username.getText().toString();
+            String login_pass = password.getText().toString();
+
+            if (username.getText().toString().equals("admin") && password.getText().toString().equals("admin")) {
+                Toast.makeText(getApplicationContext(), "Redirecting...",
+                        Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getApplicationContext(), "Wrong Credentials",
+                        Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }
-

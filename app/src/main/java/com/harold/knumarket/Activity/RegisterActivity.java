@@ -35,8 +35,7 @@ public class RegisterActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Set View to register.xml
-        setContentView(R.layout.register);
+        setContentView(R.layout.activity_register);
 
         TextView loginScreen = (TextView) findViewById(R.id.link_to_login);
         TextView btnRegister = (Button) findViewById(R.id.btnRegister);
@@ -71,9 +70,6 @@ public class RegisterActivity extends Activity {
                 Login_attempt.execute("JSP/RequestRegister.jsp?client_id=" + login_id + "&client_pw=" + login_pass + "&client_phoneNum=" + login_num);
 
                 Log.i("KNU_Market/Register", url + "JSP/RequestRegister.jsp?client_id=" + login_id + "&client_pw=" + login_pass + "&client_phoneNum=" + login_num);
-
-
-
 
 
                 Intent intent = new Intent(getBaseContext(), MainActivity.class);
