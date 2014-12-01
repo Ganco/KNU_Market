@@ -1,6 +1,7 @@
 package com.harold.knumarket.Activity;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,6 +33,11 @@ import java.util.ArrayList;
 * Created by Administrator on 2014-12-01.
         */
 public class RegisterActivity extends Activity {
+
+
+    private String login_id;
+    private String login_num;
+    private String login_pass;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,9 +68,9 @@ public class RegisterActivity extends Activity {
                 EditText reg_id = (EditText) findViewById(R.id.reg_fullname);
                 EditText reg_password = (EditText) findViewById(R.id.reg_password);
 
-                String login_id = reg_id.getText().toString();
-                String login_num = reg_phone.getText().toString();
-                String login_pass = reg_password.getText().toString();
+                login_id = reg_id.getText().toString();
+                login_num = reg_phone.getText().toString();
+                login_pass = reg_password.getText().toString();
 
                 String url = Webserver_Url.getInstance().getUrl();
                 Login_attempt.execute("JSP/RequestRegister.jsp?client_id=" + login_id + "&client_pw=" + login_pass + "&client_phoneNum=" + login_num);
@@ -103,10 +109,24 @@ public class RegisterActivity extends Activity {
                     Toast.makeText(getApplicationContext(), "등록실패", Toast.LENGTH_SHORT).show();
                 }
                 */
-                Log.i("KNU_Market/Register result - ", result);
+                Log.i("KNU_Market/Register result=s ", result);
                 User_Info user_info = User_Info.getUser_info();
                 user_info.setClient_State(true);
+
+                user_info.setPhone_No(login_num);
+                user_info.setClient_Id(login_id);
+
+                Log.i("KNU_Market/Register phone_num= ", user_info.getPhone_No());
+                Log.i("KNU_Market/Register client_id= ", user_info.getClient_Id());
+
+                SharedPreferences pref = getSharedPreferences("pref",Activity.MODE_PRIVATE);
+                SharedPreferences.Editor editor = pref.edit();
+                user_info.SavePreference(editor);
+
+
                 Toast.makeText(getApplicationContext(), "회원가입되었습니다~.", Toast.LENGTH_SHORT).show();
+
+
                 Intent intent = new Intent(getBaseContext(),MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
@@ -115,39 +135,6 @@ public class RegisterActivity extends Activity {
             }
         }
 
-        public void recordUserInfo(JSONArray array) {
-
-            try {
-
-                JSONObject obj = array.getJSONObject(0);
-                User_Info user_info = User_Info.getUser_info();
-
-                ArrayList<String> tempArray = new ArrayList<String>();
-                tempArray.add(obj.getString("c_keyword1"));
-                tempArray.add(obj.getString("c_keyword2"));
-                tempArray.add(obj.getString("c_keyword3"));
-                tempArray.add(obj.getString("c_keyword4"));
-                tempArray.add(obj.getString("c_keyword5"));
-
-                user_info.setClient_keywordList(tempArray);
-                user_info.setPhone_No(obj.getString("c_phone_num"));
-                user_info.setAddition(obj.getString("profile_image_loc"));
-
-                //User를 로그인 상태로 변경
-                user_info.setClient_State(true);
-
-
-                //Toast.makeText(getApplicationContext(), "등록", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getBaseContext(),MainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivity(intent);
-                finish();
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
         //웹에서 정보 가져오는 부분
         @Override
         protected String doInBackground(String... urls) {

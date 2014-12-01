@@ -59,7 +59,7 @@ public class MyPageActivity extends Activity {
     public void onStart() {
         super.onStart();
 
-        Log.i("KNU_Market/Config_Act", "before user_info=");
+        //Log.i("KNU_Market/Config_Act", "before user_info=");
         User_Info userInfo = User_Info.getUser_info();
         userInfo.getClient_keyword();
 

@@ -63,7 +63,7 @@ public class User_Info {
         this.phone_No = null;
         this.client_keyword = new ArrayList<String>(5);
         this.profile = null;
-        this.addition = null;
+        this.addition = "";
         this.client_State = false;
         //this.client_keyword = null;
     }
