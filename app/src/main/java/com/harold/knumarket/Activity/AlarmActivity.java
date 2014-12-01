@@ -176,7 +176,7 @@ public class AlarmActivity extends Activity {
             refresh.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(getApplicationContext(), "새로고침 클릭", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), "새로고침 클릭", Toast.LENGTH_SHORT).show();
                     //onResume();
                 }
             });

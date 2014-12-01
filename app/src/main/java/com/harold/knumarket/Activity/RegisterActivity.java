@@ -91,7 +91,7 @@ public class RegisterActivity extends Activity {
         protected void onPostExecute(String result) {
 
             if (result.equals("false")) {
-                Toast.makeText(getApplicationContext(), "등록실패", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "이미 존재하는 아이디입니다.", Toast.LENGTH_SHORT).show();
             }
             else { /*
                 try {
@@ -106,7 +106,7 @@ public class RegisterActivity extends Activity {
                 Log.i("KNU_Market/Register result - ", result);
                 User_Info user_info = User_Info.getUser_info();
                 user_info.setClient_State(true);
-                Toast.makeText(getApplicationContext(), "등록", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "회원가입되었습니다~.", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getBaseContext(),MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
@@ -137,7 +137,7 @@ public class RegisterActivity extends Activity {
                 user_info.setClient_State(true);
 
 
-                Toast.makeText(getApplicationContext(), "등록", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "등록", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getBaseContext(),MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
