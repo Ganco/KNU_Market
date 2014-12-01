@@ -78,10 +78,22 @@ public class LoginActivity extends Activity {
 
             ArrayList<String> tempArray = new ArrayList<String>();
             tempArray.add(obj.getString("c_keyword1"));
+            if(tempArray.get(0) == "null")
+                tempArray.set(0,"");
             tempArray.add(obj.getString("c_keyword2"));
+            if(tempArray.get(1) == "null")
+                tempArray.set(1,"");
             tempArray.add(obj.getString("c_keyword3"));
+            if(tempArray.get(2) == "null")
+                tempArray.set(2,"");
             tempArray.add(obj.getString("c_keyword4"));
+            if(tempArray.get(3) == "null")
+                tempArray.set(3,"");
             tempArray.add(obj.getString("c_keyword5"));
+            if(tempArray.get(4) == "null")
+                tempArray.set(4,"");
+
+
 
             user_info.setClient_keywordList(tempArray);
             user_info.setPhone_No(obj.getString("c_phone_num"));
