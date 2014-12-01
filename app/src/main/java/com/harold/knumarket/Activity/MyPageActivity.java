@@ -8,7 +8,6 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-
 import com.harold.knumarket.User_Info;
 import com.knumarket.harold.knu_market.R;
 
@@ -20,40 +19,41 @@ public class MyPageActivity extends Activity {
     public static final int REQUEST_CODE_MAIN = 1001;
 
     @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
+    public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mypage);
 
 
-        final EditText mEditText01 = (EditText) findViewById(R.id.profileTextEdit01);
+        User_Info user_info = User_Info.getUser_info();
+        if(user_info.isClient_State()) {
+            setContentView(R.layout.activity_mypage);
+            final EditText mEditText01 = (EditText) findViewById(R.id.profileTextEdit01);
+            // 프로필 입력창이 3줄이상 넘어가지 않게 이벤트 처리
+            mEditText01.addTextChangedListener(new TextWatcher() {
+                String previousString = "";
 
-        // 프로필 입력창이 3줄이상 넘어가지 않게 이벤트 처리
-        mEditText01.addTextChangedListener(new TextWatcher()
-        {
-            String previousString = "";
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count)
-            {
-            }
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after)
-            {
-                previousString= s.toString();
-            }
-
-            @Override
-            public void afterTextChanged(Editable s)
-            {
-                if (mEditText01.getLineCount() >= 4)
-                {
-                    mEditText01.setText(previousString);
-                    mEditText01.setSelection(mEditText01.length());
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
                 }
-            }
-        });
+
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                    previousString = s.toString();
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    if (mEditText01.getLineCount() >= 4) {
+                        mEditText01.setText(previousString);
+                        mEditText01.setSelection(mEditText01.length());
+                    }
+                }
+            });
+        }
+        else{
+            Intent intent = new Intent(getBaseContext(), LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
     @Override
