@@ -41,7 +41,6 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 
-
 public class PostActivity extends Activity {
 
     public static final int REQUEST_CODE_MAIN = 1001;
@@ -60,7 +59,6 @@ public class PostActivity extends Activity {
     ListView listView1;
     //ItemCommentListAdapter adapter;
     private String seller_phoneNum;
-
 
     private class ImageViewAdapter extends PagerAdapter{
 
@@ -128,7 +126,6 @@ public class PostActivity extends Activity {
             return view ==((ImageView) object);
         }
     }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
