@@ -175,9 +175,9 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
         setContentView(R.layout.activity_main);
 
 
-        Intent intent = new Intent(this, AlarmService.class);
+        //Intent intent = new Intent(this, AlarmService.class);
         //startService(intent);
-        // 알람 서비스 시작
+        // 알람 서비스 시작 -> 로그온 정보를 알람activity가 계속 유지하게되는 현상
 
 
         // preference로 키워드정보 로딩
@@ -187,7 +187,8 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
         userInfo.LoadPreference(pref);
         //
 
-        /*
+
+        /*  // 서버 IP 입력받는 팝업창
         //다이얼로그를 통해 어플 실행 시작시 서버URL을 입력받아 실행함(개발용 코드)
         builder = new AlertDialog.Builder(this);
         builder.setTitle("서버 IP 주소 입력");
@@ -224,18 +225,6 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
         // Initialise ViewPager
         initializeViewPager();
 
-
-        //Android Universal Image Loader
-        /*ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext())
-                .memoryCache(new WeakMemoryCache())
-                .memoryCacheExtraOptions(480, 800)
-                .threadPriority(Thread.NORM_PRIORITY - 2)
-                .denyCacheImageMultipleSizesInMemory()
-                .discCacheFileNameGenerator(new Md5FileNameGenerator())
-                .tasksProcessingOrder(QueueProcessingType.LIFO)
-                //.writeDebugLogs() // 마켓에 포팅하실땐 빼주세요.
-                .build();*/
-
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext())
                 .threadPriority(Thread.NORM_PRIORITY - 2)
                 .denyCacheImageMultipleSizesInMemory()
@@ -249,12 +238,10 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
     }
     @Override
     protected void onStart(){
-
         super.onStart();
 
-        // service로 역할 이전
         /*
-        // preference로 키워드정보 로딩
+        // preference로 키워드정보 로딩 -> 여기 넣으면 메인화면 부를때마다 pref파일 값으로 강제갱신
         User_Info userInfo = User_Info.getUser_info();
         SharedPreferences pref = getSharedPreferences("pref", Activity.MODE_PRIVATE);
         userInfo.LoadPreference(pref);
