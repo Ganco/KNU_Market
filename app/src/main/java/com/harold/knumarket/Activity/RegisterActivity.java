@@ -112,6 +112,8 @@ public class RegisterActivity extends Activity {
                 user_info.setClient_State(true);
                 Toast.makeText(getApplicationContext(), "등록", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getBaseContext(),MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(intent);
                 finish();
             }
@@ -141,6 +143,8 @@ public class RegisterActivity extends Activity {
 
                 Toast.makeText(getApplicationContext(), "등록", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getBaseContext(),MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(intent);
                 finish();
 

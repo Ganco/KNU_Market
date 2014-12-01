@@ -48,7 +48,7 @@ public class LoginActivity extends Activity {
                 String login_id = username.getText().toString();
                 String login_pass = password.getText().toString();
                 String url = Webserver_Url.getInstance().getUrl();
-                
+
                 task.execute(url+"JSP/RequestLogin.jsp?client_id="+login_id+"&client_pw="+login_pass);
 
             }
@@ -83,12 +83,20 @@ public class LoginActivity extends Activity {
 
             user_info.setClient_keywordList(tempArray);
             user_info.setPhone_No(obj.getString("c_phone_num"));
+            user_info.setClient_Id(obj.getString("c_client_id"));
             user_info.setAddition(obj.getString("profile_image_loc"));
+
+            Log.i("KNU_Market/Login c_phone_num= ", obj.getString("c_phone_num"));
+            Log.i("KNU_Market/Login c_client_id= ", obj.getString("c_client_id"));
+            Log.i("KNU_Market/Login getPhone_No= ", user_info.getPhone_No());
+            Log.i("KNU_Market/Login getClient_Id= ", user_info.getClient_Id());
 
             //User를 로그인 상태로 변경
             user_info.setClient_State(true);
 
             Intent intent = new Intent(getBaseContext(),MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             startActivity(intent);
             finish();
 
@@ -114,6 +122,7 @@ public class LoginActivity extends Activity {
                 try {
                     jArray = new JSONArray(result);//JSON 데이터 형식으로 파싱
                     recordUserInfo(jArray);//받아온 정보로 화면 표시
+                    Toast.makeText(getApplicationContext(), "로그인 성공!", Toast.LENGTH_SHORT).show();
                 }
                 catch (JSONException e) {
                     e.printStackTrace();

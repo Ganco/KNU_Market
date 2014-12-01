@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import com.harold.knumarket.User_Info;
+import com.knumarket.harold.knu_market.R;
 
 /**
  * Created by Gan on 2014-10-10.
