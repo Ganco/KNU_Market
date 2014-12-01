@@ -250,7 +250,7 @@ public class PostActivity extends Activity {
             p_name.setText(json.getString("name"));
             p_price.setText("[\\"+json.getString("price")+"]");
             p_client.setText(json.getString("client"));
-            p_profile.setText(json.getString("profile"));
+            //p_profile.setText(json.getString("profile"));
             p_detail.setText(json.getString("detail"));
             p_keyword1.setText(json.getString("keyword1"));
             p_keyword2.setText(json.getString("keyword2"));
@@ -258,8 +258,10 @@ public class PostActivity extends Activity {
 
             seller_phoneNum = json.getString("seller_phone_num");
 
-            TextView p_text1 = (TextView) findViewById(R.id.ItemText01);
-            TextView p_text2 = (TextView) findViewById(R.id.ItemText02);
+            TextView p_text1 = (TextView) findViewById(R.id.Buy);
+            TextView p_text2 = (TextView) findViewById(R.id.Sell);
+            Log.i("KNU_Market/Post_Act", "Sell=" + json.getString("product_state"));
+
             if(json.getString("product_state").equals("Sell")){
                 p_text1.setTextColor(Color.parseColor("#82979797"));
                 p_text1.setTextSize(15);
@@ -415,6 +417,7 @@ public class PostActivity extends Activity {
         @Override
         protected void onPostExecute(String result) {
             try {
+                Log.i("KNU_Market/Post result= ",result);
                 JSONObject json = null;
                 jArray = new JSONArray(result);//JSON 데이터 형식으로 파싱
                 updateView(jArray);//받아온 정보로 화면 표시
@@ -432,6 +435,7 @@ public class PostActivity extends Activity {
             HttpResponse response;
             HttpClient myClient = new DefaultHttpClient();
             HttpPost myConnection = new HttpPost(Url+urls[0]);
+            Log.i("KNU_Market/Post Url= ", Url);
 
             try {
                 response = myClient.execute(myConnection);

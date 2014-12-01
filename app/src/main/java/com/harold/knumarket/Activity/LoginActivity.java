@@ -95,7 +95,20 @@ public class LoginActivity extends Activity {
 
 
 
-            user_info.setClient_keywordList(tempArray);
+            //user_info.setClient_keywordList(tempArray);
+            if(user_info.getClient_keyword().get(0) == "")
+                user_info.setClient_keyword(tempArray.get(0),0);
+            if(user_info.getClient_keyword().get(1) == "")
+                user_info.setClient_keyword(tempArray.get(1),1);
+            if(user_info.getClient_keyword().get(2) == "")
+                user_info.setClient_keyword(tempArray.get(2),2);
+            if(user_info.getClient_keyword().get(3) == "")
+                user_info.setClient_keyword(tempArray.get(3),3);
+            if(user_info.getClient_keyword().get(4) == "")
+                user_info.setClient_keyword(tempArray.get(4),4);
+
+
+
             user_info.setPhone_No(obj.getString("c_phone_num"));
             user_info.setClient_Id(obj.getString("client_id"));
             user_info.setAddition(obj.getString("profile_image_loc"));

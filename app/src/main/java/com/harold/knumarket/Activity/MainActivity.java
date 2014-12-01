@@ -12,6 +12,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -172,8 +173,9 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         Intent intent = new Intent(this, AlarmService.class);
-        startService(intent);
+        //startService(intent);
         // 알람 서비스 시작
 
 
@@ -184,10 +186,10 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
         userInfo.LoadPreference(pref);
         //
 
+        /*
         //다이얼로그를 통해 어플 실행 시작시 서버URL을 입력받아 실행함(개발용 코드)
         builder = new AlertDialog.Builder(this);
         builder.setTitle("서버 IP 주소 입력");
-        //builder.setMessage("Message");
         final EditText url_Input = new EditText(this);
         //url_Input.setText("211.51.176.248");//내 방 공유기 외부 아이피 주소
         url_Input.setText("155.230.29.162");
@@ -209,6 +211,18 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
         });
         mPopupDlg = builder.show();
         //다이얼로그를 통해 어플 실행 시작시 서버URL을 입력받아 실행함(개발용 코드)
+        */
+
+        Webserver_Url.getInstance().setUrl("220.94.32.180");
+        Log.i("KNU_Market/Main Url= ", Webserver_Url.getInstance().getUrl());
+        // Initialise the TabHost
+        initialiseTabHost(savedInstanceState);
+        if (savedInstanceState != null) {
+            mTabHost.setCurrentTabByTag(savedInstanceState.getString("tab")); //set the tab as per the saved state
+        }
+        // Initialise ViewPager
+        initializeViewPager();
+
 
         //Android Universal Image Loader
         /*ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext())
