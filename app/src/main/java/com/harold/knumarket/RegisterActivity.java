@@ -13,7 +13,7 @@
 //    public void onCreate(Bundle savedInstanceState) {
 //        super.onCreate(savedInstanceState);
 //        // Set View to activity_register.xml
-//        setContentView(R.layout.register);
+//        setContentView(R.layout.activity_register);
 //
 //        TextView loginScreen = (TextView) findViewById(R.id.link_to_login);
 //

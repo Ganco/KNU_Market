@@ -28,21 +28,23 @@ import java.io.IOException;
 
 public class LoginActivity extends Activity {
 
-    private EditText  username=null;
-    private EditText  password=null;
-    private TextView attempts;
+
+    private EditText username = null;
+    private EditText password = null;
+
+    //    private TextView attempts;
 //    private Button login;
 //    int counter = 3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        username = (EditText)findViewById(R.id.editText1);
-        password = (EditText)findViewById(R.id.editText2);
+        username = (EditText) findViewById(R.id.editText1);
+        password = (EditText) findViewById(R.id.editText2);
 //        attempts = (TextView)findViewById(R.id.textView5);
 //        attempts.setText(Integer.toString(counter));
 
-        Button loginBtn = (Button)findViewById(R.id.loginBtn);
+        Button loginBtn = (Button) findViewById(R.id.loginBtn);
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,13 +53,13 @@ public class LoginActivity extends Activity {
                 String login_pass = password.getText().toString();
 
                 String url = Webserver_Url.getInstance().getUrl();
-                Login_attempt.onPostExecute(url+"JSP/RequestLogin.jsp?login_id="+login_id+"&login_pass="+login_pass);
+                Login_attempt.onPostExecute(url + "JSP/RequestLogin.jsp?login_id=" + login_id + "&login_pass=" + login_pass);
                 //
             }
         });
         TextView registerScreen = (TextView) findViewById(R.id.link_to_login);
 
-        // Listening to register new account link
+        // Listening to activity_register new account link
         registerScreen.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
@@ -78,14 +80,13 @@ public class LoginActivity extends Activity {
         try {
             JSONObject json = array.getJSONObject(0);
             p_name.setText(json.getString("name"));
-            p_price.setText("[\\"+json.getString("price")+"]");
+            p_price.setText("[\\" + json.getString("price") + "]");
             p_client.setText(json.getString("client"));
             p_detail.setText(json.getString("detail"));
 
             String categoryID = json.getString("category_id");
 //            setDecodeCatID(categoryID);
-        }
-        catch (JSONException e) {
+        } catch (JSONException e) {
             e.printStackTrace();
         }
     }
@@ -95,6 +96,7 @@ public class LoginActivity extends Activity {
         private String Url = Webserver_Url.getInstance().getUrl();
         private JSONArray jArray;
         private ViewPager mViewPager;
+
         @Override
 
         protected void onPostExecute(String result) {
@@ -110,12 +112,11 @@ public class LoginActivity extends Activity {
 
         //웹에서 정보 가져오는 부분
         @Override
-        protected String doInBackground(String... urls)
-        {
+        protected String doInBackground(String... urls) {
             String str = "";
             HttpResponse response;
             HttpClient myClient = new DefaultHttpClient();
-            HttpPost myConnection = new HttpPost(Url+urls[0]);
+            HttpPost myConnection = new HttpPost(Url + urls[0]);
 
             try {
                 response = myClient.execute(myConnection);
@@ -130,20 +131,16 @@ public class LoginActivity extends Activity {
             return str;
         }
 
-        public void login(View view)
-        { //서버에 아이디(폰번), 비번 확인
+        public void login(View view) { //서버에 아이디(폰번), 비번 확인
             String str = doInBackground();
 
             String login_id = username.getText().toString();
             String login_pass = password.getText().toString();
 
-            if(username.getText().toString().equals("admin") && password.getText().toString().equals("admin"))
-            {
+            if (username.getText().toString().equals("admin") && password.getText().toString().equals("admin")) {
                 Toast.makeText(getApplicationContext(), "Redirecting...",
                         Toast.LENGTH_SHORT).show();
-            }
-            else
-            {
+            } else {
                 Toast.makeText(getApplicationContext(), "Wrong Credentials",
                         Toast.LENGTH_SHORT).show();
 //                attempts.setBackgroundColor(Color.RED);
@@ -173,14 +170,5 @@ public class LoginActivity extends Activity {
 //                e.printStackTrace();
 //            }
 //        }
-
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
 }
-

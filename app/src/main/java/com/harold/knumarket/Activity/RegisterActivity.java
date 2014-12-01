@@ -13,8 +13,7 @@ public class RegisterActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Set View to register.xml
-        setContentView(R.layout.register);
+        setContentView(R.layout.activity_register);
 
         TextView loginScreen = (TextView) findViewById(R.id.link_to_login);
 
@@ -23,7 +22,7 @@ public class RegisterActivity extends Activity {
 
             public void onClick(View arg0) {
                 // Closing registration screen
-                // Switching to Login Screen/closing register screen
+                // Switching to Login Screen/closing activity_register screen
                 finish();
             }
         });
