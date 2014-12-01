@@ -435,10 +435,10 @@ public class addPostActivity extends Activity {
                     String file_path = Environment.getExternalStorageDirectory().getPath();
                     if(imgFiles.size() <3){
                         imgFiles.add(SaveBitmapToFileCache(bm, file_path,"temp"+System.currentTimeMillis()));
-                        Toast.makeText(getApplicationContext(),"imgFile Array Size="+imgFiles.size(),Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(),"imgFile Array Size="+imgFiles.size(),Toast.LENGTH_SHORT).show();
                     }
                     else{
-                        Toast.makeText(getApplicationContext(), "imgFile Array Full~!!", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(), "imgFile Array Full~!!", Toast.LENGTH_SHORT).show();
                     }
 
                     //Bitmap bm = (Bitmap) intent.getExtras().get("data");
@@ -465,10 +465,10 @@ public class addPostActivity extends Activity {
                 //FILE Array에 임시 저장
                 if(imgFiles.size() < 3) {
                     imgFiles.add(new File(img_path));
-                    Toast.makeText(getApplicationContext(),"imgFile Array Size="+imgFiles.size(),Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(),"imgFile Array Size="+imgFiles.size(),Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    Toast.makeText(getApplicationContext(),"imgFile Array Full~!!",Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(),"imgFile Array Full~!!",Toast.LENGTH_SHORT).show();
                 }
 
                 Log.i("add_Post-url","path="+img_path+", url="+mImageCaptureUri);
@@ -532,7 +532,7 @@ public class addPostActivity extends Activity {
             }
             @Override
             public boolean onKeyDown(View view, Editable text, int keyCode, KeyEvent event) {
-                Toast.makeText(getApplicationContext(),"onKeyDown="+text.toString(),Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(),"onKeyDown="+text.toString(),Toast.LENGTH_SHORT).show();
                 return false;
             }
             @Override
@@ -587,7 +587,7 @@ public class addPostActivity extends Activity {
                     return post_DTO;
                 }
                 else {
-                    Toast.makeText(getApplicationContext(),"Post_DTO 생성실패",Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(),"Post_DTO 생성실패",Toast.LENGTH_SHORT).show();
                     return null;
                 }
             }
@@ -597,7 +597,7 @@ public class addPostActivity extends Activity {
             }
         }
         else{
-            Toast.makeText(getApplicationContext(),"User_id is Null",Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(),"User_id is Null",Toast.LENGTH_SHORT).show();
             return null;
         }
     }
@@ -654,7 +654,7 @@ public class addPostActivity extends Activity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             Log.i("postUploading","AsyncTask Ended!");
-            Toast.makeText(getApplicationContext(),"returnCode="+s,Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(),"returnCode="+s,Toast.LENGTH_SHORT).show();
             if(s.equals("http201")){
                 Toast.makeText(getApplicationContext(),"상품 등록 완료~!",Toast.LENGTH_SHORT).show();
                 goBackToMainActivity();
