@@ -182,7 +182,6 @@
                     android:orientation="horizontal"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:id="@+id/linearLayout2"
                     android:paddingLeft="20dp">
 
                     <TextView
@@ -207,7 +206,6 @@
                     android:orientation="horizontal"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:id="@+id/linearLayout2"
                     android:weightSum="1"
                     android:paddingLeft="20dp">
 
@@ -215,7 +213,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:text="카테고리"
-                        android:id="@+id/textView3"
                         android:layout_weight="0.4"
                         android:textSize="15dp"
                         android:gravity="center_vertical|left" />
@@ -247,14 +244,12 @@
                     android:orientation="horizontal"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:id="@+id/linearLayout2"
                     android:paddingLeft="20dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:text="키워드"
-                        android:id="@+id/textView3"
                         android:gravity="center|left"
                         android:textSize="15dp"
                         android:layout_weight="0.4" />
