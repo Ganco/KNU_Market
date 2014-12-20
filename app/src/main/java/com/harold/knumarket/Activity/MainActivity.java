@@ -185,7 +185,13 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
         SharedPreferences pref = getSharedPreferences("pref", Activity.MODE_PRIVATE);
         userInfo.LoadPreference(pref);
         //
+<<<<<<< HEAD
         /*  // 서버 IP 입력받는 팝업창
+=======
+
+
+        ///*  // 서버 IP 입력받는 팝업창
+>>>>>>> b4fb004a6b3d131bdfc35b91dc17075ecd6b05a0
         //다이얼로그를 통해 어플 실행 시작시 서버URL을 입력받아 실행함(개발용 코드)
         builder = new AlertDialog.Builder(this);
         builder.setTitle("서버 IP 주소 입력");
@@ -210,9 +216,14 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
         });
         mPopupDlg = builder.show();
         //다이얼로그를 통해 어플 실행 시작시 서버URL을 입력받아 실행함(개발용 코드)
-        */
+        //*/
 
+<<<<<<< HEAD
         Webserver_Url.getInstance().setUrl("211.51.176.248");
+=======
+        /*  // IP주소 입력 팝업창 없이 바로 연결
+        Webserver_Url.getInstance().setUrl("220.94.32.180");
+>>>>>>> b4fb004a6b3d131bdfc35b91dc17075ecd6b05a0
         Log.i("KNU_Market/Main Url= ", Webserver_Url.getInstance().getUrl());
         // Initialise the TabHost
         initialiseTabHost(savedInstanceState);
@@ -221,6 +232,7 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
         }
         // Initialise ViewPager
         initializeViewPager();
+        //*/
 
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext())
                 .threadPriority(Thread.NORM_PRIORITY - 2)
