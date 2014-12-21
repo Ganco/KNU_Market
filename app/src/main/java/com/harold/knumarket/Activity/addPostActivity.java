@@ -2,7 +2,6 @@ package com.harold.knumarket.Activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -81,17 +80,18 @@ public class addPostActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        User_Info user_info = User_Info.getUser_info();
-        if(user_info.isClient_State()) {
+        //상품 등록 전 로그인 여부 확인
+        /*User_Info user_info = User_Info.getUser_info();
+        if(user_info.isClient_State()) {*/
             setContentView(R.layout.activity_add_post);
             String serverUrl = getInstance().getUrl();
             initializeSpinner();
-        }
+        /*}
         else{
             Intent intent = new Intent(getBaseContext(), LoginActivity.class);
             startActivity(intent);
             finish();
-        }
+        }*/
     }
 
     public void initializeSpinner(){
@@ -250,17 +250,10 @@ public class addPostActivity extends Activity {
 
             }
         });
-
-        cat_high.setSelection(0);
-        cat_mid.setSelection(0);
-        cat_low.setSelection(0);
+        //cat_high.setSelection(0);
+        //cat_mid.setSelection(0);
+        //cat_low.setSelection(0);
     }
-
-    /*@Override
-    protected void onPause() {
-        super.onPause();
-        ((BitmapDrawable)img_btn.getDrawable()).getBitmap().recycle();
-    }*/
 
     public void onClick(View v) {
 
@@ -661,19 +654,13 @@ public class addPostActivity extends Activity {
             }
         }
     }
+
     public void goBackToMainActivity(){
         Intent intent = new Intent(getBaseContext(), MainActivity.class);
         //intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         //intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(intent);
         finish();
-    }
-
-    public class CustomSpinnerAdapter extends ArrayAdapter{
-
-        public CustomSpinnerAdapter(Context context, int resource) {
-            super(context, resource);
-        }
     }
 
     @Override
