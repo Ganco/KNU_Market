@@ -103,8 +103,10 @@ public class ConfigActivity extends Activity {
             case R.id.btn_home:
                 intent = new Intent(getBaseContext(), MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivityForResult(intent, REQUEST_CODE_MAIN);
+                // 겔3S 에서 설정 -> 홈 버튼 클릭시 바탕화면으로 나가는 현상 방지 테스트
+                //intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                //startActivityForResult(intent, REQUEST_CODE_MAIN);
+                startActivity(intent);
                 finish();
                 break;
 

@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Vector;
 
 import com.harold.knumarket.AlarmService;
+import com.harold.knumarket.BackPressCloseHandler;
 import com.harold.knumarket.User_Info;
 import com.harold.knumarket.Webserver_Url;
 import com.harold.knumarket.categories.Category_Book;
@@ -55,6 +56,7 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
 
     private AlertDialog.Builder builder;
     private DialogInterface mPopupDlg = null;
+    private BackPressCloseHandler backPressCloseHandler;
 
     public boolean isUrlInputFlag() {
         return urlInputFlag;
@@ -166,13 +168,20 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
                 break;
            // */
         }
-
+    }
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        backPressCloseHandler.onBackPressed();
     }
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // 뒤로가기 2연속 체크
+        backPressCloseHandler = new BackPressCloseHandler(this);
 
         //Intent intent = new Intent(this, AlarmService.class);
         //startService(intent);

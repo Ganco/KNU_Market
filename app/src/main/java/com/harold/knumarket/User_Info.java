@@ -152,6 +152,17 @@ public class User_Info {
         client_keyword.set(2, pref.getString("client_keyword3", ""));
         client_keyword.set(3, pref.getString("client_keyword4", ""));
         client_keyword.set(4, pref.getString("client_keyword5", ""));
+
+
+
+        // alarm_mode
+        // zzim count
+        // zzim1 ...
+        // final_alarm_no
+        // alarm_count
+        // alarm1 ...
+
+
     }
     public void SavePostList(SharedPreferences.Editor editor)
     {
