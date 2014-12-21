@@ -40,25 +40,6 @@ public class AlarmService extends Service {
         //userInfo.LoadPreference(pref);
     }
 
-    /*
-    public void run() {
-        while(true) {
-            try {
-                count++;
-                Thread.sleep(5000); // 5000 -> 5초
-                Log.i("KNU_Market/AlarmService", "count=" + count);
-                // 각 keyword들로 각각 검색하기
-                // if not exist in list,
-                // add to list
-                // update post_no
-                // push alarm
-            } catch (Exception e) {
-                Log.e(TAG, e.toString());
-            }
-        }
-    }
-    */
-
     private Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
 //               switch(msg.what) {}
@@ -87,6 +68,7 @@ public class AlarmService extends Service {
 
 
             // 알람 클릭시 Activity를 화면에 띄운다.
+            // alarm activity로 띄우면 preference 동작 유무 고려해야
             Intent intent = new Intent(getApplicationContext(),MainActivity.class);
             PendingIntent pIntent = PendingIntent.getActivity(getApplicationContext()
                     , 0
