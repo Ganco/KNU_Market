@@ -108,17 +108,18 @@ android:layout_height="match_parent"
 
         <LinearLayout
             android:orientation="horizontal"
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/profile01"
-            android:layout_weight="1">
+            android:id="@+id/profile01">
 
             <ImageButton
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginStart="10dp"
-                android:background="@drawable/ic_empty"
+                android:background="@android:color/darker_gray"
+                android:src="@drawable/profile_img"
+                android:scaleType="centerCrop"
                 android:id="@+id/profilePicture01"/>
 
             <EditText
@@ -142,13 +143,14 @@ android:layout_height="match_parent"
 
             <TextView
                 android:layout_width="90dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:text="ID"
                 android:layout_marginStart="20dp"
                 android:textSize="14sp"
                 android:textColor="@android:color/black"
                 android:layout_marginTop="10dp"
-                android:id="@+id/profileText02"/>
+                android:id="@+id/profileText02"
+                android:layout_gravity="center_vertical" />
 
             <EditText
                 android:layout_width="match_parent"
@@ -171,13 +173,14 @@ android:layout_height="match_parent"
 
             <TextView
                 android:layout_width="90dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:text="@string/mypageTelephone"
                 android:layout_marginStart="20dp"
                 android:textSize="14sp"
                 android:textColor="@android:color/black"
                 android:layout_marginTop="10dp"
-                android:id="@+id/profileText03"/>
+                android:id="@+id/profileText03"
+                android:layout_gravity="center_vertical" />
 
             <EditText
                 android:layout_width="match_parent"
@@ -200,13 +203,14 @@ android:layout_height="match_parent"
 
             <TextView
                 android:layout_width="90dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:text="@string/mypageInfo"
                 android:layout_marginStart="20dp"
                 android:textSize="14sp"
                 android:textColor="@android:color/black"
                 android:layout_marginTop="10dp"
-                android:id="@+id/profileText04"/>
+                android:id="@+id/profileText04"
+                android:layout_gravity="center_vertical" />
 
             <EditText
                 android:layout_width="match_parent"
@@ -225,38 +229,32 @@ android:layout_height="match_parent"
 
         <LinearLayout
             android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:id="@+id/profile05"
-            android:layout_marginStart="20dp"
-            android:layout_weight="1">
+            android:weightSum="1">
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="내 알림"
+                android:layout_height="wrap_content"
+                android:text="내 글 보기"
                 android:textSize="14sp"
                 android:textColor="@android:color/black"
-                android:id="@+id/profileText05"/>
+                android:id="@+id/profileText05"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="20dp" />
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:id="@+id/profile06"
-            android:layout_marginStart="20dp"
-            android:layout_weight="1">
-
-            <TextView
+            <Space
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="내키워드"
-                android:textSize="14sp"
-                android:textColor="@android:color/black"
-                android:id="@+id/profileText06"/>
+                android:layout_weight="0.77" />
+
+            <Button
+                android:layout_width="231dp"
+                android:layout_height="wrap_content"
+                android:text="내 글"
+                android:onClick="onClick"
+                android:id="@+id/btn_goMyPost" />
 
         </LinearLayout>
 
@@ -266,33 +264,26 @@ android:layout_height="match_parent"
             android:layout_height="0dp"
             android:id="@+id/profile07"
             android:layout_marginStart="20dp"
-            android:layout_weight="1">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="내 찜"
-                android:textSize="14sp"
-                android:textColor="@android:color/black"
-                android:id="@+id/profileText07"/>
+            android:layout_weight="0.24">
 
         </LinearLayout>
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:id="@+id/profile08"
-            android:layout_marginStart="20dp"
-            android:layout_weight="1">
+            android:layout_height="wrap_content"
+            android:id="@+id/profile06"
+            android:weightSum="1"
+            android:layout_margin="0dp"
+            android:layout_marginTop="50dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="내 글"
-                android:textSize="14sp"
-                android:textColor="@android:color/black"
-                android:id="@+id/profileText08"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="로그아웃"
+                android:onClick="onClick"
+                android:id="@+id/btn_LogOut" />
+
         </LinearLayout>
 
     </LinearLayout>

@@ -144,6 +144,22 @@ public class MyPageActivity extends Activity {
                 startActivity(intent);
                 finish();
                 break;
+
+            case R.id.btn_goMyPost:
+                break;
+            case R.id.btn_LogOut:
+
+                User_Info user = User_Info.getUser_info();
+                user.setClient_State(false);
+                user.setClient_Id(null);
+                user.setPhone_No(null);
+                user.setClient_keyword(null,0);
+                user.setClient_keyword(null,1);
+                user.setClient_keyword(null,2);
+
+
+
+                break;
         }
     }
 

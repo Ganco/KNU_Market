@@ -42,8 +42,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.NavigableMap;
+import java.util.NavigableSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.TreeMap;
+import java.util.TreeSet;
+import java.util.Comparator;
 
 /**
  * Created by Gan on 2014-11-28.
@@ -63,7 +68,8 @@ public class AlarmActivity extends Activity {
     //웹서버 url정보를 WebServer_Url클래스 하나로 관리함(싱글톤 패턴 사용)
     private String Url;
     private static int keywordCount = 0;
-    Map m = new TreeMap();
+    //private NavigableMap m = new TreeMap();
+    private Map m = new TreeMap(new SetComparator());
     private postListLoading task2;
     private postListLoading task3;
     private postListLoading task4;
@@ -132,17 +138,26 @@ public class AlarmActivity extends Activity {
                 Log.i("KNU_Market/Alarm_Act", "keyword4=" + userKeyword.get(3));
                 Log.i("KNU_Market/Alarm_Act", "keyword5=" + userKeyword.get(4));
                 //*/
-
+                //public NavigableSet<String> descendingSet();
 
                 Set<String> alarmPosts;
                 alarmPosts = userInfo.getAlarmPosts();
 
-                int alarmPostCount = userInfo.getAlarmPostCount();
-                int j=0;
+                // 오름차순 (역순정렬)
+                Comparator comparator = new SetComparator();
+                NavigableSet<String> descendingSet;
+                //Set<String> treeSet = new TreeSet<String>(comparator);
+                NavigableSet<String> treeSet = new TreeSet<String>();
+                //treeSet = treeSet.descendingSet();
+
                 for(Iterator i = alarmPosts.iterator(); i.hasNext(); ) {
+                    treeSet.add((String)i.next());
+                }
+
+                for(Iterator i = alarmPosts.iterator(); i.hasNext(); ) {
+                //for(Iterator i = treeSet.descendingIterator(); i.hasNext(); ) {
                     new postListLoading().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,"JSP/RequestPost.jsp?post_no="+i.next());
                     //task(j).execute("JSP/RequestPost.jsp?post_no="+i.next());
-                    j++;
                 }
                 //updateView();
 
@@ -415,8 +430,8 @@ public class AlarmActivity extends Activity {
         Log.i("KNU_Market/Alarm_Act", "keywordCount2=" + keywordCount);
 
         User_Info userInfo = User_Info.getUser_info();
-        Log.i("KNU_Market/Alarm_Act", "AlarmPostCount=" + userInfo.getAlarmPostCount());
-        if(keywordCount == userInfo.getAlarmPostCount()) {
+        Log.i("KNU_Market/Alarm_Act", "AlarmPostCount=" + userInfo.getAlarmPosts().size());
+        if(keywordCount == userInfo.getAlarmPosts().size()) {
             keywordCount = 0;
             updateView();
         }
@@ -524,4 +539,11 @@ public class AlarmActivity extends Activity {
         }
     }
 
+}
+class SetComparator implements Comparator {
+    public int compare(Object firstObject, Object secondObject) {
+        Integer first = (Integer) firstObject;
+        Integer second = (Integer) secondObject;
+        return second.compareTo(first);
+    }
 }

@@ -13,6 +13,21 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:text="중고서적"
+            android:id="@+id/btn_f000"
+            android:layout_weight="1"
+            android:onClick="onClick" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="자취용품"
+            android:id="@+id/btn_f100"
+            android:layout_weight="1"
+            android:onClick="onClick" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:text="패션잡화"
             android:id="@+id/btn_f200"
             android:layout_weight="1"
@@ -26,21 +41,6 @@
             android:layout_weight="1"
             android:onClick="onClick" />
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="중고서적"
-            android:id="@+id/btn_f000"
-            android:layout_weight="1"
-            android:onClick="onClick" />
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="자취용품"
-            android:id="@+id/btn_f100"
-            android:layout_weight="1"
-            android:onClick="onClick" />
     </LinearLayout>
 
 </LinearLayout>

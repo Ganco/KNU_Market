@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TabHost;
 
+import com.harold.knumarket.AlarmService;
 import com.harold.knumarket.BackPressCloseHandler;
 import com.harold.knumarket.User_Info;
 import com.harold.knumarket.Webserver_Url;
@@ -62,8 +63,8 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Intent intent = new Intent(this, AlarmService.class);
-        //startService(intent);
+        Intent intent = new Intent(this, AlarmService.class);
+        startService(intent);
         // 알람 서비스 시작 -> 로그온 정보를 알람activity가 계속 유지하게되는 현상
 
 
