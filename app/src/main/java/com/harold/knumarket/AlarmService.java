@@ -47,7 +47,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Set;
-import java.util.SortedSet;
 
 /**
  * Created by Gan on 2014-12-01.
@@ -129,7 +128,7 @@ public class AlarmService extends Service {
         //final int time = intent.getIntExtra("time", 0);
 //      Toast.makeText(this, "안녕~ 난 서비스 : "+time, 0).show();
 
-        final int time = 10;         // n 초마다 run
+        final int time = 15;         // n 초마다 run
         // handler 통한 Thread 이용
         new Thread(new Runnable() {
             @Override
@@ -144,7 +143,7 @@ public class AlarmService extends Service {
                     //Thread.sleep(5000); // 5000 -> 5초
 
                     userInfo.LoadAlarmOnOff(pref);
-                    if(userInfo.getAlarmOnOff() == false)       // 알람이 off면 계속 반복해서 쉰다
+                    if(userInfo.getAlarmOnOff() == false)       // 알람모드가 off면 계속 반복해서 쉰다
                         continue;
 
                     try {
@@ -156,6 +155,20 @@ public class AlarmService extends Service {
                         userInfo.LoadPreference(pref);
                         userInfo.LoadLastPostNo(pref);
                         userInfo.LoadAlarmPosts(pref);
+
+
+                        /*
+                        SharedPreferences.Editor editor = pref.edit();
+                        if(userInfo.getAlarmPosts().size() == 0) {
+                            userInfo.getAlarmPosts().add("33");
+                            userInfo.getAlarmPosts().add("54");
+                            userInfo.getAlarmPosts().add("57");
+                            userInfo.getAlarmPosts().add("56");
+                        }
+                        userInfo.SaveAlarmPosts(editor);
+                        // Set<String>의 저장가능여부 테스트
+                        */
+
 
                         Url = Webserver_Url.getInstance().getUrl();
                         //Log.i("KNU_Market/AlarmService","Url="+Url);
@@ -216,7 +229,7 @@ public class AlarmService extends Service {
         String k3 = "";
         User_Info userInfo = User_Info.getUser_info();
         userK = userInfo.getClient_keyword();
-        SortedSet<String> alarmPosts;
+        Set<String> alarmPosts;
         alarmPosts = userInfo.getAlarmPosts();
 
         String client_id = userInfo.getClient_Id();
@@ -228,7 +241,6 @@ public class AlarmService extends Service {
             k1 = "";
             k2 = "";
             k3 = "";
-            post_no = 0;
             String temp_id = "";
 
             try {
@@ -244,8 +256,8 @@ public class AlarmService extends Service {
 
                 for(int j=0; j<5; j++) {
                     String tempk = userK.get(j);
-                    if(tempk.length() != 0 && !tempk.contains(" ")) {
-                        if( k1 == tempk ||  k2 == tempk ||  k3 == tempk) {
+                    if(tempk.length() != 0 && !tempk.contains(" \n")) {
+                        if( k1.contains(tempk) ||  k2.contains(tempk) ||  k3.contains(tempk)) {
                             if(temp_id != client_id) {
                                 // add this post
                                 newPostCount++;
@@ -261,10 +273,13 @@ public class AlarmService extends Service {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+            userInfo.setLastPostNo(post_no);
+            Log.i("KNU_Market/AlarmService", "LastPostNo="+post_no);
         }
 
         if(keywordFind == true) {       // 키워드 해당글 발견시, 마지막postNo저장, 알림List 업데이트
             userInfo.setLastPostNo(post_no);
+            Log.i("KNU_Market/AlarmService", "LastPostNo="+post_no);
             userInfo.setAlarmPosts(alarmPosts);
 
             mHandler.sendEmptyMessage(0);       // 푸쉬알림 띄우기
