@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -441,7 +442,12 @@ public class addPostActivity extends Activity {
                         img_btn.setLayoutParams(params);
                     }
                     img_btn.setScaleType(ImageView.ScaleType.CENTER_CROP);
+
+                    if(bm.getHeight() < bm.getWidth()){
+                        bm = imgRotate(bm);
+                    }
                     img_btn.setImageBitmap(bm);
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -495,6 +501,10 @@ public class addPostActivity extends Activity {
                 ImageLoader imageLoader = ImageLoader.getInstance();
                 imageLoader.displayImage(String.valueOf(mImageCaptureUri),img_btn,options);
                 */
+                if(bm.getHeight() < bm.getWidth()){
+                    bm = imgRotate(bm);
+                }
+
                 img_btn.setImageBitmap(bm);
 
                 // 임시 파일 삭제
@@ -593,6 +603,19 @@ public class addPostActivity extends Activity {
             //Toast.makeText(getApplicationContext(),"User_id is Null",Toast.LENGTH_SHORT).show();
             return null;
         }
+    }
+
+    private Bitmap imgRotate(Bitmap bmp){
+        int width = bmp.getWidth();
+        int height = bmp.getHeight();
+
+        Matrix matrix = new Matrix();
+        matrix.postRotate(90);
+
+        Bitmap resizedBitmap = Bitmap.createBitmap(bmp, 0, 0, width, height, matrix, true);
+        bmp.recycle();
+
+        return resizedBitmap;
     }
 
     private File SaveBitmapToFileCache(Bitmap bitmap, String strFilePath, String fileName) {

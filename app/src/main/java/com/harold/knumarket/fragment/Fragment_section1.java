@@ -51,8 +51,8 @@ import static android.widget.AdapterView.OnItemClickListener;
 public class Fragment_section1 extends Fragment implements AbsListView.OnScrollListener {
 
     private static final String TAG = "Frag_sec1";
-    private static final String SORT = "ASC";
-    private static final int NUM_OF_LOAD_ITEM = 3;
+    private static final String SORT = "DESC";
+    private static final int NUM_OF_LOAD_ITEM = 9;
 
     private JSONArray jArray;
     private postListLoading task;

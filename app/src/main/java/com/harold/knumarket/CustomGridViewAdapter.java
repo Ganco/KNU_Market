@@ -72,9 +72,10 @@ public class CustomGridViewAdapter extends BaseAdapter {
         DisplayMetrics metrics = new DisplayMetrics();
         ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getMetrics(metrics);
         int screenWidth = metrics.widthPixels;
+        int screenHight = metrics.heightPixels;
 
         mWidth = (screenWidth / 3) -10;
-        //mHeight = mWidth*20/17;
+        mHeight = 320;
     }
 
     public void clearItems(){
@@ -130,7 +131,7 @@ public class CustomGridViewAdapter extends BaseAdapter {
             viewHolder.icon.getLayoutParams().width = this.mWidth;
             viewHolder.icon.getLayoutParams().height = 235;
             viewHolder.button.getLayoutParams().width = this.mWidth;
-            viewHolder.button.getLayoutParams().height = 320;
+            viewHolder.button.getLayoutParams().height = this.mHeight;
 
             v.setTag(viewHolder);
         }
@@ -174,8 +175,8 @@ public class CustomGridViewAdapter extends BaseAdapter {
                             .showImageOnFail(R.drawable.ic_error) // 로딩 실패시
                             .resetViewBeforeLoading(false)  // 로딩전에 뷰를 리셋하는건데 false로 하세요 과부하!
                             .delayBeforeLoading(0) // 로딩전 딜레이라는데 필요한일이 있을까요..?ㅋㅋ
-                            .cacheInMemory(false) // 메모리케시 사용여부   (사용하면 빨라지지만 많은 이미지 캐싱할경우 outOfMemory Exception발생할 수 있어요)
-                            .cacheOnDisc(false) // 디스크캐쉬를 사용여부(사용하세요왠만하면)
+                            .cacheInMemory(true) // 메모리케시 사용여부   (사용하면 빨라지지만 많은 이미지 캐싱할경우 outOfMemory Exception발생할 수 있어요)
+                            .cacheOnDisc(true) // 디스크캐쉬를 사용여부(사용하세요왠만하면)
                                     //.preProcessor(...) // 비트맵 띄우기전에 프로세스 (BitmapProcessor이라는 인터페이스를 구연하면 process(Bitmap image)라는 메소드를 사용할 수 있어요. 처리하실게 있으면 작성하셔서 이안에 넣어주시면 됩니다.)
                                     //.postProcessor(...) // 비트맵 띄운후 프로세스 (위와같이 BitmapProcessor로 처리)
                             .considerExifParams(false) // 사진이미지의 회전률 고려할건지
@@ -216,7 +217,7 @@ public class CustomGridViewAdapter extends BaseAdapter {
         viewHolder.name.setTextColor(Color.BLACK);
         viewHolder.price.setTextColor(Color.BLACK);
         viewHolder.name.setText(item.getProduct_name());
-        viewHolder.price.setText("[\\" +item.getProduct_price() + "]");
+        viewHolder.price.setText(item.getProduct_price() + "원");
 
         return v;
     }

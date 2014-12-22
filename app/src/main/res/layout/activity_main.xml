@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:weightSum="1"
-            android:id="@+id/linear1"
+            android:id="@+id/TopMenu"
             android:background="#ffff6f58"
             android:gravity="center_vertical">
 
@@ -79,41 +79,49 @@
 
         </LinearLayout>
 
-        <TabHost
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:id="@+id/tabHost"
-            android:layout_weight="1">
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:id="@+id/MainContents">
 
-            <LinearLayout
+            <TabHost
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:orientation="vertical"
-                android:gravity="top">
+                android:layout_height="0dp"
+                android:id="@+id/tabHost"
+                android:layout_weight="1">
 
-                <TabWidget
-                    android:id="@android:id/tabs"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0">
-                </TabWidget>
-
-                <FrameLayout
-                    android:id="@android:id/tabcontent"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="0">
-                </FrameLayout>
-
-                <android.support.v4.view.ViewPager
-                    android:id="@+id/pager"
+                <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:layout_weight="1">
-                </android.support.v4.view.ViewPager>
+                    android:orientation="vertical"
+                    android:gravity="top">
 
-            </LinearLayout>
-        </TabHost>
+                    <TabWidget
+                        android:id="@android:id/tabs"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0">
+                    </TabWidget>
+
+                    <FrameLayout
+                        android:id="@android:id/tabcontent"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="0">
+                    </FrameLayout>
+
+                    <android.support.v4.view.ViewPager
+                        android:id="@+id/pager"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1">
+                    </android.support.v4.view.ViewPager>
+
+                </LinearLayout>
+            </TabHost>
+        </LinearLayout>
 
         <LinearLayout
             android:orientation="horizontal"
@@ -121,7 +129,8 @@
             android:layout_height="wrap_content"
             android:baselineAligned="false"
             android:gravity="bottom"
-            android:background="@android:color/darker_gray">
+            android:background="@android:color/darker_gray"
+            android:id="@+id/BottomMenu">
 
             <LinearLayout
                 android:orientation="horizontal"

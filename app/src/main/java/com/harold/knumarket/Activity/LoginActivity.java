@@ -29,10 +29,10 @@ import java.util.ArrayList;
 
 public class LoginActivity extends Activity {
 
+    public static final int REQUEST_CODE_MAIN = 1001;
     private EditText  username=null;
     private EditText  password=null;
     private LoginTask task;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,7 +125,7 @@ public class LoginActivity extends Activity {
             Intent intent = new Intent(getBaseContext(),MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-            startActivity(intent);
+            startActivityForResult(intent, REQUEST_CODE_MAIN);
             finish();
 
         } catch (JSONException e) {

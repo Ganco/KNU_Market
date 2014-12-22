@@ -13,6 +13,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -45,8 +46,7 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
     private TabHost mTabHost;
     private ViewPager mViewPager;
     private MyAdapter mPagerAdapter;
-    private HashMap<String, TabInfo> mapTabInfo =
-            new HashMap<String, MainActivity .TabInfo>();
+    private HashMap<String, TabInfo> mapTabInfo = new HashMap<String, MainActivity .TabInfo>();
     List<Fragment> fragments;
 
     private static final int REQUEST_CODE_ADDPOST = 1004;
@@ -55,119 +55,6 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
 
     private AlertDialog.Builder builder;
     private DialogInterface mPopupDlg = null;
-
-    public boolean isUrlInputFlag() {
-        return urlInputFlag;
-    }
-
-    public void setUrlInputFlag(boolean urlInputFlag) {
-        this.urlInputFlag = urlInputFlag;
-    }
-
-    private class TabInfo {
-        private String tag;
-        private Class<?> clss;
-        private Bundle args;
-        private Fragment fragment;
-        TabInfo(String tag, Class<?> clazz, Bundle args) {
-            this.tag = tag;
-            this.clss = clazz;
-            this.args = args;
-        }
-    }
-
-    class TabFactory implements TabHost.TabContentFactory {
-
-        private final Context mContext;
-
-        public TabFactory(Context context) {
-            mContext = context;
-        }
-        public View createTabContent(String tag) {
-            View v = new View(mContext);
-            v.setMinimumWidth(0);
-            v.setMinimumHeight(0);
-            return v;
-        }
-    }
-
-    public void onClick(View v){
-
-        int id = v.getId();
-        Intent intent = null;
-
-        switch (id){
-
-            case R.id.btn_goAddPost:
-                intent = new Intent(getBaseContext(), addPostActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivityForResult(intent, REQUEST_CODE_ADDPOST);
-                //finish();
-                break;
-
-            case R.id.btn_home:
-                break;
-
-            //// insert button listener for MYPAGE
-            case R.id.btn_myPage:
-                intent = new Intent(getBaseContext(), MyPageActivity.class);
-                //intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                //intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivityForResult(intent, REQUEST_CODE_MYPAGE);
-                break;
-
-            case R.id.btn_config:
-                intent = new Intent(getBaseContext(), ConfigActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivity(intent);
-                break;
-            case R.id.btn_search:
-                intent = new Intent(getBaseContext(), SearchActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivity(intent);
-                break;
-            case R.id.btn_zzim:
-                break;
-            case R.id.btn_alarm:
-                intent = new Intent(getBaseContext(), AlarmActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivity(intent);
-                break;
-
-
-            case R.id.btn_f000:
-                intent = new Intent(getBaseContext(), Category_Book.class);
-                //intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                intent.putExtra("category_no", "000");
-                startActivity(intent);
-                break;
-
-            case R.id.btn_f100:
-                intent = new Intent(getBaseContext(), Category_Living.class);
-                //intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                intent.putExtra("category_no", "100");
-                startActivity(intent);
-                break;
-
-            case R.id.btn_f200:
-                intent = new Intent(getBaseContext(), Category_Fashion.class);
-                //intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                intent.putExtra("category_no", "200");
-                startActivity(intent);
-                break;
-
-            case R.id.btn_f300:
-                intent = new Intent(getBaseContext(), Category_ListView.class);
-                //intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                intent.putExtra("category_no", "300");
-                startActivity(intent);
-                break;
-           // */
-        }
-
-    }
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -235,6 +122,95 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
 
         ImageLoader.getInstance().init(config);
     }
+
+    public void onClick(View v){
+
+        int id = v.getId();
+        Intent intent = null;
+
+        switch (id){
+
+            case R.id.btn_goAddPost:
+                intent = new Intent(getBaseContext(), addPostActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivityForResult(intent, REQUEST_CODE_ADDPOST);
+                //finish();
+                break;
+
+            case R.id.btn_home:
+                intent = new Intent(getBaseContext(), MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent);
+                break;
+
+            //// insert button listener for MYPAGE
+            case R.id.btn_myPage:
+                intent = new Intent(getBaseContext(), MyPageActivity.class);
+                //intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                //intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivityForResult(intent, REQUEST_CODE_MYPAGE);
+                break;
+
+            case R.id.btn_config:
+                intent = new Intent(getBaseContext(), ConfigActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent);
+                break;
+            case R.id.btn_search:
+
+                //다른 Activity로 전환
+
+                intent = new Intent(getBaseContext(), SearchActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent);
+
+                //Fragment를 바꾸기
+
+
+                break;
+
+            case R.id.btn_zzim:
+                break;
+
+            case R.id.btn_alarm:
+                intent = new Intent(getBaseContext(), AlarmActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent);
+                break;
+
+            case R.id.btn_f000:
+                intent = new Intent(getBaseContext(), Category_Book.class);
+                //intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                intent.putExtra("category_no", "000");
+                startActivity(intent);
+                break;
+
+            case R.id.btn_f100:
+                intent = new Intent(getBaseContext(), Category_Living.class);
+                //intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                intent.putExtra("category_no", "100");
+                startActivity(intent);
+                break;
+
+            case R.id.btn_f200:
+                intent = new Intent(getBaseContext(), Category_Fashion.class);
+                //intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                intent.putExtra("category_no", "200");
+                startActivity(intent);
+                break;
+
+            case R.id.btn_f300:
+                intent = new Intent(getBaseContext(), Category_ListView.class);
+                //intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                intent.putExtra("category_no", "300");
+                startActivity(intent);
+                break;
+            // */
+        }
+
+    }
     @Override
     protected void onStart(){
         super.onStart();
@@ -259,6 +235,33 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
 
         if(mPopupDlg != null){
             mPopupDlg.dismiss();
+        }
+    }
+
+    private class TabInfo {
+        private String tag;
+        private Class<?> clss;
+        private Bundle args;
+        private Fragment fragment;
+        TabInfo(String tag, Class<?> clazz, Bundle args) {
+            this.tag = tag;
+            this.clss = clazz;
+            this.args = args;
+        }
+    }
+
+    class TabFactory implements TabHost.TabContentFactory {
+
+        private final Context mContext;
+
+        public TabFactory(Context context) {
+            mContext = context;
+        }
+        public View createTabContent(String tag) {
+            View v = new View(mContext);
+            v.setMinimumWidth(0);
+            v.setMinimumHeight(0);
+            return v;
         }
     }
 
@@ -375,5 +378,32 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
     public void onTabChanged(String tag) {
         int pos = this.mTabHost.getCurrentTab();
         this.mViewPager.setCurrentItem(pos);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event){
+
+        if(keyCode == KeyEvent.KEYCODE_BACK){
+            if(keyCode == KeyEvent.KEYCODE_BACK){
+                AlertDialog.Builder alert_confirm = new AlertDialog.Builder(MainActivity.this);
+                alert_confirm.setMessage("프로그램을 종료 하시겠습니까?").setCancelable(false).setPositiveButton("확인",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                finish(); // 'YES'
+                            }
+                        }).setNegativeButton("취소",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                return;// 'No'
+                            }
+                        });
+                AlertDialog alert = alert_confirm.create();
+                alert.show();
+                return true;
+            }
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }
