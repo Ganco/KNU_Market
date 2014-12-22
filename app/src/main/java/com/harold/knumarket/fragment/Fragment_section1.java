@@ -1,6 +1,7 @@
 package com.harold.knumarket.fragment;
 
 import com.harold.knumarket.Activity.PostActivity;
+import com.harold.knumarket.User_Info;
 import com.harold.knumarket.Webserver_Url;
 import com.knumarket.harold.knu_market.R;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -237,6 +238,13 @@ public class Fragment_section1 extends Fragment {
                         //button.setText(json.getString("name")+"\n"+json.getString("price"));
                         //button.setWidth(screenWidth/3);
                         new_linearLayout.addView(p_button);
+
+
+                         // 현재 가장 마지막 글번호를 전역에 저장
+                        if(product_count == array.length()-2) {
+                            User_Info userInfo = User_Info.getUser_info();
+                            userInfo.setLastPostNo(json.getInt("post_no"));
+                        }
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

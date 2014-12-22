@@ -105,9 +105,10 @@
                 android:id="@+id/profileText02"/>
 
             <Switch
+                android:id="@+id/alarmOnOff"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:checked="true"
+                android:checked="false"
                 android:layout_gravity="center"/>
 
         </LinearLayout>

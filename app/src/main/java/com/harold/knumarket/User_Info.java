@@ -14,13 +14,21 @@ public class User_Info {
     private String client_No;
     private String client_Id;
     private boolean client_State;
+    private int LastPostNo;
+    private boolean alarmOnOff;
 
-    public boolean isClient_State() {
-        return client_State;
+    public void setLastPostNo(int lastPostNo) { LastPostNo = lastPostNo; }
+    public int getLastPostNo() { return LastPostNo; }
+
+    public void setClient_State(boolean clientState) { client_State = clientState; }
+    public boolean getClient_State() { return client_State; }
+
+    public boolean getAlarmOnOff() {
+        return alarmOnOff;
     }
 
-    public void setClient_State(boolean client_State) {
-        this.client_State = client_State;
+    public void setAlarmOnOff(boolean alarm_OnOff) {
+        this.alarmOnOff = alarm_OnOff;
     }
 
     public void setPhone_No(String phone_No) {
@@ -65,6 +73,7 @@ public class User_Info {
         this.profile = null;
         this.addition = "";
         this.client_State = false;
+        this.alarmOnOff = false;
         //this.client_keyword = null;
     }
 
@@ -111,7 +120,7 @@ public class User_Info {
             //user_info.setClient_keyword("test4",3);
 
 
-            user_info.getClient_keyword().add(0,"키워드1");
+            user_info.getClient_keyword().add(0,"");
             user_info.getClient_keyword().add(1,"");
             user_info.getClient_keyword().add(2,"");
             user_info.getClient_keyword().add(3,"");
@@ -176,4 +185,22 @@ public class User_Info {
         // to-do
     }
 
+    public void SaveLastPostNo(SharedPreferences.Editor editor)
+    {
+        editor.putInt("LastPostNo", LastPostNo);
+        editor.commit();
+    }
+    public void LoadLastPostNo(SharedPreferences pref)
+    {
+        LastPostNo = pref.getInt("LastPostNo", 0);
+    }
+    public void SaveAlarmOnOff(SharedPreferences.Editor editor)
+    {
+        editor.putBoolean("alarmOnOff", alarmOnOff);
+        editor.commit();
+    }
+    public void LoadAlarmOnOff(SharedPreferences pref)
+    {
+        alarmOnOff = pref.getBoolean("alarmOnOff", false);  // defualt는 false
+    }
 }

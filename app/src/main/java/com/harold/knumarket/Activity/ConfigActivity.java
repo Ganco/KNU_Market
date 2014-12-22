@@ -2,10 +2,14 @@ package com.harold.knumarket.Activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Switch;
+import android.widget.Toast;
 
 import com.harold.knumarket.User_Info;
 import com.knumarket.harold.knu_market.R;
@@ -18,63 +22,110 @@ import java.util.ArrayList;
 public class ConfigActivity extends Activity {
 
     public static final int REQUEST_CODE_MAIN = 1001;
-    private ArrayList<String> userKeyword;
+    //private ArrayList<String> userKeyword;
+    private Switch swc; // 스위치 객체
+    private EditText keyword1;
+    private EditText keyword2;
+    private EditText keyword3;
+    private EditText keyword4;
+    private EditText keyword5;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_config);
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        keyword1 = (EditText) findViewById(R.id.keyword1);
+        keyword2 = (EditText) findViewById(R.id.keyword2);
+        keyword3 = (EditText) findViewById(R.id.keyword3);
+        keyword4 = (EditText) findViewById(R.id.keyword4);
+        keyword5 = (EditText) findViewById(R.id.keyword5);
+
+        // 객체 설정, 리스너 부착
+        swc = (Switch)findViewById(R.id.alarmOnOff);
+        swc.setOnCheckedChangeListener(new Switch.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton cb, boolean isChecking) {
+                String str = String.valueOf(isChecking); // boolean - String 변환
+
+                // 상태가 on, off인 경우에 알맞게 토스트를 띄움
+                if(isChecking) {
+                    Toast.makeText(getApplication(), "키워드 알람을 설정합니다", Toast.LENGTH_SHORT).show();
+                    loadKeyword();
+                    keyword1.setEnabled(true);
+                    keyword2.setEnabled(true);
+                    keyword3.setEnabled(true);
+                    keyword4.setEnabled(true);
+                    keyword5.setEnabled(true);
+
+                    User_Info userInfo = User_Info.getUser_info();
+                    SharedPreferences pref = getSharedPreferences("pref",Activity.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = pref.edit();
+                    userInfo.SaveLastPostNo(editor);    // 마지막 글번호 설정
+                    userInfo.setAlarmOnOff(true);
+                    userInfo.SaveAlarmOnOff(editor);    //
+                }
+                else {
+                    Toast.makeText(getApplication(), "키워드 알람을 끕니다", Toast.LENGTH_SHORT).show();
+                    saveKeyword();
+                    keyword1.setEnabled(false);
+                    keyword2.setEnabled(false);
+                    keyword3.setEnabled(false);
+                    keyword4.setEnabled(false);
+                    keyword5.setEnabled(false);
+
+                    User_Info userInfo = User_Info.getUser_info();
+                    SharedPreferences pref = getSharedPreferences("pref",Activity.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = pref.edit();
+                    userInfo.setAlarmOnOff(false);
+                    userInfo.SaveAlarmOnOff(editor);    //
+                }
+            }
+        });
     }
+
     @Override
     public void onStart() {
         super.onStart();
-
-        //Log.i("KNU_Market/Config_Act", "before user_info=");
-        User_Info userInfo = User_Info.getUser_info();
-        //userInfo.getClient_keyword();
-
-        /*
-        Log.i("KNU_Market/Config_Act", "keyword1=" + userInfo.getClient_keyword().get(0));
-        Log.i("KNU_Market/Config_Act", "keyword2=" + userInfo.getClient_keyword().get(1));
-        Log.i("KNU_Market/Config_Act", "keyword3=" + userInfo.getClient_keyword().get(2));
-        Log.i("KNU_Market/Config_Act", "keyword4=" + userInfo.getClient_keyword().get(3));
-        Log.i("KNU_Market/Config_Act", "keyword5=" + userInfo.getClient_keyword().get(4));
-        ///*/
-
-
-        ///*
-        EditText keyword1 = (EditText) findViewById(R.id.keyword1);
-        EditText keyword2 = (EditText) findViewById(R.id.keyword2);
-        EditText keyword3 = (EditText) findViewById(R.id.keyword3);
-        EditText keyword4 = (EditText) findViewById(R.id.keyword4);
-        EditText keyword5 = (EditText) findViewById(R.id.keyword5);
-        //*/
-
-        ///*
-        keyword1.setText(userInfo.getClient_keyword().get(0));
-        keyword2.setText(userInfo.getClient_keyword().get(1));
-        keyword3.setText(userInfo.getClient_keyword().get(2));
-        keyword4.setText(userInfo.getClient_keyword().get(3));
-        keyword5.setText(userInfo.getClient_keyword().get(4));
-        //*/
-
+        loadKeyword();
     }
 
     @Override
     public void onPause()
     {
         super.onPause();
-        ///*
+        saveKeyword();
+    }
+
+    public void loadKeyword()
+    {
+        User_Info userInfo = User_Info.getUser_info();
+
+        keyword1 = (EditText) findViewById(R.id.keyword1);
+        keyword2 = (EditText) findViewById(R.id.keyword2);
+        keyword3 = (EditText) findViewById(R.id.keyword3);
+        keyword4 = (EditText) findViewById(R.id.keyword4);
+        keyword5 = (EditText) findViewById(R.id.keyword5);
+
+        keyword1.setText(userInfo.getClient_keyword().get(0));
+        keyword2.setText(userInfo.getClient_keyword().get(1));
+        keyword3.setText(userInfo.getClient_keyword().get(2));
+        keyword4.setText(userInfo.getClient_keyword().get(3));
+        keyword5.setText(userInfo.getClient_keyword().get(4));
+    }
+
+    public void saveKeyword()
+    {
         User_Info userInfo = User_Info.getUser_info();
         //userKeyword = userInfo.getClient_keyword();
 
-
-        EditText keyword1 = (EditText) findViewById(R.id.keyword1);
-        EditText keyword2 = (EditText) findViewById(R.id.keyword2);
-        EditText keyword3 = (EditText) findViewById(R.id.keyword3);
-        EditText keyword4 = (EditText) findViewById(R.id.keyword4);
-        EditText keyword5 = (EditText) findViewById(R.id.keyword5);
+        keyword1 = (EditText) findViewById(R.id.keyword1);
+        keyword2 = (EditText) findViewById(R.id.keyword2);
+        keyword3 = (EditText) findViewById(R.id.keyword3);
+        keyword4 = (EditText) findViewById(R.id.keyword4);
+        keyword5 = (EditText) findViewById(R.id.keyword5);
 
         userInfo.setClient_keyword(keyword1.getText().toString(),0);
         userInfo.setClient_keyword(keyword2.getText().toString(),1);
@@ -83,7 +134,10 @@ public class ConfigActivity extends Activity {
         userInfo.setClient_keyword(keyword5.getText().toString(),4);
 
         //*/
-
+        // 키워드 저장
+        SharedPreferences pref = getSharedPreferences("pref",Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        userInfo.SavePreference(editor);
     }
 
     public void onClick(View v){

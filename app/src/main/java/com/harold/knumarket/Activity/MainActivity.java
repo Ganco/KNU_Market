@@ -183,9 +183,9 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
         // 뒤로가기 2연속 체크
         backPressCloseHandler = new BackPressCloseHandler(this);
 
-        //Intent intent = new Intent(this, AlarmService.class);
-        //startService(intent);
         // 알람 서비스 시작 -> 로그온 정보를 알람activity가 계속 유지하게되는 현상
+        Intent intent = new Intent(this, AlarmService.class);
+        startService(intent);
 
 
         // preference로 키워드정보 로딩
