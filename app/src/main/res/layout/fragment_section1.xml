@@ -6,11 +6,12 @@
     android:orientation="horizontal">
 
     <GridView
-           android:id="@+id/gridView1"
-           android:numColumns="3"
-           android:padding="5dp"
+        android:id="@+id/gridView1"
+        android:numColumns="3"
+        android:padding="5dp"
         android:visibility="visible"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        />
 
 </LinearLayout>
