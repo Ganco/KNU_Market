@@ -18,7 +18,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.harold.knumarket.User_Info;
 import com.harold.knumarket.Webserver_Url;
@@ -41,7 +40,6 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.NavigableMap;
@@ -71,11 +69,7 @@ public class AlarmActivity extends Activity {
     private String Url;
     private static int keywordCount = 0;
     //private NavigableMap m = new TreeMap();
-    private Map m = new TreeMap(new SetComparator());
-    private postListLoading task2;
-    private postListLoading task3;
-    private postListLoading task4;
-    private postListLoading task5;
+    private Map m = new TreeMap(new IntComparator());
     private boolean isTasking = false;
 
 
@@ -108,10 +102,6 @@ public class AlarmActivity extends Activity {
         if(netStat){//WIFI나 데이터네트워크 사용 가능
             if(true) {
                 task = new postListLoading();
-                task2 = new postListLoading();
-                task3 = new postListLoading();
-                task4 = new postListLoading();
-                task5 = new postListLoading();
                 ///////////////////////////////////////////////////////////////
 
                 keywordCount = 0;
@@ -146,7 +136,6 @@ public class AlarmActivity extends Activity {
                 alarmPosts = userInfo.getAlarmPosts();
 
                 // 오름차순 (역순정렬)
-                Comparator comparator = new SetComparator();
                 NavigableSet<String> descendingSet;
                 //Set<String> treeSet = new TreeSet<String>(comparator);
                 NavigableSet<String> treeSet = new TreeSet<String>();
@@ -503,19 +492,20 @@ public class AlarmActivity extends Activity {
 
             case R.id.btn_home:
                 intent = new Intent(getBaseContext(), MainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                //intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivityForResult(intent, REQUEST_CODE_MAIN);
+                //startActivityForResult(intent, REQUEST_CODE_MAIN);
+                startActivity(intent);
                 finish();
                 break;
 
             //// insert button listener for MYPAGE
             case R.id.btn_myPage:
                 intent = new Intent(getBaseContext(), MyPageActivity.class);
-                //intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 //intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                //intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 //startActivityForResult(intent, REQUEST_CODE_MYPAGE);
                 startActivity(intent);
                 finish();
@@ -541,7 +531,7 @@ public class AlarmActivity extends Activity {
     }
 
 }
-class SetComparator implements Comparator {
+class IntComparator implements Comparator {
     public int compare(Object firstObject, Object secondObject) {
         Integer first = (Integer) firstObject;
         Integer second = (Integer) secondObject;

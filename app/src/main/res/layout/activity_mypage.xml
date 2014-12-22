@@ -286,13 +286,14 @@ android:layout_height="match_parent"
             android:layout_marginStart="20dp"
             android:layout_weight="1">
 
-            <TextView
+            <Button
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="내 글"
                 android:textSize="14sp"
                 android:textColor="@android:color/black"
-                android:id="@+id/profileText08"/>
+                android:onClick="onClick"
+                android:id="@+id/btn_mypost"/>
         </LinearLayout>
 
     </LinearLayout>

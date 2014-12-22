@@ -256,7 +256,7 @@ public class AlarmService extends Service {
 
                 for(int j=0; j<5; j++) {
                     String tempk = userK.get(j);
-                    if(tempk.length() != 0 && !tempk.contains(" \n")) {
+                    if(tempk.length() != 0 && !tempk.startsWith(" ")) {
                         if( k1.contains(tempk) ||  k2.contains(tempk) ||  k3.contains(tempk)) {
                             if(temp_id != client_id) {
                                 // add this post

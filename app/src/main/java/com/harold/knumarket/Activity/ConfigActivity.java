@@ -5,7 +5,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -14,8 +15,6 @@ import android.widget.Toast;
 
 import com.harold.knumarket.User_Info;
 import com.knumarket.harold.knu_market.R;
-
-import java.util.ArrayList;
 
 /**
  * Created by Gan on 2014-11-28.
@@ -111,6 +110,12 @@ public class ConfigActivity extends Activity {
                 }
             }
         });
+
+        if(!userInfo.getClient_State()) {
+            Intent intent = new Intent(getBaseContext(), LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
     @Override
@@ -183,9 +188,10 @@ public class ConfigActivity extends Activity {
 
             case R.id.btn_home:
                 intent = new Intent(getBaseContext(), MainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                // 겔3S 에서 설정 -> 홈 버튼 클릭시 바탕화면으로 나가는 현상 방지 테스트
-                //intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                //intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
                 //startActivityForResult(intent, REQUEST_CODE_MAIN);
                 startActivity(intent);
                 finish();

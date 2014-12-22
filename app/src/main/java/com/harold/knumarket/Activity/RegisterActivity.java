@@ -1,4 +1,5 @@
 package com.harold.knumarket.Activity;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -23,17 +24,15 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 /**
 * Created by Administrator on 2014-12-01.
         */
 public class RegisterActivity extends Activity {
 
+    public static final int REQUEST_CODE_MAIN = 1001;
 
     private String login_id;
     private String login_num;
@@ -81,9 +80,9 @@ public class RegisterActivity extends Activity {
                 Intent intent = new Intent(getBaseContext(), MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                //startActivityForResult(intent, REQUEST_CODE_MAIN);
                 startActivity(intent);
                 finish();
-
             }
         });
 
@@ -96,19 +95,10 @@ public class RegisterActivity extends Activity {
         @Override
         protected void onPostExecute(String result) {
 
-            if (result.equals("false")) {
+            if (result.contains("false")) {
                 Toast.makeText(getApplicationContext(), "이미 존재하는 아이디입니다.", Toast.LENGTH_SHORT).show();
             }
-            else { /*
-                try {
-                    jArray = new JSONArray(result);//JSON 데이터 형식으로 파싱
-                    //recordUserInfo(jArray);//받아온 정보로 화면 표시
-                }
-                catch (JSONException e) {
-                    e.printStackTrace();
-                    Toast.makeText(getApplicationContext(), "등록실패", Toast.LENGTH_SHORT).show();
-                }
-                */
+            else if(result.contains("true")) {
                 Log.i("KNU_Market/Register result=s ", result);
                 User_Info user_info = User_Info.getUser_info();
                 user_info.setClient_State(true);
@@ -128,8 +118,8 @@ public class RegisterActivity extends Activity {
 
 
                 Intent intent = new Intent(getBaseContext(),MainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                //intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                //intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(intent);
                 finish();
             }

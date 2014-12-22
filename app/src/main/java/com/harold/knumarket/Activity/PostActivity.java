@@ -1,8 +1,11 @@
 package com.harold.knumarket.Activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
@@ -16,12 +19,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-//import com.harold.knumarket.Item_Comment.ItemComment;
-//import com.harold.knumarket.Item_Comment.ItemCommentListAdapter;
+import com.harold.knumarket.User_Info;
 import com.harold.knumarket.Webserver_Url;
 import com.knumarket.harold.knu_market.R;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -41,24 +45,31 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 
+//import com.harold.knumarket.Item_Comment.ItemComment;
+//import com.harold.knumarket.Item_Comment.ItemCommentListAdapter;
+
 public class PostActivity extends Activity {
 
     public static final int REQUEST_CODE_MAIN = 1001;
     public static final int REQUEST_CODE_MYPAGE = 1005;
     private int post_no;
+
     //private String Url = "http://192.168.1.10:5001/KNU_Market/"; //웹서버 URL
     //private String Url = "http://155.230.29.182:5001/KNU_Market/"; //웹서버 URL
     //private String Url = "http://121.151.119.125:5001/KNU_Market/"; //웹서버 URL
-
     //웹서버 url정보를 WebServer_Url클래스 하나로 관리함(싱글톤 패턴 사용)
+
     private String Url = Webserver_Url.getInstance().getUrl();
 
     private JSONArray jArray;
-    private postLoading task;
+    private postLoading loadTask;
+    private postLoading deleteTask;
     private ViewPager mViewPager;
     ListView listView1;
     //ItemCommentListAdapter adapter;
     private String seller_phoneNum;
+    private String client_id;
+    private boolean isZzim = false;
 
     private class ImageViewAdapter extends PagerAdapter{
 
@@ -134,14 +145,12 @@ public class PostActivity extends Activity {
         post_no = intent.getExtras().getInt("post_no");
         mViewPager = (ViewPager) findViewById(R.id.post_viewpager);
 
-        task = new postLoading();
+        loadTask = new postLoading();
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,"JSP/RequestPost.jsp?post_no="+post_no);
+            loadTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, "JSP/RequestPost.jsp?post_no=" + post_no);
         }else {
-            task.execute("JSP/RequestPost.jsp?post_no="+post_no);
+            loadTask.execute("JSP/RequestPost.jsp?post_no=" + post_no);
         }
-
-
 
         // 댓글기능 -> 임시 삭제
         /*
@@ -175,14 +184,13 @@ public class PostActivity extends Activity {
             }
         });
         */
-
-
     }
 
     public void onClick(View v){
 
         int id = v.getId();
         Intent intent = null;
+        User_Info user_info = User_Info.getUser_info();
 
         switch (id){
 
@@ -198,17 +206,62 @@ public class PostActivity extends Activity {
                 startActivity( intent );
                 break;
 
-            //// insert button listener for MYPAGE
             case R.id.btn_zzim:
-                //intent = new Intent(getBaseContext(), MyPageActivity.class);
-                //intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                //intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-                //intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                //startActivityForResult(intent, REQUEST_CODE_MYPAGE);
+                if(user_info.getClient_State() && user_info.getClient_Id() != client_id) {
+                    user_info.getZzimPosts();
+                    v.setSelected(!v.isSelected());
+
+                    if (v.isSelected()) {
+                        Toast.makeText(getApplicationContext(),"해당 상품을 찜 하였습니다.",Toast.LENGTH_SHORT).show();
+                        user_info.getZzimPosts().add( (new Integer(post_no).toString()) );
+                    } else {
+                        Toast.makeText(getApplicationContext(),"찜을 해제하였습니다.",Toast.LENGTH_SHORT).show();
+                        user_info.getZzimPosts().remove( (new Integer(post_no).toString()) );
+                    }
+                    SharedPreferences pref = getSharedPreferences("pref",Activity.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = pref.edit();
+                    user_info.SaveZzimPosts(editor);
+                }
                 break;
 
             case R.id.btn_temp:
+                if(user_info.getClient_State()) {//현재 로그인 상태인지 확인
+                    if(User_Info.getUser_info().getClient_Id().equals(client_id)){//유저가 작성자인지 확인
+
+                        AlertDialog.Builder alert_confirm = new AlertDialog.Builder(PostActivity.this);
+                        alert_confirm.setMessage("해당 상품을 삭제 하시겠습니까?").setCancelable(false).setPositiveButton("확인",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        deleteTask = new postLoading();
+                                        //상품 삭제 요청
+                                        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+                                            deleteTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,"JSP/RemovePost.jsp?post_no="+post_no);
+                                        }else {
+                                            deleteTask.execute("JSP/RemovePost.jsp?post_no="+post_no);
+                                        }
+                                    }
+                                }).setNegativeButton("취소",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        return;// 'No'
+                                    }
+                                });
+                        AlertDialog alert = alert_confirm.create();
+                        alert.show();
+                    }
+                    else{
+                        //상품 등록한 유저가 아닐 경우
+                        Toast.makeText(getApplicationContext(),"작성자만 삭제 가능합니다.",Toast.LENGTH_SHORT).show();
+                    }
+                }
+                else{
+                    //로그인 하지 않은경우 로그인 화면으로 전환
+                    intent = new Intent(getBaseContext(), LoginActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
                 break;
         }
     }
@@ -249,7 +302,10 @@ public class PostActivity extends Activity {
             JSONObject json = array.getJSONObject(0);
             p_name.setText(json.getString("name"));
             p_price.setText("[\\"+json.getString("price")+"]");
-            p_client.setText(json.getString("client"));
+
+            client_id = json.getString("client");
+            p_client.setText(client_id );
+
             //p_profile.setText(json.getString("profile"));
             p_detail.setText(json.getString("detail"));
             p_keyword1.setText(json.getString("keyword1"));
@@ -274,10 +330,28 @@ public class PostActivity extends Activity {
             String categoryID = json.getString("category_id");
             Log.i("KNU_Market/Post_Act", "category_code=" + categoryID);
             setDecodeCatID(categoryID);
+
+            User_Info userInfo = User_Info.getUser_info();
+            SharedPreferences pref = getSharedPreferences("pref", Activity.MODE_PRIVATE);
+            userInfo.LoadZzimPosts(pref);
+            Button p_zzim = (Button) findViewById(R.id.btn_zzim);
+
+            // 현재 글이 찜해놓은 글이면
+            if( userInfo.getZzimPosts().contains( (new Integer(json.getInt("post_no"))).toString() )) {
+                p_zzim.setSelected(true);
+                isZzim = true;
+            } else {
+                p_zzim.setSelected(false);
+                isZzim = false;
+            }
+
+
         }
         catch (JSONException e) {
             e.printStackTrace();
         }
+
+
      }
 
     public void setDecodeCatID(String categoryID){
@@ -418,10 +492,25 @@ public class PostActivity extends Activity {
         protected void onPostExecute(String result) {
             try {
                 Log.i("KNU_Market/Post result= ",result);
-                JSONObject json = null;
-                jArray = new JSONArray(result);//JSON 데이터 형식으로 파싱
-                updateView(jArray);//받아온 정보로 화면 표시
-                initializeViewPager(jArray);
+                if(result.contains("Remove Success")) {
+                    Toast.makeText(getApplicationContext(),"삭제 완료",Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    startActivity(intent);
+                    finish();
+                }
+                else if(result.contains("Remove Fail")){
+                    Toast.makeText(getApplicationContext(),"삭제 실패",Toast.LENGTH_SHORT).show();
+                }
+                else if(result.contains("[")){
+                    JSONObject json = null;
+                    jArray = new JSONArray(result);//JSON 데이터 형식으로 파싱
+                    updateView(jArray);//받아온 정보로 화면 표시
+                    initializeViewPager(jArray);
+                }
+                else if(result.contains("Apache")){
+                    Toast.makeText(getApplicationContext(),"서버 오류",Toast.LENGTH_SHORT).show();
+                }
             } catch (JSONException e) {
                 e.printStackTrace();
             }

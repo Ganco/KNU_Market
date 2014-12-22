@@ -13,15 +13,11 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TabHost;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Vector;
 
 import com.harold.knumarket.AlarmService;
 import com.harold.knumarket.BackPressCloseHandler;
@@ -36,18 +32,22 @@ import com.harold.knumarket.fragment.Fragment_section2;
 import com.harold.knumarket.fragment.Fragment_section3;
 import com.knumarket.harold.knu_market.R;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
-import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Vector;
+
 public class MainActivity extends FragmentActivity implements TabHost.OnTabChangeListener, ViewPager.OnPageChangeListener {
 
     private TabHost mTabHost;
+
     private ViewPager mViewPager;
+
     private MyAdapter mPagerAdapter;
-    private HashMap<String, TabInfo> mapTabInfo =
-            new HashMap<String, MainActivity .TabInfo>();
+    private HashMap<String, TabInfo> mapTabInfo = new HashMap<String, MainActivity .TabInfo>();
     List<Fragment> fragments;
 
     private static final int REQUEST_CODE_ADDPOST = 1004;
@@ -58,39 +58,71 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
     private DialogInterface mPopupDlg = null;
     private BackPressCloseHandler backPressCloseHandler;
 
-    public boolean isUrlInputFlag() {
-        return urlInputFlag;
-    }
+    @Override
+    protected void onCreate(final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
-    public void setUrlInputFlag(boolean urlInputFlag) {
-        this.urlInputFlag = urlInputFlag;
-    }
+        Intent intent = new Intent(this, AlarmService.class);
+        startService(intent);
+        // 알람 서비스 시작 -> 로그온 정보를 알람activity가 계속 유지하게되는 현상
 
-    private class TabInfo {
-        private String tag;
-        private Class<?> clss;
-        private Bundle args;
-        private Fragment fragment;
-        TabInfo(String tag, Class<?> clazz, Bundle args) {
-            this.tag = tag;
-            this.clss = clazz;
-            this.args = args;
+
+        // preference로 키워드정보 로딩
+        // onStart -> 메인Activity 볼때마다 강제갱신된다. onCreate에 넣는게 맞는듯
+        User_Info userInfo = User_Info.getUser_info();
+        SharedPreferences pref = getSharedPreferences("pref", Activity.MODE_PRIVATE);
+        userInfo.LoadPreference(pref);
+
+        // 서버 IP 입력받는 팝업창
+        //다이얼로그를 통해 어플 실행 시작시 서버URL을 입력받아 실행함(개발용 코드)
+        /*
+        builder = new AlertDialog.Builder(this);
+        builder.setTitle("서버 IP 주소 입력");
+        final EditText url_Input = new EditText(this);
+        //url_Input.setText("211.51.176.248");//내 방 공유기 외부 아이피 주소
+        url_Input.setText("155.230.29.162");
+        //url_Input.setText("218.233.221.26");
+        builder.setView(url_Input);
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                Webserver_Url.getInstance().setUrl(url_Input.getText().toString());
+                // Initialise the TabHost
+                initialiseTabHost(savedInstanceState);
+                if (savedInstanceState != null) {
+                    mTabHost.setCurrentTabByTag(savedInstanceState.getString("tab")); //set the tab as per the saved state
+                }
+                // Initialise ViewPager
+                initializeViewPager();
+            }
+        });
+        mPopupDlg = builder.show();*/
+        //다이얼로그를 통해 어플 실행 시작시 서버URL을 입력받아 실행함(개발용 코드)
+
+        Webserver_Url.getInstance().setUrl("155.230.29.162");
+        // IP주소 입력 팝업창 없이 바로 연결
+
+        Log.i("KNU_Market/Main Url= ", Webserver_Url.getInstance().getUrl());
+        // Initialise the TabHost
+        initialiseTabHost(savedInstanceState);
+        if (savedInstanceState != null) {
+            mTabHost.setCurrentTabByTag(savedInstanceState.getString("tab")); //set the tab as per the saved state
         }
-    }
+        // Initialise ViewPager
+        initializeViewPager();
 
-    class TabFactory implements TabHost.TabContentFactory {
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext())
+                .threadPriority(Thread.NORM_PRIORITY - 2)
+                .denyCacheImageMultipleSizesInMemory()
+                .diskCacheFileNameGenerator(new Md5FileNameGenerator())
+                .diskCacheSize(50 * 1024 * 1024) // 50 Mb
+                .tasksProcessingOrder(QueueProcessingType.LIFO)
+                .writeDebugLogs() // Remove for release app
+                .build();
 
-        private final Context mContext;
-
-        public TabFactory(Context context) {
-            mContext = context;
-        }
-        public View createTabContent(String tag) {
-            View v = new View(mContext);
-            v.setMinimumWidth(0);
-            v.setMinimumHeight(0);
-            return v;
-        }
+        ImageLoader.getInstance().init(config);
     }
 
     public void onClick(View v){
@@ -103,11 +135,15 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
             case R.id.btn_goAddPost:
                 intent = new Intent(getBaseContext(), addPostActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivityForResult(intent, REQUEST_CODE_ADDPOST);
+                //startActivityForResult(intent, REQUEST_CODE_ADDPOST);
+                startActivity(intent);
                 //finish();
                 break;
 
             case R.id.btn_home:
+                intent = new Intent(getBaseContext(), MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent);
                 break;
 
             //// insert button listener for MYPAGE
@@ -117,7 +153,8 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
                 //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 //intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivityForResult(intent, REQUEST_CODE_MYPAGE);
+                startActivity(intent);
+                //startActivityForResult(intent, REQUEST_CODE_MYPAGE);
                 break;
 
             case R.id.btn_config:
@@ -126,18 +163,27 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
                 startActivity(intent);
                 break;
             case R.id.btn_search:
+
+                //다른 Activity로 전환
+
                 intent = new Intent(getBaseContext(), SearchActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(intent);
+
+                //Fragment를 바꾸기
                 break;
+
             case R.id.btn_zzim:
+                intent = new Intent(getBaseContext(), ZzimActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent);
                 break;
+
             case R.id.btn_alarm:
                 intent = new Intent(getBaseContext(), AlarmActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(intent);
                 break;
-
 
             case R.id.btn_f000:
                 intent = new Intent(getBaseContext(), Category_Book.class);
@@ -166,88 +212,10 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
                 intent.putExtra("category_no", "300");
                 startActivity(intent);
                 break;
-           // */
+            // */
         }
     }
-    @Override
-    public void onBackPressed() {
-        //super.onBackPressed();
-        backPressCloseHandler.onBackPressed();
-    }
 
-    @Override
-    protected void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        // 뒤로가기 2연속 체크
-        backPressCloseHandler = new BackPressCloseHandler(this);
-
-        // 알람 서비스 시작 -> 로그온 정보를 알람activity가 계속 유지하게되는 현상
-        Intent intent = new Intent(this, AlarmService.class);
-        startService(intent);
-
-
-        // preference로 키워드정보 로딩
-        // onStart -> 메인Activity 볼때마다 강제갱신된다. onCreate에 넣는게 맞는듯
-        User_Info userInfo = User_Info.getUser_info();
-        SharedPreferences pref = getSharedPreferences("pref", Activity.MODE_PRIVATE);
-        userInfo.LoadPreference(pref);
-        //
-
-        ///*  // 서버 IP 입력받는 팝업창
-        //다이얼로그를 통해 어플 실행 시작시 서버URL을 입력받아 실행함(개발용 코드)
-        builder = new AlertDialog.Builder(this);
-        builder.setTitle("서버 IP 주소 입력");
-        final EditText url_Input = new EditText(this);
-        //url_Input.setText("211.51.176.248");//내 방 공유기 외부 아이피 주소
-        url_Input.setText("155.230.29.162");
-        //url_Input.setText("220.94.32.180");
-        builder.setView(url_Input);
-        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-                Webserver_Url.getInstance().setUrl(url_Input.getText().toString());
-                // Initialise the TabHost
-                initialiseTabHost(savedInstanceState);
-                if (savedInstanceState != null) {
-                    mTabHost.setCurrentTabByTag(savedInstanceState.getString("tab")); //set the tab as per the saved state
-                }
-                // Initialise ViewPager
-                initializeViewPager();
-            }
-        });
-        mPopupDlg = builder.show();
-        //다이얼로그를 통해 어플 실행 시작시 서버URL을 입력받아 실행함(개발용 코드)
-        //*/
-
-
-        /*  // IP주소 입력 팝업창 없이 바로 연결
-        Webserver_Url.getInstance().setUrl("211.51.176.248");
-        Webserver_Url.getInstance().setUrl("220.94.32.180");
-
-        Log.i("KNU_Market/Main Url= ", Webserver_Url.getInstance().getUrl());
-        // Initialise the TabHost
-        initialiseTabHost(savedInstanceState);
-        if (savedInstanceState != null) {
-            mTabHost.setCurrentTabByTag(savedInstanceState.getString("tab")); //set the tab as per the saved state
-        }
-        // Initialise ViewPager
-        initializeViewPager();
-        //*/
-
-        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext())
-                .threadPriority(Thread.NORM_PRIORITY - 2)
-                .denyCacheImageMultipleSizesInMemory()
-                .diskCacheFileNameGenerator(new Md5FileNameGenerator())
-                .diskCacheSize(50 * 1024 * 1024) // 50 Mb
-                .tasksProcessingOrder(QueueProcessingType.LIFO)
-                .writeDebugLogs() // Remove for release app
-                .build();
-
-        ImageLoader.getInstance().init(config);
-    }
     @Override
     protected void onStart(){
         super.onStart();
@@ -272,6 +240,33 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
 
         if(mPopupDlg != null){
             mPopupDlg.dismiss();
+        }
+    }
+
+    private class TabInfo {
+        private String tag;
+        private Class<?> clss;
+        private Bundle args;
+        private Fragment fragment;
+        TabInfo(String tag, Class<?> clazz, Bundle args) {
+            this.tag = tag;
+            this.clss = clazz;
+            this.args = args;
+        }
+    }
+
+    class TabFactory implements TabHost.TabContentFactory {
+
+        private final Context mContext;
+
+        public TabFactory(Context context) {
+            mContext = context;
+        }
+        public View createTabContent(String tag) {
+            View v = new View(mContext);
+            v.setMinimumWidth(0);
+            v.setMinimumHeight(0);
+            return v;
         }
     }
 
@@ -388,5 +383,32 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
     public void onTabChanged(String tag) {
         int pos = this.mTabHost.getCurrentTab();
         this.mViewPager.setCurrentItem(pos);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event){
+
+        if(keyCode == KeyEvent.KEYCODE_BACK){
+            if(keyCode == KeyEvent.KEYCODE_BACK){
+                AlertDialog.Builder alert_confirm = new AlertDialog.Builder(MainActivity.this);
+                alert_confirm.setMessage("프로그램을 종료 하시겠습니까?").setCancelable(false).setPositiveButton("확인",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                finish(); // 'YES'
+                            }
+                        }).setNegativeButton("취소",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                return;// 'No'
+                            }
+                        });
+                AlertDialog alert = alert_confirm.create();
+                alert.show();
+                return true;
+            }
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

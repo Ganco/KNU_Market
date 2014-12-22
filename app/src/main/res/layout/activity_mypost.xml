@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    tools:context="com.harold.knumarket.categories.Category_ListView">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1"
+        android:id="@+id/linear1"
+        android:background="#ffff6f58"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:id="@+id/Log"
+            android:src="@drawable/logo"
+            android:layout_margin="3dp" />
+
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="30dp"
+            android:id="@+id/knuMarketTitle"
+            android:background="@drawable/knu_market_title_crop"
+            android:scaleType="fitXY"
+            android:cropToPadding="false" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0.94" />
+
+        <Button
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/search_btn"
+            android:id="@+id/btn_search"
+            android:onClick="onClick"
+            android:adjustViewBounds="true"
+            android:padding="0sp"
+            android:scaleType="fitXY"
+            android:layout_marginLeft="10dp" />
+
+        <Button
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/zzim_btn"
+            android:id="@+id/btn_zzim"
+            android:onClick="onClick"
+            android:adjustViewBounds="true"
+            android:padding="0sp"
+            android:scaleType="center"
+            android:layout_marginLeft="10dp" />
+
+        <Button
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/notify_btn"
+            android:id="@+id/btn_alarm"
+            android:onClick="onClick"
+            android:adjustViewBounds="true"
+            android:padding="0sp"
+            android:scaleType="center"
+            android:layout_marginLeft="10dp" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView3"
+        android:layout_below="@id/linear1"
+        android:layout_above="@id/linear2"
+        android:layout_centerHorizontal="true"
+        android:fillViewport="false"
+        android:gravity="center"
+        >
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/list_vertical">
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/linear2"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:baselineAligned="false"
+        android:layout_gravity="bottom"
+        android:background="@android:color/darker_gray"
+        android:layout_alignParentBottom="true" >
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical">
+
+            <Button
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:id="@+id/btn_home"
+                android:onClick="onClick"
+                android:background="@drawable/home_btn"
+                android:adjustViewBounds="true"
+                android:padding="0sp"
+                android:scaleType="center"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp" />
+
+            <Button
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:id="@+id/btn_goAddPost"
+                android:onClick="onClick"
+                android:background="@drawable/addpost_btn"
+                android:adjustViewBounds="true"
+                android:padding="0sp"
+                android:scaleType="center"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp" />
+
+            <Button
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:id="@+id/btn_myPage"
+                android:onClick="onClick"
+                android:background="@drawable/mypage_btn"
+                android:adjustViewBounds="true"
+                android:padding="0sp"
+                android:scaleType="center"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp" />
+
+            <Button
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:id="@+id/btn_config"
+                android:background="@drawable/config_btn"
+                android:onClick="onClick"
+                android:padding="0sp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:maxHeight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

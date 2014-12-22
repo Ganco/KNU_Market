@@ -1,4 +1,4 @@
-package com.harold.knumarket.categories;
+package com.harold.knumarket.Activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -19,13 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.harold.knumarket.Activity.AlarmActivity;
-import com.harold.knumarket.Activity.ConfigActivity;
-import com.harold.knumarket.Activity.MainActivity;
-import com.harold.knumarket.Activity.MyPageActivity;
-import com.harold.knumarket.Activity.PostActivity;
-import com.harold.knumarket.Activity.SearchActivity;
-import com.harold.knumarket.Activity.addPostActivity;
+import com.harold.knumarket.User_Info;
 import com.harold.knumarket.Webserver_Url;
 import com.knumarket.harold.knu_market.R;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -48,32 +42,25 @@ import java.io.IOException;
 import java.util.Comparator;
 
 /**
- * Created by Gan on 2014-11-30.
+ * Created by Gan on 2014-12-23.
  */
-public class Category_ListView extends Activity {
-
+public class MyPostActivity extends Activity {
 
     //private ArrayList<String> userKeyword;
 
-    public static final int REQUEST_CODE_MAIN = 1001;
-    public static final int REQUEST_CODE_MYPAGE = 1005;
-
-    public static final String ARG_SECTION_NUMBER = "section_number";
-    private static final String TAG = "Category";
     private JSONArray jArray;
     private postListLoading task;
     private int line_num = 0;
     //웹서버 url정보를 WebServer_Url클래스 하나로 관리함(싱글톤 패턴 사용)
     private String Url;
-    private String category_no;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_category_listview);
+        setContentView(R.layout.activity_mypost);
         Intent intent = getIntent();
-        category_no = intent.getExtras().getString("category_no");
 
+        User_Info userInfo = User_Info.getUser_info();
 
         Url = Webserver_Url.getInstance().getUrl();
         Log.i("KNU_Market/Search_Act", "Url=" + Url);
@@ -91,9 +78,8 @@ public class Category_ListView extends Activity {
                 task = new postListLoading();
                 ///////////////////////////////////////////////////////////////
                 //userKeyword.size();
-                Log.i("KNU_Market/Category_Act", "category_no=" + category_no);
 
-                task.execute("JSP/RequestMainList.jsp");        // 지금은 메인화면 코드
+                task.execute("JSP/RequestClientID.jsp?client_id="+userInfo.getClient_Id());        // 지금은 메인화면 코드
                 // 불러올 카테고리를 서버의 jsp에 보내는 코드 만들어야 //
                 ///////////////////////////////////////////////////////////////
             }
@@ -155,16 +141,6 @@ public class Category_ListView extends Activity {
             try {
                 JSONObject json = null;
                 json = array.getJSONObject(product_count++);
-
-                String category_code = json.getString("category_code");
-
-                //Log.i("KNU_Market/Category_Act", "category_code=" + category_code);
-
-                if(isCategory(category_code, category_no) == false) {
-                    //line_num -= 1;
-                    //i++;
-                    continue;
-                }
 
                 //이미지만 웹뷰로 출력
                 LinearLayout p_button = (LinearLayout) new LinearLayout(getBaseContext());
@@ -343,8 +319,7 @@ public class Category_ListView extends Activity {
             case R.id.btn_home:
                 intent = new Intent(getBaseContext(), MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivityForResult(intent, REQUEST_CODE_MAIN);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 finish();
                 break;
 
@@ -369,6 +344,10 @@ public class Category_ListView extends Activity {
                 finish();
                 break;
             case R.id.btn_zzim:
+                intent = new Intent(getBaseContext(), ZzimActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent);
+                finish();
                 break;
             case R.id.btn_alarm:
                 intent = new Intent(getBaseContext(), AlarmActivity.class);
@@ -377,80 +356,5 @@ public class Category_ListView extends Activity {
                 finish();
                 break;
         }
-    }
-
-    public boolean isCategory(String code, String num) {
-
-        int icode = 0;      // code of object from server
-        int inum = 0;       // user-click code
-        icode = Integer.parseInt(code);
-        inum = Integer.parseInt(num);
-
-        //Log.i("KNU_Market/Category_Act", "icode=" + icode);
-        //Log.i("KNU_Market/Category_Act", "inum=" + inum);
-        if(inum == 300) {
-            if(icode == 300)
-                return true;
-            else
-                return false;
-        }
-        if(icode == inum) {
-            return true;
-        }
-
-        if(icode / 100 == inum / 100) {
-            // 100의 자리
-            switch (icode / 100) {
-
-                case 0: // 000~099
-                    if((inum % 100 == 99)) { // 099
-                        return true;
-                    }
-                    // another
-                    else if(icode / 10 == inum / 10) {
-
-                        // 10의 자리
-                        switch (icode / 10) {
-                            case 0: // 000~009
-                                if(inum % 10 == 9) {   // 009
-                                    return true;
-                                }
-                                break;
-
-                            case 1: // 010~019
-                                if(inum % 10 == 9) {   // 019
-                                    return true;
-                                }
-                                break;
-
-                            case 2: // 020~029
-                                if(inum % 10 == 9) {   // 029
-                                    return true;
-                                }
-                                break;
-                        }
-                    }
-
-                    break;
-                case 1: // 100~199
-                    // 199
-                    if(inum % 100 == 99) {
-                        return true;
-                    }
-                    break;
-
-                case 2:
-                    // 200~299
-                    if(inum % 100 == 99) {
-                        return true;
-                    }
-                    break;
-            }
-            // end switch
-        }
-        // end if
-
-
-        return false;
     }
 }
