@@ -5,12 +5,12 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.harold.knumarket.User_Info;
 import com.harold.knumarket.Webserver_Url;
 import com.knumarket.harold.knu_market.R;
@@ -24,6 +24,7 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -122,10 +123,10 @@ public class LoginActivity extends Activity {
             user_info.setClient_State(true);
             Toast.makeText(getApplicationContext(), "로그인 성공!", Toast.LENGTH_SHORT).show();
 
-            Intent intent = new Intent(getBaseContext(),MainActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            Intent intent = new Intent(getBaseContext(),MyPageActivity.class);
+            //intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-            startActivityForResult(intent, REQUEST_CODE_MAIN);
+            startActivity(intent);
             finish();
 
         } catch (JSONException e) {

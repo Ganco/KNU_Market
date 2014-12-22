@@ -23,9 +23,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-//import com.harold.knumarket.Item_Comment.ItemComment;
-//import com.harold.knumarket.Item_Comment.ItemCommentListAdapter;
-import com.harold.knumarket.Post_DTO;
 import com.harold.knumarket.User_Info;
 import com.harold.knumarket.Webserver_Url;
 import com.knumarket.harold.knu_market.R;
@@ -45,6 +42,9 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+
+//import com.harold.knumarket.Item_Comment.ItemComment;
+//import com.harold.knumarket.Item_Comment.ItemCommentListAdapter;
 
 public class PostActivity extends Activity {
 

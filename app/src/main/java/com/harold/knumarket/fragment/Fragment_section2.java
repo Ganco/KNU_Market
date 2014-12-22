@@ -1,39 +1,25 @@
 package com.harold.knumarket.fragment;
 
-import com.harold.knumarket.Activity.PostActivity;
-import com.harold.knumarket.CustomGridViewAdapter;
-import com.harold.knumarket.Post_DTO;
-import com.harold.knumarket.Webserver_Url;
-import com.knumarket.harold.knu_market.R;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.assist.FailReason;
-import com.nostra13.universalimageloader.core.assist.ImageScaleType;
-import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
-
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.GridView;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
+
+import com.harold.knumarket.Activity.PostActivity;
+import com.harold.knumarket.CustomGridViewAdapter;
+import com.harold.knumarket.Post_DTO;
+import com.harold.knumarket.Webserver_Url;
+import com.knumarket.harold.knu_market.R;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -47,7 +33,6 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Comparator;
 
 public class Fragment_section2 extends Fragment implements AbsListView.OnScrollListener {
 

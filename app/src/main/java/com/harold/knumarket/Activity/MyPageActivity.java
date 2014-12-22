@@ -5,9 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+
 import com.harold.knumarket.User_Info;
 import com.knumarket.harold.knu_market.R;
 
@@ -17,15 +17,23 @@ import com.knumarket.harold.knu_market.R;
 public class MyPageActivity extends Activity {
 
     public static final int REQUEST_CODE_MAIN = 1001;
-
+    private EditText client_Id;
+    private EditText phone_No;
+    private EditText profile;
+    private EditText addition;
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
 
+
+        setContentView(R.layout.activity_mypage);
+        client_Id = (EditText) findViewById(R.id.profileTextEdit02);
+        phone_No = (EditText) findViewById(R.id.profileTextEdit03);
+        profile = (EditText) findViewById(R.id.profileTextEdit01);
+        addition = (EditText) findViewById(R.id.profileTextEdit04);
         //마이페이지 진입 전 로그인 여부 확인
         User_Info user_info = User_Info.getUser_info();
         if(user_info.getClient_State()) {
-            setContentView(R.layout.activity_mypage);
             final EditText mEditText01 = (EditText) findViewById(R.id.profileTextEdit01);
             // 프로필 입력창이 3줄이상 넘어가지 않게 이벤트 처리
             mEditText01.addTextChangedListener(new TextWatcher() {
@@ -52,7 +60,7 @@ public class MyPageActivity extends Activity {
         else{
             Intent intent = new Intent(getBaseContext(), LoginActivity.class);
             startActivity(intent);
-            finish();
+            //finish();
         }
     }
 
@@ -64,10 +72,6 @@ public class MyPageActivity extends Activity {
         User_Info userInfo = User_Info.getUser_info();
         userInfo.getClient_keyword();
 
-        EditText client_Id = (EditText) findViewById(R.id.profileTextEdit02);
-        EditText phone_No = (EditText) findViewById(R.id.profileTextEdit03);
-        EditText profile = (EditText) findViewById(R.id.profileTextEdit01);
-        EditText addition = (EditText) findViewById(R.id.profileTextEdit04);
 
         client_Id.setText(userInfo.getClient_Id());
         phone_No.setText(userInfo.getPhone_No());
@@ -111,7 +115,8 @@ public class MyPageActivity extends Activity {
                 intent = new Intent(getBaseContext(), MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivityForResult(intent, REQUEST_CODE_MAIN);
+                //startActivityForResult(intent, REQUEST_CODE_MAIN);
+                startActivity(intent);
                 finish();
                 break;
 

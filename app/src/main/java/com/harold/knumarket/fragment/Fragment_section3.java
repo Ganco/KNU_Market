@@ -1,21 +1,13 @@
 package com.harold.knumarket.fragment;
 
-import com.harold.knumarket.categories.Category_Book;
-import com.harold.knumarket.categories.Category_Fashion;
-import com.harold.knumarket.categories.Category_ListView;
-import com.harold.knumarket.categories.Category_Living;
-import com.knumarket.harold.knu_market.R;
-
-import android.app.Activity;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
+
+import com.knumarket.harold.knu_market.R;
 
 public class Fragment_section3 extends Fragment {
     public static final String ARG_SECTION_NUMBER = "section_number";

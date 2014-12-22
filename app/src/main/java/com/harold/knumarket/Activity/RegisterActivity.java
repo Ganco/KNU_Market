@@ -1,4 +1,5 @@
 package com.harold.knumarket.Activity;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -23,11 +24,8 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 /**
 * Created by Administrator on 2014-12-01.
@@ -82,9 +80,9 @@ public class RegisterActivity extends Activity {
                 Intent intent = new Intent(getBaseContext(), MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivityForResult(intent, REQUEST_CODE_MAIN);
+                //startActivityForResult(intent, REQUEST_CODE_MAIN);
+                startActivity(intent);
                 finish();
-
             }
         });
 

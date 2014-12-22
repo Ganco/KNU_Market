@@ -1,12 +1,10 @@
 package com.harold.knumarket;
 
-import android.app.Activity;
 import android.content.SharedPreferences;
 import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -29,11 +27,15 @@ public class User_Info {
     private static User_Info user_info = null;
 
     public void setLastPostNo(int lastPostNo) { LastPostNo = lastPostNo; }
+
     public int getLastPostNo() { return LastPostNo; }
+
     public void setAlarmPostCount(int AlarmPostCount) { alarmPostCount = AlarmPostCount; }
+
     public int getAlarmPostCount() { return alarmPostCount; }
 
     public void setClient_State(boolean clientState) { client_State = clientState; }
+
     public boolean getClient_State() { return client_State; }
 
     public boolean getAlarmOnOff() {
@@ -71,7 +73,6 @@ public class User_Info {
     public void setAddition(String addition) {
         this.addition = addition;
     }
-
 
     public User_Info() {
         this.client_No = null;
@@ -116,7 +117,9 @@ public class User_Info {
         //client_keyword.set(index, keyword);
         user_info.getClient_keyword().set(index, keyword);
     }
+
     public SortedSet<String> getAlarmPosts() { return user_info.alarmPosts; }
+
     public void setAlarmPosts(SortedSet<String> stringSet) { user_info.alarmPosts = stringSet; }
 
     public static synchronized User_Info getUser_info(){

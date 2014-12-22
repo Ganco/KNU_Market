@@ -17,14 +17,8 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TabHost;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Vector;
-
-import com.harold.knumarket.AlarmService;
 import com.harold.knumarket.BackPressCloseHandler;
 import com.harold.knumarket.User_Info;
 import com.harold.knumarket.Webserver_Url;
@@ -37,15 +31,20 @@ import com.harold.knumarket.fragment.Fragment_section2;
 import com.harold.knumarket.fragment.Fragment_section3;
 import com.knumarket.harold.knu_market.R;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
-import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Vector;
+
 public class MainActivity extends FragmentActivity implements TabHost.OnTabChangeListener, ViewPager.OnPageChangeListener {
 
     private TabHost mTabHost;
+
     private ViewPager mViewPager;
+
     private MyAdapter mPagerAdapter;
     private HashMap<String, TabInfo> mapTabInfo = new HashMap<String, MainActivity .TabInfo>();
     List<Fragment> fragments;
@@ -135,7 +134,8 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
             case R.id.btn_goAddPost:
                 intent = new Intent(getBaseContext(), addPostActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivityForResult(intent, REQUEST_CODE_ADDPOST);
+                //startActivityForResult(intent, REQUEST_CODE_ADDPOST);
+                startActivity(intent);
                 //finish();
                 break;
 
@@ -152,7 +152,8 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
                 //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 //intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivityForResult(intent, REQUEST_CODE_MYPAGE);
+                startActivity(intent);
+                //startActivityForResult(intent, REQUEST_CODE_MYPAGE);
                 break;
 
             case R.id.btn_config:
