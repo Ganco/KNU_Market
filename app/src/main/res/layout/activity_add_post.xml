@@ -167,7 +167,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:text="가격"
-                        android:id="@+id/textView2"
+                        android:id="@+id/grid_textView2"
                         android:layout_weight="0.4"
                         android:textSize="15dp"
                         android:gravity="center_vertical|left" />

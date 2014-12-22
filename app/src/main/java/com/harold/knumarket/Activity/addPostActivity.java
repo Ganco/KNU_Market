@@ -81,17 +81,17 @@ public class addPostActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         //상품 등록 전 로그인 여부 확인
-        /*User_Info user_info = User_Info.getUser_info();
-        if(user_info.isClient_State()) {*/
+        User_Info user_info = User_Info.getUser_info();
+        if(user_info.isClient_State()) {
             setContentView(R.layout.activity_add_post);
             String serverUrl = getInstance().getUrl();
             initializeSpinner();
-        /*}
+        }
         else{
             Intent intent = new Intent(getBaseContext(), LoginActivity.class);
             startActivity(intent);
             finish();
-        }*/
+        }
     }
 
     public void initializeSpinner(){

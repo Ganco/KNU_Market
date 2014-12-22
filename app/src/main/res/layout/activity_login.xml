@@ -21,7 +21,7 @@
         android:layout_centerHorizontal="true" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/grid_textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/username"
@@ -37,9 +37,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:layout_toEndOf="@+id/textView2"
-        android:layout_alignTop="@+id/textView2"
-        android:layout_toRightOf="@+id/textView2">
+        android:layout_toEndOf="@+id/grid_textView2"
+        android:layout_alignTop="@+id/grid_textView2"
+        android:layout_toRightOf="@+id/grid_textView2">
 
         <requestFocus />
     </EditText>
@@ -51,8 +51,8 @@
         android:text="@string/password"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_below="@+id/edit_c_id"
-        android:layout_alignLeft="@+id/textView2"
-        android:layout_alignStart="@+id/textView2" />
+        android:layout_alignLeft="@+id/grid_textView2"
+        android:layout_alignStart="@+id/grid_textView2" />
 
     <EditText
         android:id="@+id/edit_c_pw"
@@ -60,7 +60,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPassword"
-        android:layout_toEndOf="@+id/textView2"
+        android:layout_toEndOf="@+id/grid_textView2"
         android:layout_alignTop="@+id/textView3"
         android:layout_alignLeft="@+id/edit_c_id"
         android:layout_alignStart="@+id/edit_c_id" />

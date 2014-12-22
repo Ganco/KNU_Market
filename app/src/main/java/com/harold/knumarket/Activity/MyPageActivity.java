@@ -23,8 +23,8 @@ public class MyPageActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         //마이페이지 진입 전 로그인 여부 확인
-        /*User_Info user_info = User_Info.getUser_info();
-        if(user_info.isClient_State()) {*/
+        User_Info user_info = User_Info.getUser_info();
+        if(user_info.isClient_State()) {
             setContentView(R.layout.activity_mypage);
             final EditText mEditText01 = (EditText) findViewById(R.id.profileTextEdit01);
             // 프로필 입력창이 3줄이상 넘어가지 않게 이벤트 처리
@@ -48,12 +48,12 @@ public class MyPageActivity extends Activity {
                     }
                 }
             });
-        /*}
+        }
         else{
             Intent intent = new Intent(getBaseContext(), LoginActivity.class);
             startActivity(intent);
             finish();
-        }*/
+        }
     }
 
     @Override

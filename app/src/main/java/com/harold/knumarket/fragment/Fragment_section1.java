@@ -1,13 +1,5 @@
 package com.harold.knumarket.fragment;
 
-import com.harold.knumarket.Activity.PostActivity;
-import com.harold.knumarket.Webserver_Url;
-import com.knumarket.harold.knu_market.R;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.assist.FailReason;
-import com.nostra13.universalimageloader.core.assist.ImageScaleType;
-import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -23,11 +15,24 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.AbsListView;
+import android.widget.AdapterView;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.harold.knumarket.Activity.PostActivity;
+import com.harold.knumarket.CustomGridViewAdapter;
+import com.harold.knumarket.Post_DTO;
+import com.harold.knumarket.Webserver_Url;
+import com.knumarket.harold.knu_market.R;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.FailReason;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
@@ -37,15 +42,19 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.IOException;
-import java.util.Comparator;
+import java.util.ArrayList;
 
-public class Fragment_section1 extends Fragment {
+public class Fragment_section1 extends Fragment implements AbsListView.OnScrollListener {
 
-    public static final String ARG_SECTION_NUMBER = "section_number";
-    private static final String TAG = "Fragment_section1";
+    private static final String TAG = "Frag_sec1";
+    private static final String SORT = "ASC";
     private JSONArray jArray;
     private postListLoading task;
+    private GridView mGridView;
+    private CustomGridViewAdapter mAdapterGrid;
+    private boolean mIsLoading;
 
     //웹서버 url정보를 WebServer_Url클래스 하나로 관리함(싱글톤 패턴 사용)
     private String Url;
@@ -71,46 +80,99 @@ public class Fragment_section1 extends Fragment {
         }
     }
 
+    private AdapterView.OnItemClickListener mItemClickListener = new AdapterView.OnItemClickListener(){
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            Post_DTO item = (Post_DTO)mAdapterGrid.getItem(position);
+            Intent intent = new Intent(getActivity(), PostActivity.class);
+            intent.putExtra("post_no", item.getPost_no());
+            startActivity(intent);
+        }
+    };
+
+    public void requestAllPost(int start, int amount, String sort){
+        task = new postListLoading();
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,"JSP/RequestMainList.jsp?s="+start+"&a="+amount+"&d="+sort);
+        }else {
+            task.execute("JSP/RequestMainList.jsp?s="+start+"&a="+amount+"&d="+sort);
+        }
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
+        //View rootView = inflater.inflate(R.layout.fragment_section1, container, false);
         View rootView = inflater.inflate(R.layout.fragment_section1, container, false);
 
-        //작업 부분
+        mAdapterGrid = new CustomGridViewAdapter(getActivity().getApplicationContext(), null, R.layout.grid_item);
+        mGridView = (GridView)((ViewGroup)rootView).findViewById(R.id.gridView1);
+
+        Log.d(TAG, "Before setAdapter");
+        mGridView.setAdapter(mAdapterGrid);
+        Log.d(TAG, "After setAdapter");
+        mGridView.setOnItemClickListener(mItemClickListener);
+        mGridView.setOnScrollListener(this);
+
         boolean netStat = false;
         netStat = checkNetStat();//네트워크 상태 확인
         if(netStat){//WIFI나 데이터네트워크 사용 가능
             if(true) {
-                task = new postListLoading();
-                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-                    task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,"JSP/RequestMainList.jsp");
-                }else {
-                    task.execute("JSP/RequestMainList.jsp");
-                }
+                requestAllPost(1, 12, SORT);
             }
         }
-        else{//인터넷 연결 불가
-            Button refresh = new Button(getActivity());
-            refresh.setText("새로고침");
-            refresh.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(getActivity().getApplicationContext(), "새로고침 클릭", Toast.LENGTH_SHORT).show();
-                    //onResume();
-                }
-            });
-            ((LinearLayout)getActivity().findViewById(R.id.f_sec1_linear_horiz)).addView(refresh);
+        else{//네트워크 연결 불가
+
         }
-        //작업 부분
-        //Bundle args = getArguments();
+        // mode : a(All), p(Popular), r(Recommend)
+        //DDMHelper.RequestGoodsByCategory(this, mHandler, 100, "p", id, 0, 30);
+
+        Bundle extras = getActivity().getIntent().getExtras();
+        if ( extras != null ) {
+            netStat = checkNetStat();//네트워크 상태 확인
+            //WIFI나 데이터네트워크 사용 가능
+            if(netStat){
+                requestAllPost(1, 12, SORT);
+            }
+        }
         return rootView;
     }
 
     @Override
     public void onResume() {
         super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if(task != null) {
+            task.cancel(true);
+        }
+        //Toast.makeText(getActivity().getApplicationContext(),"Task status = "+String.valueOf(task.isCancelled()),Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+    }
+
+    @Override
+    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+
+        Log.d(TAG,"onScroll(): mAdapterGrid.getCount()="+mAdapterGrid.getCount());
+        if(mAdapterGrid.getCount() < 12)
+            return;
+
+        int loadedItems = firstVisibleItem + visibleItemCount;
+        if( (loadedItems == totalItemCount) && !mIsLoading && mAdapterGrid.getCount() >= 1){
+            Log.d(TAG,"onScroll(): loaded:"+loadedItems+"/total:"+totalItemCount+"IsLoading:"+mIsLoading );
+            mIsLoading = true;
+            requestAllPost(mAdapterGrid.getCount()+1, 12, SORT);
+            //DDMHelper.RequestGoodsByCategory(this, mHandler, 100, "p", mCategoryId, mAdapterGrid.getCount(), 30);
+        }
     }
 
     //웹서버에서 받아온 정보(상품명,가격,이미지파일명)를 출력
@@ -136,8 +198,8 @@ public class Fragment_section1 extends Fragment {
             for(int j = 0; j < 3; j++){
                 JSONObject json = null;
                 try {
-                     if(product_count >= 0) {
-                         json = array.getJSONObject(product_count--);
+                    if(product_count >= 0) {
+                        json = array.getJSONObject(product_count--);
                         //임시로 웹뷰 사용 -> 이미지 버튼 형식으로 바꿔야함
                         //WebView webView = (WebView) new WebView(getActivity());
                         //webView.getSettings().setDefaultZoom(WebSettings.ZoomDensity.FAR);
@@ -183,8 +245,8 @@ public class Fragment_section1 extends Fragment {
 
                         p_name.setTextSize(15);
                         p_price.setTextSize(15);
-                         p_name.setTextColor(Color.BLACK);
-                         p_price.setTextColor(Color.BLACK);
+                        p_name.setTextColor(Color.BLACK);
+                        p_price.setTextColor(Color.BLACK);
                         p_name.setGravity(Gravity.FILL);
                         p_button.setGravity(Gravity.FILL);
 
@@ -242,9 +304,66 @@ public class Fragment_section1 extends Fragment {
                     e.printStackTrace();
                 }
             }
-            LinearLayout linearLayout_vertic = (LinearLayout)getActivity().findViewById(R.id.f_sec1_linear_vertic);
-            linearLayout_vertic.addView(new_linearLayout);
+            //LinearLayout linearLayout_vertic = (LinearLayout)getActivity().findViewById(R.id.f_sec1_linear_vertic);
+            //linearLayout_vertic.addView(new_linearLayout);
         }
+    }
+
+    public boolean handleMessage(JSONArray array) {
+        // TODO Auto-generated method stub
+        //if (msg.what == 100) {
+        //JSONObject json = new JSONObject((String) msg.obj);
+        //Log.d(TAG, (String) msg.obj);
+        //if (json.getInt("success") == 1) {
+        ArrayList<Post_DTO> items = new ArrayList<Post_DTO>();
+        int count = array.length();
+        if (count > 0) {
+            JSONArray rows = array;
+            Log.d(TAG, "rows.length() = " + rows.length());
+            for (int i = 0; i < count; i++) {
+                JSONObject row = null;
+                try {
+                    row = rows.getJSONObject(i);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                Post_DTO item = new Post_DTO();
+                item.fromJSONObject(row);
+                items.add(item);
+            }
+
+            if (mAdapterGrid.getCount() > 0) {
+                int found = 0;
+                Post_DTO last = (Post_DTO) mAdapterGrid.getItem(mAdapterGrid.getCount() - 1);
+                for (int i = 0; i < items.size(); i++) {
+                    Post_DTO item = items.get(i);
+                    if (last.equals(item)) {
+                        found = i + 1;
+                        break;
+                    }
+                }
+
+                for (int i = 0; i < found; i++)
+                    items.remove(0);
+            }
+
+            boolean bFirst = mAdapterGrid.getCount() == 0;
+            mAdapterGrid.addItems(items);
+            mAdapterGrid.notifyDataSetChanged();
+            if (bFirst) {
+                //mGridView.setAnimation(AnimationUtil.Alpha(0.0f, 1.0f, 500));
+            }
+            mIsLoading = false;
+        } else {
+            mIsLoading = true;
+        }
+
+        if (mAdapterGrid.getCount() > 0) {
+            // mNoMoreItem.setVisibility(View.GONE);
+        } else {
+            //mNoMoreItem.setVisibility(View.VISIBLE);
+        }
+        return true;
     }
 
     class postListLoading extends AsyncTask<String, Void, String> {
@@ -254,7 +373,8 @@ public class Fragment_section1 extends Fragment {
                 JSONObject json = null;
                 Log.i("KNU_Market/Frgmt_sec1 - onPostExcute()","result="+result);
                 jArray = new JSONArray(result);//JSON 데이터 형식으로 파싱
-                updateView(jArray);//받아온 정보로 화면 표시
+                handleMessage(jArray);
+                //updateView(jArray);//받아온 정보로 화면 표시
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -281,35 +401,5 @@ public class Fragment_section1 extends Fragment {
             //str = Url+urls[0];
             return result;
         }
-    }
-
-    class JSONComparator implements Comparator<JSONObject>{
-
-        public int compare(JSONObject a, JSONObject b){
-            //valA and valB could be any simple type, such as number, string, whatever
-            String valA = null;
-            String valB = null;
-            try {
-                valA = a.getString("post_no");
-                valB = b.getString("post_no");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            return valA.compareTo(valB);
-            //if your value is numeric:
-            //if(valA > valB)
-            //    return 1;
-            //if(valA < valB)
-            //    return -1;
-            //return 0;
-        }
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        task.cancel(true);
-        //Toast.makeText(getActivity().getApplicationContext(),"Task status = "+String.valueOf(task.isCancelled()),Toast.LENGTH_SHORT).show();
     }
 }
