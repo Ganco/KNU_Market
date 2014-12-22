@@ -8,81 +8,98 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".MainActivity" >
+    android:background="#fff">
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
+
+    <!--  Header  Starts-->
+    <LinearLayout android:id="@+id/header"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        android:text="@string/hello_world"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:background="#ffff6f58"
+        android:orientation="horizontal"
+        android:paddingTop="5dip"
+        android:paddingBottom="5dip">
+        <!-- Logo Start-->
+        <ImageView android:src="@drawable/logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dip"/>
+        <!-- Logo Ends -->
+        <TextView android:id="@+id/link_to_login"
+            android:onClick="login"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dip"
+            android:text="로그인이 필요합니다"
+            android:gravity="center"
+            android:textSize="20dip"
+            android:textColor="#ffffff"
+            android:textStyle="bold"/>
+    </LinearLayout>
+    <!--  Header Ends -->
+    <!-- Footer Start -->
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/footer"
+        android:layout_width="fill_parent"
+        android:layout_height="90dip"
+        android:background="#ffff6f58"
+        android:layout_alignParentBottom="true">
+    </LinearLayout>
+    <!-- Footer Ends -->
 
-    <TextView
-        android:id="@+id/grid_textView2"
-        android:layout_width="wrap_content"
+    <!-- Registration Form -->
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/username"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_toStartOf="@+id/textView1"
-        android:layout_marginRight="33dp"
-        android:layout_below="@+id/textView1"
-        android:layout_toLeftOf="@+id/textView1"
-        android:layout_marginTop="36dp" />
+        android:padding="10dip"
+        android:layout_below="@id/header">
+        <!-- Full Name Label -->
+        <TextView android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#372c24"
+            android:text="ID"
+            android:id="@+id/textViewName" />
+        <EditText android:id="@+id/edit_c_id"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dip"
+            android:singleLine="true"
+            android:layout_marginBottom="20dip"/>
+        <!--  Email Label -->
+        <TextView android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#372c24"
+            android:text="Password"
+            android:id="@+id/textViewPhoneNum" />
+        <EditText android:id="@+id/edit_c_pw"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dip"
+            android:singleLine="true"
+            android:layout_marginBottom="20dip"/>
 
-    <EditText
-        android:id="@+id/edit_c_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:layout_toEndOf="@+id/grid_textView2"
-        android:layout_alignTop="@+id/grid_textView2"
-        android:layout_toRightOf="@+id/grid_textView2">
+        <!-- Register Button -->
+        <Button android:id="@+id/loginBtn"
+            android:onClick="login"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dip"
+            android:text="Login here"/>
+        <!-- Link to Login Screen -->
+        <TextView android:id="@+id/link_to_login"
+            android:onClick="login"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dip"
+            android:layout_marginBottom="40dip"
+            android:text="Register New Account Here!"
+            android:gravity="center"
+            android:textSize="20dip"
+            android:textColor="#025f7c"/>
 
-        <requestFocus />
-    </EditText>
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/password"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_below="@+id/edit_c_id"
-        android:layout_alignLeft="@+id/grid_textView2"
-        android:layout_alignStart="@+id/grid_textView2" />
-
-    <EditText
-        android:id="@+id/edit_c_pw"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPassword"
-        android:layout_toEndOf="@+id/grid_textView2"
-        android:layout_alignTop="@+id/textView3"
-        android:layout_alignLeft="@+id/edit_c_id"
-        android:layout_alignStart="@+id/edit_c_id" />
-
-    <Button
-        android:id="@+id/loginBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="login"
-        android:text="@string/Login"
-        android:layout_below="@+id/textView3"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="46dp" />
-
-    <Button
-        android:id="@+id/link_to_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="login"
-        android:text="회원가입"
-        android:layout_alignTop="@+id/loginBtn"
-        android:layout_alignRight="@+id/edit_c_pw"
-        android:layout_alignEnd="@+id/edit_c_pw" />
-
+    </LinearLayout>
+    <!-- Registration Form Ends -->
 </RelativeLayout>

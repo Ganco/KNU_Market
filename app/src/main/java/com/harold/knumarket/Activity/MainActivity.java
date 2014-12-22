@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Vector;
 
 import com.harold.knumarket.AlarmService;
+import com.harold.knumarket.BackPressCloseHandler;
 import com.harold.knumarket.User_Info;
 import com.harold.knumarket.Webserver_Url;
 import com.harold.knumarket.categories.Category_Book;
@@ -55,6 +56,7 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
 
     private AlertDialog.Builder builder;
     private DialogInterface mPopupDlg = null;
+    private BackPressCloseHandler backPressCloseHandler;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -167,8 +169,6 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
                 startActivity(intent);
 
                 //Fragment를 바꾸기
-
-
                 break;
 
             case R.id.btn_zzim:
@@ -209,8 +209,8 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
                 break;
             // */
         }
-
     }
+
     @Override
     protected void onStart(){
         super.onStart();
