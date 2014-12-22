@@ -2,6 +2,7 @@ package com.harold.knumarket.Activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
@@ -41,6 +42,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
@@ -68,17 +70,23 @@ public class AlarmActivity extends Activity {
     private postListLoading task3;
     private postListLoading task4;
     private postListLoading task5;
+    private boolean isTasking = false;
 
 
     @Override
-    public void onCreate(Bundle savedInstanceState){
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alarm);
-        Intent intent = getIntent();
-
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
 
         User_Info userInfo = User_Info.getUser_info();
         userKeyword = userInfo.getClient_keyword();
+
+        SharedPreferences pref = getSharedPreferences("pref", Activity.MODE_PRIVATE);
+        userInfo.LoadAlarmPosts(pref);
 
         Url = Webserver_Url.getInstance().getUrl();
         Log.i("KNU_Market/Alarm_Act", "Url=" + Url);
@@ -113,7 +121,6 @@ public class AlarmActivity extends Activity {
                 task4.execute("JSP/RequestSearch.jsp?search_keyword="+userKeyword.get(3));
                 while(keywordCount < 4);
                 task5.execute("JSP/RequestSearch.jsp?search_keyword="+userKeyword.get(4));
-                //*/
 
                 String key1 = userKeyword.get(0);
                 String key2 = userKeyword.get(1);
@@ -126,10 +133,23 @@ public class AlarmActivity extends Activity {
                 Log.i("KNU_Market/Alarm_Act", "keyword3=" + userKeyword.get(2));
                 Log.i("KNU_Market/Alarm_Act", "keyword4=" + userKeyword.get(3));
                 Log.i("KNU_Market/Alarm_Act", "keyword5=" + userKeyword.get(4));
+                //*/
 
 
-                ///*
-                //if(key1 != null && key1 != "" && key1 != " ")
+                Set<String> alarmPosts;
+                alarmPosts = userInfo.getAlarmPosts();
+
+                int alarmPostCount = userInfo.getAlarmPostCount();
+                int j=0;
+                for(Iterator i = alarmPosts.iterator(); i.hasNext(); ) {
+                    new postListLoading().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,"JSP/RequestPost.jsp?post_no="+i.next());
+                    //task(j).execute("JSP/RequestPost.jsp?post_no="+i.next());
+                    j++;
+                }
+                //updateView();
+
+
+                /*
                 if(key1.length() != 0 && !key1.contains(" "))
                     task.execute("JSP/RequestSearch.jsp?search_keyword="+key1);
                 else
@@ -210,7 +230,7 @@ public class AlarmActivity extends Activity {
         }
     }
     //웹서버에서 받아온 정보(상품명,가격,이미지파일명)를 출력
-    public void updateView(JSONArray array){
+    synchronized public void updateView(){
 
         int product_count = 0;
 
@@ -218,9 +238,11 @@ public class AlarmActivity extends Activity {
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
         int screenWidth = metrics.widthPixels;
 
+
         Set set = m.keySet();
         line_num = set.size();
         Object []hmKeys = set.toArray();
+
 
 
         for(int i = 0; i < line_num  ; i++){
@@ -233,10 +255,14 @@ public class AlarmActivity extends Activity {
 
 
                 //Object key = hmKeys[i-1];
+
                 Integer key = (Integer)hmKeys[i];
-                Log.i("KNU_Market/Alarm_Act", "key=" + key);
                 json = (JSONObject)m.get(key);
-                Log.i("KNU_Market/Alarm_Act", "catch post_no=" + json.getInt("post_no"));
+                Log.i("KNU_Market/Alarm_Act_updateView", "key=" + key);
+                Log.i("KNU_Market/Alarm_Act_updateView", "catch post_no=" + json.getInt("post_no"));
+
+
+
 
                 //json = array.getJSONObject(product_count++);
 
@@ -320,7 +346,8 @@ public class AlarmActivity extends Activity {
                         .build();
 
                 ImageLoader imageLoader = ImageLoader.getInstance();
-                imageLoader.displayImage(Url+"Image/"+json.getString("imgUrl"), p_img, options, new ImageLoadingListener() {
+                Log.i("KNU_Market/Alarm_Act_updateView", "Url=" + Url+"Image/"+json.getString("img1Url"));
+                imageLoader.displayImage(Url+"Image/"+json.getString("img1Url"), p_img, options, new ImageLoadingListener() {
                     @Override
                     public void onLoadingStarted(String s, View view) {
                     }
@@ -374,8 +401,8 @@ public class AlarmActivity extends Activity {
         JSONObject json = null;
         int product_count = 0;
 
-        line_num = jArray.length();
-        Log.i("KNU_Market/Alarm_Act", "keywordCount1=" + keywordCount);
+        //line_num = jArray.length();
+        line_num = 1;
         for(int i = 1; i <= line_num  ; i++) {
             try {
                 json = jArray.getJSONObject(product_count++);
@@ -388,35 +415,27 @@ public class AlarmActivity extends Activity {
 
         keywordCount++;
         Log.i("KNU_Market/Alarm_Act", "keywordCount2=" + keywordCount);
-        if(keywordCount == 5)
-            updateView(jArray);
 
-        /*//keywordCount++;
+        User_Info userInfo = User_Info.getUser_info();
+        Log.i("KNU_Market/Alarm_Act", "AlarmPostCount=" + userInfo.getAlarmPostCount());
+        if(keywordCount == userInfo.getAlarmPostCount()) {
+            keywordCount = 0;
+            updateView();
+        }
 
+        /*
+        keywordCount++;
         if(keywordCount == 5) {
             JSONArray jArray2 = null;
             for(int i=0; i < m.size(); i++) {
                 jArray2.
             }
             updateView(jArray);
-        }*/
-
+        }//*/
     }
 
     class postListLoading extends AsyncTask<String, Void, String> {
-        @Override
-        protected void onPostExecute(String result) {
-            try {
-                JSONObject json = null;
-                jArray = new JSONArray(result);//JSON 데이터 형식으로 파싱
-                //updateView(jArray);//받아온 정보로 화면 표시
-                mergeKeyword(jArray);
 
-            } catch (JSONException e) {
-                e.printStackTrace();
-                keywordCount++;     // no results makes exception?
-            }
-        }
         //웹에서 정보 가져오는 부분
         @Override
         protected String doInBackground(String... urls) {
@@ -438,28 +457,18 @@ public class AlarmActivity extends Activity {
             //str = Url+urls[0];
             return str;
         }
-    }
-
-    class JSONComparator implements Comparator<JSONObject> {
-
-        public int compare(JSONObject a, JSONObject b){
-            //valA and valB could be any simple type, such as number, string, whatever
-            String valA = null;
-            String valB = null;
+        @Override
+        protected void onPostExecute(String result) {
             try {
-                valA = a.getString("post_no");
-                valB = b.getString("post_no");
+                JSONObject json = null;
+                jArray = new JSONArray(result);//JSON 데이터 형식으로 파싱
+                //updateView(jArray);//받아온 정보로 화면 표시
+                mergeKeyword(jArray); // thread 5개에서 각각의 키워드로 json 받아와서 json pool에 merge
+
             } catch (JSONException e) {
                 e.printStackTrace();
+                //keywordCount++;     // no results makes exception?
             }
-
-            return valA.compareTo(valB);
-            //if your value is numeric:
-            //if(valA > valB)
-            //    return 1;
-            //if(valA < valB)
-            //    return -1;
-            //return 0;
         }
     }
 

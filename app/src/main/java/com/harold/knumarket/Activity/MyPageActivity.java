@@ -24,7 +24,7 @@ public class MyPageActivity extends Activity {
 
         //마이페이지 진입 전 로그인 여부 확인
         User_Info user_info = User_Info.getUser_info();
-        if(user_info.isClient_State()) {
+        if(user_info.getClient_State()) {
             setContentView(R.layout.activity_mypage);
             final EditText mEditText01 = (EditText) findViewById(R.id.profileTextEdit01);
             // 프로필 입력창이 3줄이상 넘어가지 않게 이벤트 처리

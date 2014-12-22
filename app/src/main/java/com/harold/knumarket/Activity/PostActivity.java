@@ -214,7 +214,7 @@ public class PostActivity extends Activity {
 
             case R.id.btn_temp:
                 User_Info user_info = User_Info.getUser_info();
-                if(user_info.isClient_State()) {//현재 로그인 상태인지 확인
+                if(user_info.getClient_State()) {//현재 로그인 상태인지 확인
                     if(User_Info.getUser_info().getClient_Id().equals(client_id)){//유저가 작성자인지 확인
 
                         AlertDialog.Builder alert_confirm = new AlertDialog.Builder(PostActivity.this);

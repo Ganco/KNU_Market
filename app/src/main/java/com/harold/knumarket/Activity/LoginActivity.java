@@ -56,7 +56,7 @@ public class LoginActivity extends Activity {
             }
         });
 
-        TextView registerScreen = (TextView) findViewById(R.id.link_to_login);
+        TextView registerScreen = (TextView) findViewById(R.id.link_to_register);
         // Listening to register new account link
         // Listening to activity_register new account link
         registerScreen.setOnClickListener(new View.OnClickListener() {

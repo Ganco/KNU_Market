@@ -379,7 +379,6 @@
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:background="@drawable/config_btn"
-                    android:text="(임시)"
                     android:textSize="14sp"
                     android:id="@+id/btn_temp"
                     android:onClick="onClick"

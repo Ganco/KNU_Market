@@ -3,6 +3,7 @@ package com.harold.knumarket.Activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -35,8 +36,7 @@ public class ConfigActivity extends Activity {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_config);
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        User_Info userInfo = User_Info.getUser_info();
 
         keyword1 = (EditText) findViewById(R.id.keyword1);
         keyword2 = (EditText) findViewById(R.id.keyword2);
@@ -44,11 +44,30 @@ public class ConfigActivity extends Activity {
         keyword4 = (EditText) findViewById(R.id.keyword4);
         keyword5 = (EditText) findViewById(R.id.keyword5);
 
-        // 객체 설정, 리스너 부착
         swc = (Switch)findViewById(R.id.alarmOnOff);
+        SharedPreferences pref = getSharedPreferences("pref",Activity.MODE_PRIVATE);
+        userInfo.LoadAlarmOnOff(pref);
+        swc.setChecked(userInfo.getAlarmOnOff());
+
+        if(!swc.isChecked()) {
+            keyword1.setEnabled(false);
+            keyword2.setEnabled(false);
+            keyword3.setEnabled(false);
+            keyword4.setEnabled(false);
+            keyword5.setEnabled(false);
+            keyword1.setTextColor(Color.parseColor("#82979797"));   // 회색
+            keyword2.setTextColor(Color.parseColor("#82979797"));
+            keyword3.setTextColor(Color.parseColor("#82979797"));
+            keyword4.setTextColor(Color.parseColor("#82979797"));
+            keyword5.setTextColor(Color.parseColor("#82979797"));
+        }
+
+        // 객체 설정, 리스너 부착
         swc.setOnCheckedChangeListener(new Switch.OnCheckedChangeListener() {
+            @Override
             public void onCheckedChanged(CompoundButton cb, boolean isChecking) {
                 String str = String.valueOf(isChecking); // boolean - String 변환
+                User_Info userInfo = User_Info.getUser_info();
 
                 // 상태가 on, off인 경우에 알맞게 토스트를 띄움
                 if(isChecking) {
@@ -59,8 +78,12 @@ public class ConfigActivity extends Activity {
                     keyword3.setEnabled(true);
                     keyword4.setEnabled(true);
                     keyword5.setEnabled(true);
+                    keyword1.setTextColor(Color.parseColor("#ff000000"));   // 검은색
+                    keyword2.setTextColor(Color.parseColor("#ff000000"));
+                    keyword3.setTextColor(Color.parseColor("#ff000000"));
+                    keyword4.setTextColor(Color.parseColor("#ff000000"));
+                    keyword5.setTextColor(Color.parseColor("#ff000000"));
 
-                    User_Info userInfo = User_Info.getUser_info();
                     SharedPreferences pref = getSharedPreferences("pref",Activity.MODE_PRIVATE);
                     SharedPreferences.Editor editor = pref.edit();
                     userInfo.SaveLastPostNo(editor);    // 마지막 글번호 설정
@@ -75,8 +98,12 @@ public class ConfigActivity extends Activity {
                     keyword3.setEnabled(false);
                     keyword4.setEnabled(false);
                     keyword5.setEnabled(false);
+                    keyword1.setTextColor(Color.parseColor("#82979797"));   // 회색
+                    keyword2.setTextColor(Color.parseColor("#82979797"));
+                    keyword3.setTextColor(Color.parseColor("#82979797"));
+                    keyword4.setTextColor(Color.parseColor("#82979797"));
+                    keyword5.setTextColor(Color.parseColor("#82979797"));
 
-                    User_Info userInfo = User_Info.getUser_info();
                     SharedPreferences pref = getSharedPreferences("pref",Activity.MODE_PRIVATE);
                     SharedPreferences.Editor editor = pref.edit();
                     userInfo.setAlarmOnOff(false);

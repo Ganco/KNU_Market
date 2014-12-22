@@ -5,6 +5,10 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 /**
  * Created by Harold on 2014-11-20.
@@ -16,9 +20,18 @@ public class User_Info {
     private boolean client_State;
     private int LastPostNo;
     private boolean alarmOnOff;
+    private String phone_No;
+    private String profile;
+    private String addition;
+    public ArrayList<String> client_keyword;
+    public SortedSet<String> alarmPosts;
+    private int alarmPostCount;
+    private static User_Info user_info = null;
 
     public void setLastPostNo(int lastPostNo) { LastPostNo = lastPostNo; }
     public int getLastPostNo() { return LastPostNo; }
+    public void setAlarmPostCount(int AlarmPostCount) { alarmPostCount = AlarmPostCount; }
+    public int getAlarmPostCount() { return alarmPostCount; }
 
     public void setClient_State(boolean clientState) { client_State = clientState; }
     public boolean getClient_State() { return client_State; }
@@ -59,11 +72,6 @@ public class User_Info {
         this.addition = addition;
     }
 
-    private String phone_No;
-    private String profile;
-    private String addition;
-    public ArrayList<String> client_keyword;
-    private static User_Info user_info = null;
 
     public User_Info() {
         this.client_No = null;
@@ -74,6 +82,8 @@ public class User_Info {
         this.addition = "";
         this.client_State = false;
         this.alarmOnOff = false;
+        this.alarmPosts = new TreeSet<String>();
+        this.alarmPostCount = 0;
         //this.client_keyword = null;
     }
 
@@ -106,6 +116,8 @@ public class User_Info {
         //client_keyword.set(index, keyword);
         user_info.getClient_keyword().set(index, keyword);
     }
+    public SortedSet<String> getAlarmPosts() { return user_info.alarmPosts; }
+    public void setAlarmPosts(SortedSet<String> stringSet) { user_info.alarmPosts = stringSet; }
 
     public static synchronized User_Info getUser_info(){
         if(null == user_info){
@@ -176,16 +188,31 @@ public class User_Info {
 
 
     }
-    public void SavePostList(SharedPreferences.Editor editor)
+    public void SaveAlarmPosts(SharedPreferences.Editor editor)
     {
-        SavePreference(editor);
+        alarmPostCount = alarmPosts.size();
+        editor.putInt("alarmPostCount", alarmPostCount);     // 필요?
 
-        // to-do
+        editor.putStringSet("alarmPosts", alarmPosts);
+        editor.commit();
+
     }
-    public void LoadPostList(SharedPreferences pref)
+    public void LoadAlarmPosts(SharedPreferences pref)
     {
+        alarmPostCount = pref.getInt("alarmPostCount", 0);      // 필요?
+        alarmPosts = (SortedSet<String>)pref.getStringSet("alarmPosts",new TreeSet<String>());
 
-        // to-do
+        if(alarmPostCount == 0) {
+            alarmPosts.add("33");
+            alarmPosts.add("54");
+            alarmPosts.add("57");
+            alarmPosts.add("56");
+            alarmPostCount = 4;
+        }
+
+        for(Iterator i = alarmPosts.iterator(); i.hasNext(); ) {
+            Log.i("KNU_Market/User_Info", "alarmPostNum=" + i.next());
+        }
     }
     public void SaveLastPostNo(SharedPreferences.Editor editor)
     {

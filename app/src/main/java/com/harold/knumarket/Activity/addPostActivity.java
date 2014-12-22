@@ -83,7 +83,7 @@ public class addPostActivity extends Activity {
 
         //상품 등록 전 로그인 여부 확인
         User_Info user_info = User_Info.getUser_info();
-        if(user_info.isClient_State()) {
+        if(user_info.getClient_State()) {
             setContentView(R.layout.activity_add_post);
             String serverUrl = getInstance().getUrl();
             initializeSpinner();

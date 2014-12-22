@@ -44,7 +44,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Set;
+import java.util.SortedSet;
 
 /**
  * Created by Gan on 2014-12-01.
@@ -55,6 +58,11 @@ public class AlarmService extends Service {
     private int count=0;
     protected boolean mRunning = false;
     private int newPostCount = 0;
+    private JSONArray jArray;
+    private postListLoading task;
+    private String Url;
+    private int line_num = 0;
+    private boolean keywordFind = false;
 
     @Override
     public void onCreate() {
@@ -109,6 +117,7 @@ public class AlarmService extends Service {
             // Notification을 눌렀을 경우 처리되는 Intent
             builder.setContentIntent(pIntent);
             manager.notify(1, builder.build());
+            newPostCount = 0;
         };
     };
 
@@ -120,15 +129,9 @@ public class AlarmService extends Service {
         //final int time = intent.getIntExtra("time", 0);
 //      Toast.makeText(this, "안녕~ 난 서비스 : "+time, 0).show();
 
-
-
-        final int time = 6;         // n 초마다 run
+        final int time = 10;         // n 초마다 run
         // handler 통한 Thread 이용
         new Thread(new Runnable() {
-            private String Url;
-            private JSONArray jArray;
-            private postListLoading task;
-            private int line_num = 0;
             @Override
             public void run() {
                 mRunning = true;
@@ -141,33 +144,18 @@ public class AlarmService extends Service {
                     //Thread.sleep(5000); // 5000 -> 5초
 
                     userInfo.LoadAlarmOnOff(pref);
-                    if(userInfo.getAlarmOnOff() == false)       // 알람이 off면 계속 쉰다
+                    if(userInfo.getAlarmOnOff() == false)       // 알람이 off면 계속 반복해서 쉰다
                         continue;
 
                     try {
                         count++;
                         Log.i("KNU_Market/AlarmService", "count=" + count);
 
-                        mHandler.sendEmptyMessage(0);       // 푸쉬알림 띄우기
-
 
                         // preference로 키워드정보 로딩
                         userInfo.LoadPreference(pref);
                         userInfo.LoadLastPostNo(pref);
-
-
-
-
-
-                        // 각 keyword들로 각각 검색하기
-
-                        // if not exist in list,
-                        // add to list
-
-                        // update post_no
-
-                        // push alarm
-
+                        userInfo.LoadAlarmPosts(pref);
 
                         Url = Webserver_Url.getInstance().getUrl();
                         //Log.i("KNU_Market/AlarmService","Url="+Url);
@@ -184,10 +172,8 @@ public class AlarmService extends Service {
                             }
                         }
                         else{//인터넷 연결 불가
-                            Log.i("KNU_Market/AlarmService Error","Url="+Url + "/JSP/RequestKeyword.jsp?after_post_no="+userInfo.getLastPostNo());
+                            Log.i("KNU_Market/AlarmService Error", "Url=" + Url + "/JSP/RequestKeyword.jsp?after_post_no=" + userInfo.getLastPostNo());
                         }
-
-
                     } catch (Exception e) {
                         Log.e(TAG, e.toString());
                     }
@@ -213,85 +199,137 @@ public class AlarmService extends Service {
                     return false;
                 }
             }
-
-            public void keywordCheck(JSONArray array){
-                int product_count = 0;
-                line_num = array.length();
-
-                for(int i = 1; i <= line_num  ; i++){
-
-                    JSONObject json = null;
-                    try {
-                        json = array.getJSONObject(product_count++);
-
-                        //판매-구매 상품 상태 색상으로 구분
-                        if(json.getString("product_state").equals("Sell")){
-                        }
-                        else{
-                        }
-                        json.getString("name");
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-
-            class postListLoading extends AsyncTask<String, Void, String> {
-                @Override
-                protected void onPostExecute(String result) {
-                    try {
-                        JSONObject json = null;
-                        jArray = new JSONArray(result);//JSON 데이터 형식으로 파싱
-                        keywordCheck(jArray);  //받아온 정보 처리
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-                //웹에서 정보 가져오는 부분
-                @Override
-                protected String doInBackground(String... urls) {
-
-                    String str = "";
-                    HttpResponse response;
-                    HttpClient myClient = new DefaultHttpClient();
-                    HttpPost myConnection = new HttpPost(Url+urls[0]);
-
-                    try {
-                        response = myClient.execute(myConnection);
-                        str = EntityUtils.toString(response.getEntity(), "UTF-8");
-
-                    } catch (ClientProtocolException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    //str = Url+urls[0];
-                    return str;
-                }
-            }
-
-            class JSONComparator implements Comparator<JSONObject> {
-
-                public int compare(JSONObject a, JSONObject b){
-                    //valA and valB could be any simple type, such as number, string, whatever
-                    String valA = null;
-                    String valB = null;
-                    try {
-                        valA = a.getString("post_no");
-                        valB = b.getString("post_no");
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    return valA.compareTo(valB);
-                }
-            }
-
         }).start();
 
         return START_STICKY_COMPATIBILITY;
     }
 
+    public void keywordCheck(JSONArray array){
+        int product_count = 0;
+        line_num = array.length();
+        JSONObject json = null;
+        int post_no = 0;
+
+        ArrayList<String> userK;
+        String k1 = "";
+        String k2 = "";
+        String k3 = "";
+        User_Info userInfo = User_Info.getUser_info();
+        userK = userInfo.getClient_keyword();
+        SortedSet<String> alarmPosts;
+        alarmPosts = userInfo.getAlarmPosts();
+
+        String client_id = userInfo.getClient_Id();
+        keywordFind = false;
+
+        for(int i = 0; i < line_num  ; i++){
+
+            json = null;
+            k1 = "";
+            k2 = "";
+            k3 = "";
+            post_no = 0;
+            String temp_id = "";
+
+            try {
+                json = array.getJSONObject(product_count++);
+
+                post_no = json.getInt("post_no");
+                k1 =json.getString("keyword1");
+                k2 =json.getString("keyword2");
+                k3 =json.getString("keyword3");
+                temp_id = json.getString("client");
+
+                Log.i("KNU_Market/AlarmService", "post_no="+post_no+"keyword1="+k1+"keyword2="+k2+"keyword3="+k3+"client="+temp_id);
+
+                for(int j=0; j<5; j++) {
+                    String tempk = userK.get(j);
+                    if(tempk.length() != 0 && !tempk.contains(" ")) {
+                        if( k1 == tempk ||  k2 == tempk ||  k3 == tempk) {
+                            if(temp_id != client_id) {
+                                // add this post
+                                newPostCount++;
+                                keywordFind = true;
+                                alarmPosts.add(new Integer(post_no).toString());   // 어짜피 요청글번호 이상의 post만 검색. 기존에 리스트에 있는지 유무는 체크필요x
+                                break;
+                            }
+                        }
+
+                    }
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        if(keywordFind == true) {       // 키워드 해당글 발견시, 마지막postNo저장, 알림List 업데이트
+            userInfo.setLastPostNo(post_no);
+            userInfo.setAlarmPosts(alarmPosts);
+
+            mHandler.sendEmptyMessage(0);       // 푸쉬알림 띄우기
+
+            SharedPreferences pref = getSharedPreferences("pref",Activity.MODE_PRIVATE);
+            SharedPreferences.Editor editor = pref.edit();
+            userInfo.SaveLastPostNo(editor);
+            userInfo.SaveAlarmPosts(editor);
+        }
+
+    }
+
+    class postListLoading extends AsyncTask<String, Void, String> {
+        @Override
+        protected void onPostExecute(String result) {
+            try {
+                JSONObject json = null;
+                if(!result.contains("NullPointerException")) {
+                    jArray = new JSONArray(result);//JSON 데이터 형식으로 파싱
+                    keywordCheck(jArray);  //받아온 정보 처리
+                }
+                else
+                    Log.i("KNU_Market/AlarmService", "there is no new post");
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        //웹에서 정보 가져오는 부분
+        @Override
+        protected String doInBackground(String... urls) {
+
+            String str = "";
+            HttpResponse response;
+            HttpClient myClient = new DefaultHttpClient();
+            HttpPost myConnection = new HttpPost(Url+urls[0]);
+
+            try {
+                response = myClient.execute(myConnection);
+                str = EntityUtils.toString(response.getEntity(), "UTF-8");
+
+            } catch (ClientProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            //str = Url+urls[0];
+            return str;
+        }
+    }
+    class JSONComparator implements Comparator<JSONObject> {
+
+        public int compare(JSONObject a, JSONObject b){
+            //valA and valB could be any simple type, such as number, string, whatever
+            String valA = null;
+            String valB = null;
+            try {
+                valA = a.getString("post_no");
+                valB = b.getString("post_no");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return valA.compareTo(valB);
+        }
+    }
     public IBinder onBind(Intent arg0) {
         return null;
     }
