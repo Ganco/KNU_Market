@@ -211,10 +211,14 @@ public class PostActivity extends Activity {
                     user_info.getZzimPosts();
                     v.setSelected(!v.isSelected());
 
+                    Button btn_zzim = (Button) findViewById(R.id.btn_zzim);
+
                     if (v.isSelected()) {
+                        btn_zzim.setBackground(this.getResources().getDrawable(R.drawable.ic_favorite_grey600_48dp));
                         Toast.makeText(getApplicationContext(),"해당 상품을 찜 하였습니다.",Toast.LENGTH_SHORT).show();
                         user_info.getZzimPosts().add( (new Integer(post_no).toString()) );
                     } else {
+                        btn_zzim.setBackground(this.getResources().getDrawable(R.drawable.ic_favorite_outline_grey600_48dp));
                         Toast.makeText(getApplicationContext(),"찜을 해제하였습니다.",Toast.LENGTH_SHORT).show();
                         user_info.getZzimPosts().remove( (new Integer(post_no).toString()) );
                     }
@@ -340,9 +344,11 @@ public class PostActivity extends Activity {
             if( userInfo.getZzimPosts().contains( (new Integer(json.getInt("post_no"))).toString() )) {
                 p_zzim.setSelected(true);
                 isZzim = true;
+                p_zzim.setBackground(this.getResources().getDrawable(R.drawable.ic_favorite_grey600_48dp));
             } else {
                 p_zzim.setSelected(false);
                 isZzim = false;
+                p_zzim.setBackground(this.getResources().getDrawable(R.drawable.ic_favorite_outline_grey600_48dp));
             }
 
 
