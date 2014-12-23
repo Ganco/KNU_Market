@@ -5,41 +5,59 @@
 
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="20dp"
+        android:orientation="vertical">
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="중고서적"
+            android:drawableLeft="@drawable/books8"
+            android:gravity="left|center"
+            android:paddingLeft="130dp"
+            android:drawablePadding="10dp"
             android:id="@+id/btn_f000"
             android:layout_weight="1"
-            android:onClick="onClick" />
+            android:onClick="onClick"
+            android:layout_gravity="center_horizontal"
+             />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:drawableLeft="@drawable/boxes2"
             android:text="자취용품"
+            android:gravity="left|center"
+            android:drawablePadding="10dp"
             android:id="@+id/btn_f100"
             android:layout_weight="1"
-            android:onClick="onClick" />
+            android:onClick="onClick"
+            android:paddingLeft="130dp" />
         <Button
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:drawableLeft="@drawable/hanger22"
+            android:gravity="left|center"
+            android:drawablePadding="10dp"
             android:text="패션잡화"
             android:id="@+id/btn_f200"
             android:layout_weight="1"
-            android:onClick="onClick" />
+            android:onClick="onClick"
+            android:paddingLeft="130dp" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="기타"
+            android:drawableLeft="@drawable/box52"
+            android:drawablePadding="25dp"
+            android:gravity="left|center"
             android:id="@+id/btn_f300"
             android:layout_weight="1"
-            android:onClick="onClick" />
+            android:onClick="onClick"
+            android:paddingLeft="130dp" />
 
     </LinearLayout>
 

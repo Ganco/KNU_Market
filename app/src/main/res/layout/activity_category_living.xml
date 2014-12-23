@@ -101,6 +101,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="가전"
+                    android:drawableLeft="@drawable/washing11"
+                    android:gravity="left|center"
+                    android:paddingLeft="130dp"
+                    android:drawablePadding="10dp"
                     android:id="@+id/btn_100"
                     android:layout_weight="1"
                     android:onClick="onClick" />
@@ -109,6 +113,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="주방"
+                    android:drawableLeft="@drawable/bowl12"
+                    android:gravity="left|center"
+                    android:paddingLeft="130dp"
+                    android:drawablePadding="10dp"
                     android:id="@+id/btn_110"
                     android:layout_weight="1"
                     android:onClick="onClick" />
@@ -117,6 +125,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="가구"
+                    android:drawableLeft="@drawable/sofa9"
+                    android:gravity="left|center"
+                    android:paddingLeft="130dp"
+                    android:drawablePadding="10dp"
                     android:id="@+id/btn_120"
                     android:layout_weight="1"
                     android:onClick="onClick" />

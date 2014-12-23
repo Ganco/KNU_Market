@@ -104,6 +104,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="전공"
+                    android:drawableLeft="@drawable/tools6"
+                    android:gravity="left|center"
+                    android:paddingLeft="130dp"
+                    android:drawablePadding="10dp"
                     android:id="@+id/btn_009"
                     android:layout_weight="1"
                     android:onClick="onClick" />
@@ -112,6 +116,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="교양"
+                    android:drawableLeft="@drawable/public6"
+                    android:gravity="left|center"
+                    android:paddingLeft="130dp"
+                    android:drawablePadding="10dp"
                     android:id="@+id/btn_019"
                     android:layout_weight="1"
                     android:onClick="onClick" />
@@ -120,6 +128,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="일반"
+                    android:drawableLeft="@drawable/man216"
+                    android:gravity="left|center"
+                    android:paddingLeft="130dp"
+                     android:drawablePadding="10dp"
                     android:id="@+id/btn_029"
                     android:layout_weight="1"
                     android:onClick="onClick" />

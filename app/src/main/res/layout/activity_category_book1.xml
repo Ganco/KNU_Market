@@ -104,6 +104,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="자연과학"
+                    android:drawableLeft="@drawable/erlenmeyer1"
+                    android:gravity="left|center"
+                    android:paddingLeft="130dp"
+                    android:drawablePadding="10dp"
+
+
+
                     android:id="@+id/btn_010"
                     android:layout_weight="1"
                     android:onClick="onClick" />
@@ -112,6 +119,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="기초수학"
+                    android:drawableLeft="@drawable/mathematics5"
+                    android:gravity="left|center"
+                    android:paddingLeft="130dp"
+                    android:drawablePadding="10dp"
                     android:id="@+id/btn_011"
                     android:layout_weight="1"
                     android:onClick="onClick" />
@@ -120,6 +131,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="인문사회"
+                    android:drawableLeft="@drawable/online5"
+                    android:gravity="left|center"
+                    android:paddingLeft="130dp"
+                    android:drawablePadding="10dp"
                     android:id="@+id/btn_012"
                     android:layout_weight="1"
                     android:onClick="onClick" />
@@ -127,6 +142,10 @@
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:drawableLeft="@drawable/basketball3"
+                    android:gravity="left|center"
+                    android:paddingLeft="130dp"
+                    android:drawablePadding="10dp"
                     android:text="스포츠"
                     android:id="@+id/btn_013"
                     android:layout_weight="1"

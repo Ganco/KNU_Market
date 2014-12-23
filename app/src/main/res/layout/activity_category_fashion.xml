@@ -102,6 +102,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="남성"
+                    android:drawableLeft="@drawable/male80"
+                    android:gravity="left|center"
+                    android:paddingLeft="130dp"
+                    android:drawablePadding="10dp"
                     android:id="@+id/btn_200"
                     android:layout_weight="1"
                     android:onClick="onClick" />
@@ -110,6 +114,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="여성"
+                    android:drawableLeft="@drawable/woman139"
+                    android:gravity="left|center"
+                    android:paddingLeft="130dp"
+                    android:drawablePadding="10dp"
                     android:id="@+id/btn_210"
                     android:layout_weight="1"
                     android:onClick="onClick" />
