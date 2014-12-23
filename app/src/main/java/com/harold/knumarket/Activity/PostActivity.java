@@ -231,7 +231,7 @@ public class PostActivity extends Activity {
             case R.id.btn_temp:
                 if(user_info.getClient_State()) {//현재 로그인 상태인지 확인
                     Log.d("PostActivity", "client_id="+user_info.getClient_Id());
-                    if(user_info.getClient_Id().equals(client_id) || user_info.getClient_Id().equals(null)){//유저가 작성자인지 확인
+                    if(user_info.getClient_Id().equals(client_id) || user_info.getClient_Id().equals("")){//유저가 작성자인지 확인
 
                         AlertDialog.Builder alert_confirm = new AlertDialog.Builder(PostActivity.this);
                         alert_confirm.setMessage("해당 상품을 삭제 하시겠습니까?").setCancelable(false).setPositiveButton("확인",
@@ -504,7 +504,9 @@ public class PostActivity extends Activity {
                 if(result.contains("Remove Success")) {
                     Toast.makeText(getApplicationContext(),"삭제 완료",Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getBaseContext(), MainActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    //intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
                     startActivity(intent);
                     finish();
                 }

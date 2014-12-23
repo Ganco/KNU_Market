@@ -1,6 +1,8 @@
 package com.harold.knumarket.fragment;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -18,6 +20,7 @@ import android.widget.GridView;
 import com.harold.knumarket.Activity.PostActivity;
 import com.harold.knumarket.CustomGridViewAdapter;
 import com.harold.knumarket.Post_DTO;
+import com.harold.knumarket.User_Info;
 import com.harold.knumarket.Webserver_Url;
 import com.knumarket.harold.knu_market.R;
 
@@ -179,6 +182,19 @@ public class Fragment_section1 extends Fragment implements AbsListView.OnScrollL
                 Post_DTO item = new Post_DTO();
                 item.fromJSONObject(row);
                 items.add(item);
+            }
+
+            JSONObject row = null;
+            try {
+                row = rows.getJSONObject(0);
+                User_Info userInfo = User_Info.getUser_info();
+                userInfo.setLastPostNo(row.getInt("post_no"));
+                SharedPreferences pref = getActivity().getSharedPreferences("pref", Activity.MODE_PRIVATE);
+                SharedPreferences.Editor editor = pref.edit();
+                userInfo.SaveLastPostNo(editor);    // 마지막 글번호 설정
+
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
 
             if (mAdapterGrid.getCount() > 0) {

@@ -2,6 +2,7 @@ package com.harold.knumarket.Activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -122,6 +123,9 @@ public class LoginActivity extends Activity {
             //User를 로그인 상태로 변경
             user_info.setClient_State(true);
             Toast.makeText(getApplicationContext(), "로그인 성공!", Toast.LENGTH_SHORT).show();
+            SharedPreferences pref = getSharedPreferences("pref",Activity.MODE_PRIVATE);
+            SharedPreferences.Editor editor = pref.edit();
+            user_info.SavePreference(editor);
 
             Intent intent = new Intent(getBaseContext(),MyPageActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);

@@ -229,8 +229,6 @@ public class AlarmService extends Service {
         String k3 = "";
         User_Info userInfo = User_Info.getUser_info();
         userK = userInfo.getClient_keyword();
-        Set<String> alarmPosts;
-        alarmPosts = userInfo.getAlarmPosts();
 
         String client_id = userInfo.getClient_Id();
         keywordFind = false;
@@ -262,7 +260,7 @@ public class AlarmService extends Service {
                                 // add this post
                                 newPostCount++;
                                 keywordFind = true;
-                                alarmPosts.add(new Integer(post_no).toString());   // 어짜피 요청글번호 이상의 post만 검색. 기존에 리스트에 있는지 유무는 체크필요x
+                                userInfo.getAlarmPosts().add(new Integer(post_no).toString());   // 어짜피 요청글번호 이상의 post만 검색. 기존에 리스트에 있는지 유무는 체크필요x
                                 break;
                             }
                         }
@@ -280,7 +278,7 @@ public class AlarmService extends Service {
         if(keywordFind == true) {       // 키워드 해당글 발견시, 마지막postNo저장, 알림List 업데이트
             userInfo.setLastPostNo(post_no);
             Log.i("KNU_Market/AlarmService", "LastPostNo="+post_no);
-            userInfo.setAlarmPosts(alarmPosts);
+            //userInfo.setAlarmPosts(alarmPosts);
 
             mHandler.sendEmptyMessage(0);       // 푸쉬알림 띄우기
 

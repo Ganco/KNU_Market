@@ -27,7 +27,10 @@ public class User_Info {
     //private int alarmPostCount;
     private static User_Info user_info = null;
 
-    public void setLastPostNo(int lastPostNo) { LastPostNo = lastPostNo; }
+    public void setLastPostNo(int lastPostNo) {
+        if(lastPostNo > LastPostNo)
+            LastPostNo = lastPostNo;
+    }
 
     public int getLastPostNo() { return LastPostNo; }
     //public void setAlarmPostCount(int AlarmPostCount) { alarmPostCount = AlarmPostCount; }
