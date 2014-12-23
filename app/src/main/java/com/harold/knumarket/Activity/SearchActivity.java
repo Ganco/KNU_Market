@@ -386,6 +386,10 @@ public class SearchActivity extends Activity{
             case R.id.btn_search:
                 break;
             case R.id.btn_zzim:
+                intent = new Intent(getBaseContext(), ZzimActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent);
+                finish();
                 break;
             case R.id.btn_alarm:
                 intent = new Intent(getBaseContext(), AlarmActivity.class);
