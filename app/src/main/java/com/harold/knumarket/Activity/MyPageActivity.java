@@ -60,7 +60,7 @@ public class MyPageActivity extends Activity {
         else{
             Intent intent = new Intent(getBaseContext(), LoginActivity.class);
             startActivity(intent);
-            //finish();
+            finish();
         }
     }
 

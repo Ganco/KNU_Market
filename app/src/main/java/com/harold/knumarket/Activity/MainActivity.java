@@ -141,9 +141,10 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
                 break;
 
             case R.id.btn_home:
-                intent = new Intent(getBaseContext(), MainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivity(intent);
+                mViewPager.setCurrentItem(0);
+                //intent = new Intent(getBaseContext(), MainActivity.class);
+                //intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                //startActivity(intent);
                 break;
 
             //// insert button listener for MYPAGE
