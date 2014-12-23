@@ -80,8 +80,7 @@ public class MyPageActivity extends Activity {
 
     }
     @Override
-    public void onPause()
-    {
+    public void onPause(){
         super.onPause();
         User_Info userInfo = User_Info.getUser_info();
         //userKeyword = userInfo.getClient_keyword();
@@ -97,6 +96,7 @@ public class MyPageActivity extends Activity {
         userInfo.setAddition(addition.getText().toString());
 
     }
+
     public void onClick(View v){
 
         int id = v.getId();

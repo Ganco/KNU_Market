@@ -1,13 +1,11 @@
 package com.harold.knumarket;
 
-import android.app.Activity;
 import android.content.SharedPreferences;
 import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Set;
-import java.util.SortedSet;
 import java.util.TreeSet;
 
 /**
@@ -30,11 +28,12 @@ public class User_Info {
     private static User_Info user_info = null;
 
     public void setLastPostNo(int lastPostNo) { LastPostNo = lastPostNo; }
+
     public int getLastPostNo() { return LastPostNo; }
     //public void setAlarmPostCount(int AlarmPostCount) { alarmPostCount = AlarmPostCount; }
     //public int getAlarmPostCount() { return alarmPostCount; }
-
     public void setClient_State(boolean clientState) { client_State = clientState; }
+
     public boolean getClient_State() { return client_State; }
 
     public boolean getAlarmOnOff() {
@@ -73,7 +72,6 @@ public class User_Info {
         this.addition = addition;
     }
 
-
     public User_Info() {
         this.client_No = null;
         this.client_Id = null;
@@ -109,18 +107,21 @@ public class User_Info {
     }
 
     public ArrayList<String> getClient_keyword() { return user_info.client_keyword; }
+
     public void setClient_keywordList(ArrayList<String> stringList) { user_info.client_keyword = stringList; }
+
     public void setClient_keyword(String keyword, int index) {
         //client_keyword.set(index, keyword);
         user_info.getClient_keyword().set(index, keyword);
     }
+
     public Set<String> getAlarmPosts() { return user_info.alarmPosts; }
+
     public void setAlarmPosts(Set<String> stringSet) { user_info.alarmPosts = stringSet; }
+
     public Set<String> getZzimPosts() { return user_info.zzimPosts; }
+
     public void setZzimPosts(Set<String> stringSet) { user_info.zzimPosts = stringSet; }
-
-
-
 
     public static synchronized User_Info getUser_info(){
         if(null == user_info){
@@ -147,6 +148,7 @@ public class User_Info {
         }
         return user_info;
     }
+
     public void SavePreference(SharedPreferences.Editor editor)
     {
         // preference로 키워드정보 저장

@@ -1,11 +1,13 @@
 package com.harold.knumarket.fragment;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.knumarket.harold.knu_market.R;
 
@@ -78,9 +80,6 @@ public class Fragment_section3 extends Fragment {
                 startActivity(intent);
             }
         });*/
-
-
-
         return  rootView;
     }
 
