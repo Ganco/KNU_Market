@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -17,6 +18,7 @@ import android.text.Editable;
 import android.text.method.KeyListener;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -58,7 +60,7 @@ public class addPostActivity extends Activity {
     //카메라,갤러리에서 이미지 가져올때 필요한 변수들
     private Bitmap bm = null;
     private ImageView img_btn;
-    private static final double SCALE = 0.4;
+    private static final double SCALE = 0.8;
     private int TAKE_CAMERA = 1;
     private int TAKE_GALLARY = 2;
     private int IMG_BTN_1 =1;
@@ -427,8 +429,12 @@ public class addPostActivity extends Activity {
 
                     //FILE Array에 임시 저장
                     String file_path = Environment.getExternalStorageDirectory().getPath();
+                    String tempFileName ="tmp"+System.currentTimeMillis();
+
+                    File f = SaveBitmapToFileCache(bm, file_path,tempFileName);
+
                     if(imgFiles.size() <3){
-                        imgFiles.add(SaveBitmapToFileCache(bm, file_path,"temp"+System.currentTimeMillis()));
+                        imgFiles.add(f);
                         //Toast.makeText(getApplicationContext(),"imgFile Array Size="+imgFiles.size(),Toast.LENGTH_SHORT).show();
                     }
                     else{
@@ -443,10 +449,12 @@ public class addPostActivity extends Activity {
                     }
                     img_btn.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
-                    if(bm.getHeight() < bm.getWidth()){
+                    /*if(bm.getHeight() < bm.getWidth()){
                         bm = imgRotate(bm);
-                    }
-                    img_btn.setImageBitmap(bm);
+                    }*/
+                    setThumbnailImage(f.getPath(),img_btn, "GALLARY");
+                    Log.d("addPostActivity : onActivityResult() Gallary =>",f.getPath());
+                    //img_btn.setImageBitmap(bm);
 
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -481,31 +489,14 @@ public class addPostActivity extends Activity {
                 }
                 img_btn.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
-                /*
-                //AUIL 이미지 옵션 설정
-                DisplayImageOptions options = new DisplayImageOptions.Builder()
-                        .showImageOnLoading(R.drawable.ic_empty) // 로딩중 이미지 설정
-                        .showImageForEmptyUri(R.drawable.ic_empty) // Uri주소가 잘못되었을경우(이미지없을때)
-                        .showImageOnFail(R.drawable.ic_error) // 로딩 실패시
-                        .resetViewBeforeLoading(false)  // 로딩전에 뷰를 리셋하는건데 false로 하세요 과부하!
-                        .delayBeforeLoading(0) // 로딩전 딜레이라는데 필요한일이 있을까요..?ㅋㅋ
-                        .cacheInMemory(true) // 메모리케시 사용여부   (사용하면 빨라지지만 많은 이미지 캐싱할경우 outOfMemory Exception발생할 수 있어요)
-                        .cacheOnDisc(true) // 디스크캐쉬를 사용여부(사용하세요왠만하면)
-                                //.preProcessor(...) // 비트맵 띄우기전에 프로세스 (BitmapProcessor이라는 인터페이스를 구연하면 process(Bitmap image)라는 메소드를 사용할 수 있어요. 처리하실게 있으면 작성하셔서 이안에 넣어주시면 됩니다.)
-                                //.postProcessor(...) // 비트맵 띄운후 프로세스 (위와같이 BitmapProcessor로 처리)
-                        .considerExifParams(false) // 사진이미지의 회전률 고려할건지
-                        .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2) // 스케일타입설정   (일부밖에없습니다. 제가 centerCrop이 없어서 라이브러리 다 뒤져봤는데 없더라구요. 다른방법이 있습니다. 아래 설명해드릴게요.)
-                        .bitmapConfig(Bitmap.Config.ARGB_8888) // 이미지 컬러방식
-                        .build();
-
-                ImageLoader imageLoader = ImageLoader.getInstance();
-                imageLoader.displayImage(String.valueOf(mImageCaptureUri),img_btn,options);
-                */
-                if(bm.getHeight() < bm.getWidth()){
+                /*if(bm.getHeight() < bm.getWidth()){
                     bm = imgRotate(bm);
-                }
+                }*/
 
-                img_btn.setImageBitmap(bm);
+                Log.d("addPostActivity : onActivityResult() Camera =>", img_path);
+                setThumbnailImage(img_path, img_btn, "CAMERA");
+
+                //img_btn.setImageBitmap(bm);
 
                 // 임시 파일 삭제
                 File f = new File(mImageCaptureUri.getPath());
@@ -618,6 +609,119 @@ public class addPostActivity extends Activity {
         return resizedBitmap;
     }
 
+    private void setThumbnailImage(String orgImagePath, ImageView mThumbnailImage, String source) {
+        // 회전 각도 취득
+        int degrees = GetExifOrientation(orgImagePath);
+
+        // 이미지 취득 옵션 설정 (사이즈 정보 취득)
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+
+        // 원본 이미지 정보 취득
+        BitmapFactory.decodeFile(orgImagePath, options);
+
+        // 리사이즈 비율 취득
+        int sampleSize = getSampliSize(options.outWidth, options.outHeight);
+
+        // 이미지 취득 옵션 설정 (사이즈 정보 취득 해제, 리사이즈)
+        options.inJustDecodeBounds = false;
+        options.inSampleSize = sampleSize;
+
+        // 리사이즈된 원본 이미지 취득
+        Bitmap orgImage = BitmapFactory.decodeFile(orgImagePath, options);
+
+        if(source.equals("CAMERA")){
+            // 회전한 이미지 취득
+            orgImage = GetRotatedBitmap(orgImage, degrees);
+        }
+
+        if (orgImage != null) {
+            // 섬네일 이미지 표시
+            mThumbnailImage.setImageBitmap(orgImage);
+        }
+    }
+
+    private int getSampliSize(int width, int height) {
+        // 화면 크기 취득
+        Display currentDisplay = getWindowManager().getDefaultDisplay();
+
+        float dw = currentDisplay.getWidth();
+        float dh = currentDisplay.getHeight();
+
+        // 가로/세로 축소 비율 취득
+        int widthtRatio = (int) Math.ceil(width / dw);
+        int heightRatio = (int) Math.ceil(height / dh);
+
+        // 초기 리사이즈 비율
+        int sampleSize = 1;
+
+        // 가로 세로 비율이 화면보다 큰경우에만 처리
+        if (widthtRatio > 1 && height > 1) {
+            if (widthtRatio > heightRatio) {
+                // 가로 축소 비율이 큰 경우
+                sampleSize = widthtRatio;
+            } else {
+                // 세로 축소 비율이 큰 경우
+                sampleSize = heightRatio;
+            }
+        }
+
+        return sampleSize;
+    }
+
+    private int GetExifOrientation(String filepath) {
+        int degree = 0;
+        ExifInterface exif = null;
+
+        try {
+            exif = new ExifInterface(filepath);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (exif != null) {
+            int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+
+            if (orientation != -1) {
+                switch(orientation) {
+                    case ExifInterface.ORIENTATION_ROTATE_90:
+                        degree = 90;
+                        break;
+
+                    case ExifInterface.ORIENTATION_ROTATE_180:
+                        degree = 180;
+                        break;
+
+                    case ExifInterface.ORIENTATION_ROTATE_270:
+                        degree = 270;
+                        break;
+                }
+            }
+        }
+
+        return degree;
+    }
+
+    private Bitmap GetRotatedBitmap(Bitmap bitmap, int degrees) {
+        if (degrees != 0 && bitmap != null) {
+            Matrix m = new Matrix();
+            m.setRotate(degrees, (float) bitmap.getWidth() / 2, (float) bitmap.getHeight() / 2);
+
+            try {
+                Bitmap b2 = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), m, true);
+
+                if (bitmap != b2) {
+                    bitmap.recycle();
+                    bitmap = b2;
+                }
+            } catch (OutOfMemoryError e) {
+                // 메모리 부족에러시, 원본을 반환
+            }
+        }
+
+        return bitmap;
+    }
+
     private File SaveBitmapToFileCache(Bitmap bitmap, String strFilePath, String fileName) {
 
         File file = new File(strFilePath);
@@ -694,4 +798,5 @@ public class addPostActivity extends Activity {
             bm = null;
         }
     }
-}
+
+ }

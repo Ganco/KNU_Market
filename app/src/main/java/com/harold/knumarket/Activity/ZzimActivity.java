@@ -417,9 +417,8 @@ public class ZzimActivity extends Activity {
 
             case R.id.btn_home:
                 intent = new Intent(getBaseContext(), MainActivity.class);
-                //intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                //startActivityForResult(intent, REQUEST_CODE_MAIN);
+                intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 finish();
                 break;
@@ -429,9 +428,6 @@ public class ZzimActivity extends Activity {
                 intent = new Intent(getBaseContext(), MyPageActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                //intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-                //intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                //startActivityForResult(intent, REQUEST_CODE_MYPAGE);
                 startActivity(intent);
                 finish();
                 break;
