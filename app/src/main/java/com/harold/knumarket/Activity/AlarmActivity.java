@@ -524,6 +524,10 @@ public class AlarmActivity extends Activity {
                 finish();
                 break;
             case R.id.btn_zzim:
+                intent = new Intent(getBaseContext(), ZzimActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent);
+                finish();
                 break;
             case R.id.btn_alarm:
                 break;

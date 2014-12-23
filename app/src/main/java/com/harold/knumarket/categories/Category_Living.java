@@ -10,6 +10,7 @@ import com.harold.knumarket.Activity.ConfigActivity;
 import com.harold.knumarket.Activity.MainActivity;
 import com.harold.knumarket.Activity.MyPageActivity;
 import com.harold.knumarket.Activity.SearchActivity;
+import com.harold.knumarket.Activity.ZzimActivity;
 import com.harold.knumarket.Activity.addPostActivity;
 import com.knumarket.harold.knu_market.R;
 
@@ -96,6 +97,10 @@ public class Category_Living extends Activity {
                 finish();
                 break;
             case R.id.btn_zzim:
+                intent = new Intent(getBaseContext(), ZzimActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent);
+                finish();
                 break;
             case R.id.btn_alarm:
                 intent = new Intent(getBaseContext(), AlarmActivity.class);
