@@ -77,9 +77,9 @@ public class RegisterActivity extends Activity {
                 Log.i("KNU_Market/Register", url + "JSP/RequestRegister.jsp?client_id=" + login_id + "&client_pw=" + login_pass + "&client_phoneNum=" + login_num);
 
 
-                Intent intent = new Intent(getBaseContext(), MainActivity.class);
+                Intent intent = new Intent(getBaseContext(), MyPageActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 //startActivityForResult(intent, REQUEST_CODE_MAIN);
                 startActivity(intent);
                 finish();
