@@ -342,9 +342,11 @@ public class PostActivity extends Activity {
 
             // 현재 글이 찜해놓은 글이면
             if( userInfo.getZzimPosts().contains( (new Integer(json.getInt("post_no"))).toString() )) {
-                p_zzim.setSelected(true);
-                isZzim = true;
-                p_zzim.setBackground(this.getResources().getDrawable(R.drawable.ic_favorite_grey600_48dp));
+                if(userInfo.getClient_State() && userInfo.getClient_Id() != client_id) {
+                    p_zzim.setSelected(true);
+                    isZzim = true;
+                    p_zzim.setBackground(this.getResources().getDrawable(R.drawable.ic_favorite_grey600_48dp));
+                }
             } else {
                 p_zzim.setSelected(false);
                 isZzim = false;
