@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
@@ -18,6 +19,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -67,6 +69,7 @@ public class PostActivity extends Activity {
     //ItemCommentListAdapter adapter;
     private String seller_phoneNum;
     private String client_id;
+    private boolean isZzim = false;
 
     private class ImageViewAdapter extends PagerAdapter{
 
@@ -187,6 +190,7 @@ public class PostActivity extends Activity {
 
         int id = v.getId();
         Intent intent = null;
+        User_Info user_info = User_Info.getUser_info();
 
         switch (id){
 
@@ -202,18 +206,25 @@ public class PostActivity extends Activity {
                 startActivity( intent );
                 break;
 
-            //// insert button listener for MYPAGE
             case R.id.btn_zzim:
-                //intent = new Intent(getBaseContext(), MyPageActivity.class);
-                //intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                //intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-                //intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                //startActivityForResult(intent, REQUEST_CODE_MYPAGE);
+                if(user_info.getClient_State() && user_info.getClient_Id() != client_id) {
+                    user_info.getZzimPosts();
+                    v.setSelected(!v.isSelected());
+
+                    if (v.isSelected()) {
+                        Toast.makeText(getApplicationContext(),"해당 상품을 찜 하였습니다.",Toast.LENGTH_SHORT).show();
+                        user_info.getZzimPosts().add( (new Integer(post_no).toString()) );
+                    } else {
+                        Toast.makeText(getApplicationContext(),"찜을 해제하였습니다.",Toast.LENGTH_SHORT).show();
+                        user_info.getZzimPosts().remove( (new Integer(post_no).toString()) );
+                    }
+                    SharedPreferences pref = getSharedPreferences("pref",Activity.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = pref.edit();
+                    user_info.SaveZzimPosts(editor);
+                }
                 break;
 
             case R.id.btn_temp:
-                User_Info user_info = User_Info.getUser_info();
                 if(user_info.getClient_State()) {//현재 로그인 상태인지 확인
                     if(User_Info.getUser_info().getClient_Id().equals(client_id)){//유저가 작성자인지 확인
 
@@ -320,10 +331,27 @@ public class PostActivity extends Activity {
             Log.i("KNU_Market/Post_Act", "category_code=" + categoryID);
             setDecodeCatID(categoryID);
 
+            User_Info userInfo = User_Info.getUser_info();
+            SharedPreferences pref = getSharedPreferences("pref", Activity.MODE_PRIVATE);
+            userInfo.LoadZzimPosts(pref);
+            Button p_zzim = (Button) findViewById(R.id.btn_zzim);
+
+            // 현재 글이 찜해놓은 글이면
+            if( userInfo.getZzimPosts().contains( (new Integer(json.getInt("post_no"))).toString() )) {
+                p_zzim.setSelected(true);
+                isZzim = true;
+            } else {
+                p_zzim.setSelected(false);
+                isZzim = false;
+            }
+
+
         }
         catch (JSONException e) {
             e.printStackTrace();
         }
+
+
      }
 
     public void setDecodeCatID(String categoryID){

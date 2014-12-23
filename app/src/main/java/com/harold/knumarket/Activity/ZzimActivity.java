@@ -9,15 +9,19 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.harold.knumarket.User_Info;
 import com.harold.knumarket.Webserver_Url;
@@ -40,35 +44,30 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.NavigableMap;
 import java.util.NavigableSet;
-import java.util.Objects;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
-import java.util.Comparator;
 
 /**
- * Created by Gan on 2014-11-28.
+ * Created by Gan on 2014-12-23.
  */
-public class AlarmActivity extends Activity {
+public class ZzimActivity extends Activity {
 
     private ArrayList<String> userKeyword;
 
     public static final int REQUEST_CODE_MAIN = 1001;
     public static final int REQUEST_CODE_MYPAGE = 1005;
 
-    public static final String ARG_SECTION_NUMBER = "section_number";
-    private static final String TAG = "Search";
     private JSONArray jArray;
     private postListLoading task;
     private int line_num = 0;
     //웹서버 url정보를 WebServer_Url클래스 하나로 관리함(싱글톤 패턴 사용)
     private String Url;
     private static int keywordCount = 0;
-    //private NavigableMap m = new TreeMap();
     private Map m = new TreeMap(new IntComparator());
     private boolean isTasking = false;
 
@@ -76,7 +75,14 @@ public class AlarmActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_alarm);
+        setContentView(R.layout.activity_zzim);
+
+        User_Info user_info = User_Info.getUser_info();
+        if(!user_info.getClient_State()) {
+            Intent intent = new Intent(getBaseContext(), LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
     @Override
     public void onStart() {
@@ -86,10 +92,9 @@ public class AlarmActivity extends Activity {
         userKeyword = userInfo.getClient_keyword();
 
         SharedPreferences pref = getSharedPreferences("pref", Activity.MODE_PRIVATE);
-        userInfo.LoadAlarmPosts(pref);
+        userInfo.LoadZzimPosts(pref);
 
         Url = Webserver_Url.getInstance().getUrl();
-        Log.i("KNU_Market/Alarm_Act", "Url=" + Url);
 
         if(line_num != 0) {
             LinearLayout linearLayout_vertic = (LinearLayout) findViewById(R.id.list_vertical);
@@ -107,91 +112,12 @@ public class AlarmActivity extends Activity {
                 keywordCount = 0;
                 m.clear();
 
-                /*
-                task.execute("JSP/RequestSearch.jsp?search_keyword="+userKeyword.get(0));
-                while(keywordCount < 1);
-                task2.execute("JSP/RequestSearch.jsp?search_keyword="+userKeyword.get(1));
-                while(keywordCount < 2);
-                task3.execute("JSP/RequestSearch.jsp?search_keyword="+userKeyword.get(2));
-                while(keywordCount < 3);
-                task4.execute("JSP/RequestSearch.jsp?search_keyword="+userKeyword.get(3));
-                while(keywordCount < 4);
-                task5.execute("JSP/RequestSearch.jsp?search_keyword="+userKeyword.get(4));
+                Set<String> zzimPosts;
+                zzimPosts = userInfo.getZzimPosts();
 
-                String key1 = userKeyword.get(0);
-                String key2 = userKeyword.get(1);
-                String key3 = userKeyword.get(2);
-                String key4 = userKeyword.get(3);
-                String key5 = userKeyword.get(4);
-
-                Log.i("KNU_Market/Alarm_Act", "keyword1=" + userKeyword.get(0));
-                Log.i("KNU_Market/Alarm_Act", "keyword2=" + userKeyword.get(1));
-                Log.i("KNU_Market/Alarm_Act", "keyword3=" + userKeyword.get(2));
-                Log.i("KNU_Market/Alarm_Act", "keyword4=" + userKeyword.get(3));
-                Log.i("KNU_Market/Alarm_Act", "keyword5=" + userKeyword.get(4));
-                //*/
-                //public NavigableSet<String> descendingSet();
-
-                Set<String> alarmPosts;
-                alarmPosts = userInfo.getAlarmPosts();
-
-                // 오름차순 (역순정렬)
-                NavigableSet<String> descendingSet;
-                //Set<String> treeSet = new TreeSet<String>(comparator);
-                NavigableSet<String> treeSet = new TreeSet<String>();
-                //treeSet = treeSet.descendingSet();
-
-                for(Iterator i = alarmPosts.iterator(); i.hasNext(); ) {
-                    treeSet.add((String)i.next());
-                }
-
-                for(Iterator i = alarmPosts.iterator(); i.hasNext(); ) {
-                //for(Iterator i = treeSet.descendingIterator(); i.hasNext(); ) {
+                for(Iterator i = zzimPosts.iterator(); i.hasNext(); ) {
                     new postListLoading().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,"JSP/RequestPost.jsp?post_no="+i.next());
-                    //task(j).execute("JSP/RequestPost.jsp?post_no="+i.next());
                 }
-                //updateView();
-
-
-                /*
-                if(key1.length() != 0 && !key1.contains(" "))
-                    task.execute("JSP/RequestSearch.jsp?search_keyword="+key1);
-                else
-                    keywordCount++;
-
-                if(key2.length() != 0 && !key2.contains(" "))
-                    task2.execute("JSP/RequestSearch.jsp?search_keyword="+key2);
-                else
-                    keywordCount++;
-
-                //if(key3 != null && key3 != "" && key3 != " ")
-                if(key3.length() != 0 && !key3.contains(" "))
-                    task3.execute("JSP/RequestSearch.jsp?search_keyword="+key3);
-                else
-                    keywordCount++;
-
-                if(key4.length() != 0 && !key4.contains(" "))
-                    task4.execute("JSP/RequestSearch.jsp?search_keyword="+key4);
-                else
-                    keywordCount++;
-
-                if(key5.length() != 0 && !key5.contains(" "))
-                    task5.execute("JSP/RequestSearch.jsp?search_keyword="+key5);
-                else {
-                    Log.i("KNU_Market/Alarm_Act", "keywordCount0=" + keywordCount);
-                    keywordCount++;
-                    //updateView(jArray);
-                }
-                   // keywordCount++;
-                //*/
-
-
-               // while(keywordCount < 5);    // wait for threads
-
-
-                //task.execute("JSP/RequestMainList.jsp");        // 지금은 메인화면 코드
-                // 검색할 키워드를 서버의 jsp에 보내는 코드 만들어야 //
-                ///////////////////////////////////////////////////////////////
             }
         }
         else{//인터넷 연결 불가
@@ -262,8 +188,8 @@ public class AlarmActivity extends Activity {
 
                 Integer key = (Integer)hmKeys[i];
                 json = (JSONObject)m.get(key);
-                Log.i("KNU_Market/Alarm_Act_updateView", "key=" + key);
-                Log.i("KNU_Market/Alarm_Act_updateView", "catch post_no=" + json.getInt("post_no"));
+                Log.i("KNU_Market/Zzim_Act_updateView", "key=" + key);
+                Log.i("KNU_Market/Zzim_Act_updateView", "catch post_no=" + json.getInt("post_no"));
 
 
 
@@ -290,7 +216,7 @@ public class AlarmActivity extends Activity {
                 else{
                     p_button.setBackgroundColor(Color.parseColor("#B2CCFF"));
                 }
-               //p_button.setBackgroundColor(Color.LTGRAY);
+                //p_button.setBackgroundColor(Color.LTGRAY);
                 p_button.setGravity(Gravity.FILL);
                 p_button.setId(json.getInt("post_no"));//Post의 번호를 각 버튼의 ID값으로 사용
                 p_button.setOnClickListener(new View.OnClickListener() {
@@ -350,7 +276,7 @@ public class AlarmActivity extends Activity {
                         .build();
 
                 ImageLoader imageLoader = ImageLoader.getInstance();
-                Log.i("KNU_Market/Alarm_Act_updateView", "Url=" + Url+"Image/"+json.getString("img1Url"));
+                Log.i("KNU_Market/Zzim_Act_updateView", "Url=" + Url+"Image/"+json.getString("img1Url"));
                 imageLoader.displayImage(Url+"Image/"+json.getString("img1Url"), p_img, options, new ImageLoadingListener() {
                     @Override
                     public void onLoadingStarted(String s, View view) {
@@ -397,7 +323,6 @@ public class AlarmActivity extends Activity {
             LinearLayout linearLayout_vertic = (LinearLayout)findViewById(R.id.list_vertical);
             linearLayout_vertic.addView(new_linearLayout);
         }
-        Log.i("KNU_Market/Alarm_Act", "///////////// END UPDATE VIEW //////////////");
     }
 
     public void mergeKeyword(JSONArray jArray) {
@@ -411,18 +336,18 @@ public class AlarmActivity extends Activity {
             try {
                 json = jArray.getJSONObject(product_count++);
                 m.put(json.getInt("post_no"), json);
-                Log.i("KNU_Market/Alarm_Act", "catch post_no=" + json.getInt("post_no"));
+                Log.i("KNU_Market/Zzim_Act", "catch post_no=" + json.getInt("post_no"));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
 
         keywordCount++;
-        Log.i("KNU_Market/Alarm_Act", "keywordCount2=" + keywordCount);
+        Log.i("KNU_Market/Zzim_Act", "keywordCount2=" + keywordCount);
 
         User_Info userInfo = User_Info.getUser_info();
-        Log.i("KNU_Market/Alarm_Act", "AlarmPostCount=" + userInfo.getAlarmPosts().size());
-        if(keywordCount == userInfo.getAlarmPosts().size()) {
+        Log.i("KNU_Market/Zzim_Act", "zzimPostsCount=" + userInfo.getZzimPosts().size());
+        if(keywordCount == userInfo.getZzimPosts().size()) {
             keywordCount = 0;
             updateView();
         }
@@ -526,12 +451,15 @@ public class AlarmActivity extends Activity {
             case R.id.btn_zzim:
                 break;
             case R.id.btn_alarm:
+                intent = new Intent(getBaseContext(), AlarmActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent);
+                finish();
                 break;
         }
     }
-
 }
-class IntComparator implements Comparator {
+class SetComparator implements Comparator {
     public int compare(Object firstObject, Object secondObject) {
         Integer first = (Integer) firstObject;
         Integer second = (Integer) secondObject;

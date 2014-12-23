@@ -75,6 +75,14 @@
             android:label="ConfigActivity" >
         </activity>
         <activity
+            android:name="com.harold.knumarket.Activity.MyPostActivity"
+            android:label="MyPostActivity" >
+        </activity>
+        <activity
+            android:name="com.harold.knumarket.Activity.ZzimActivity"
+            android:label="ZzimActivity" >
+        </activity>
+        <activity
             android:name="com.harold.knumarket.categories.Category_Book"
             android:label="Category_Book" >
         </activity>

@@ -25,6 +25,7 @@ public class User_Info {
     private String addition;
     public ArrayList<String> client_keyword;
     public Set<String> alarmPosts;
+    public Set<String> zzimPosts;
     //private int alarmPostCount;
     private static User_Info user_info = null;
 
@@ -83,6 +84,7 @@ public class User_Info {
         this.client_State = false;
         this.alarmOnOff = false;
         this.alarmPosts = new TreeSet<String>();
+        this.zzimPosts = new TreeSet<String>();
        // this.alarmPostCount = 0;
         //this.client_keyword = null;
     }
@@ -114,6 +116,8 @@ public class User_Info {
     }
     public Set<String> getAlarmPosts() { return user_info.alarmPosts; }
     public void setAlarmPosts(Set<String> stringSet) { user_info.alarmPosts = stringSet; }
+    public Set<String> getZzimPosts() { return user_info.zzimPosts; }
+    public void setZzimPosts(Set<String> stringSet) { user_info.zzimPosts = stringSet; }
 
 
 
@@ -174,23 +178,9 @@ public class User_Info {
         client_keyword.set(2, pref.getString("client_keyword3", ""));
         client_keyword.set(3, pref.getString("client_keyword4", ""));
         client_keyword.set(4, pref.getString("client_keyword5", ""));
-
-
-
-        // alarm_mode
-        // zzim count
-        // zzim1 ...
-        // final_alarm_no
-        // alarm_count
-        // alarm1 ...
-
-
     }
     public void SaveAlarmPosts(SharedPreferences.Editor editor)
     {
-        //alarmPostCount = alarmPosts.size();
-        //editor.putInt("alarmPostCount", alarmPostCount);     // 필요?
-
         editor.putStringSet("alarmPosts", alarmPosts);
         editor.commit();
         Log.i("KNU_Market/User_Info", "alarmPosts Saved");
@@ -198,9 +188,8 @@ public class User_Info {
     }
     public void LoadAlarmPosts(SharedPreferences pref)
     {
-        //alarmPostCount = pref.getInt("alarmPostCount", 0);      // 필요?
         alarmPosts = pref.getStringSet("alarmPosts",new TreeSet<String>());
-        /*
+        /*  // 테스트용 데이터
         if(alarmPostCount == 0) {
             alarmPosts.add("33");
             alarmPosts.add("54");
@@ -213,7 +202,29 @@ public class User_Info {
             Log.i("KNU_Market/User_Info", "alarmPostNum=" + i.next());
         }
     }
+    public void SaveZzimPosts(SharedPreferences.Editor editor)
+    {
+        editor.putStringSet("zzimPosts", zzimPosts);
+        editor.commit();
+        Log.i("KNU_Market/User_Info", "zzimPosts Saved");
 
+    }
+    public void LoadZzimPosts(SharedPreferences pref)
+    {
+        zzimPosts = pref.getStringSet("zzimPosts",new TreeSet<String>());
+        /*  // 테스트용 데이터
+        if(alarmPostCount == 0) {
+            alarmPosts.add("33");
+            alarmPosts.add("54");
+            alarmPosts.add("57");
+            alarmPosts.add("56");
+            alarmPostCount = 4;
+        }*/
+
+        for(Iterator i = zzimPosts.iterator(); i.hasNext(); ) {
+            Log.i("KNU_Market/User_Info", "zzimPosts=" + i.next());
+        }
+    }
     public void SaveLastPostNo(SharedPreferences.Editor editor)
     {
         editor.putInt("LastPostNo", LastPostNo);

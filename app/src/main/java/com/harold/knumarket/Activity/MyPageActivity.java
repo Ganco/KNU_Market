@@ -103,7 +103,6 @@ public class MyPageActivity extends Activity {
         Intent intent = null;
 
         switch (id){
-
             case R.id.btn_goAddPost:
                 intent = new Intent(getBaseContext(), addPostActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
@@ -114,7 +113,8 @@ public class MyPageActivity extends Activity {
             case R.id.btn_home:
                 intent = new Intent(getBaseContext(), MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                //intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 //startActivityForResult(intent, REQUEST_CODE_MAIN);
                 startActivity(intent);
                 finish();
@@ -137,6 +137,9 @@ public class MyPageActivity extends Activity {
                 finish();
                 break;
             case R.id.btn_zzim:
+                intent = new Intent(getBaseContext(), ZzimActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent);
                 break;
             case R.id.btn_alarm:
                 intent = new Intent(getBaseContext(), AlarmActivity.class);
@@ -144,22 +147,13 @@ public class MyPageActivity extends Activity {
                 startActivity(intent);
                 finish();
                 break;
-
             case R.id.btn_goMyPost:
+                intent = new Intent(getBaseContext(), MyPostActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent);
+                finish();
                 break;
-            case R.id.btn_LogOut:
 
-                User_Info user = User_Info.getUser_info();
-                user.setClient_State(false);
-                user.setClient_Id(null);
-                user.setPhone_No(null);
-                user.setClient_keyword(null,0);
-                user.setClient_keyword(null,1);
-                user.setClient_keyword(null,2);
-
-
-
-                break;
         }
     }
 

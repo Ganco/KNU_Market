@@ -174,6 +174,9 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
                 break;
 
             case R.id.btn_zzim:
+                intent = new Intent(getBaseContext(), ZzimActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent);
                 break;
 
             case R.id.btn_alarm:
@@ -212,7 +215,6 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
             // */
         }
     }
-
     @Override
     protected void onStart(){
         super.onStart();
