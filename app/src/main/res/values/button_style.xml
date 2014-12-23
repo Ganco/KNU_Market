@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="button_img">
+        <item name="android:background">@drawable/button_img</item>
+        <item name="android:gravity">left|center</item>
+        <item name="android:paddingLeft">130dp</item>
+        <item name="android:drawablePadding">10dp</item>
+    </style>
+    <style name="button_no_img">
+        <item name="android:background">@drawable/button_img</item>
+    </style>
+</resources>

@@ -87,8 +87,7 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginLeft="10dp">
+                android:layout_margin="10dp">
 
                 <Button
                     android:layout_width="match_parent"
@@ -96,43 +95,38 @@
                     android:text="일반 전체"
                     android:id="@+id/btn_029"
                     android:layout_weight="1"
-                    android:onClick="onClick" />
+                    android:onClick="onClick"
+                    style="@style/button_img"/>
 
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="소설"
                     android:drawableLeft="@drawable/dragon7"
-                    android:gravity="left|center"
-                    android:paddingLeft="130dp"
-                    android:drawablePadding="10dp"
                     android:id="@+id/btn_020"
                     android:layout_weight="1"
-                    android:onClick="onClick" />
+                    android:onClick="onClick"
+                    style="@style/button_img"/>
 
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:drawableLeft="@drawable/apple20"
-                    android:gravity="left|center"
-                    android:paddingLeft="130dp"
-                    android:drawablePadding="10dp"
                     android:text="자기계발"
                     android:id="@+id/btn_021"
                     android:layout_weight="1"
-                    android:onClick="onClick" />
+                    android:onClick="onClick"
+                    style="@style/button_img"/>
 
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:drawableLeft="@drawable/computer136"
-                    android:gravity="left|center"
-                    android:paddingLeft="130dp"
-                    android:drawablePadding="10dp"
                     android:text="전문서적"
                     android:id="@+id/btn_022"
                     android:layout_weight="1"
-                    android:onClick="onClick" />
+                    android:onClick="onClick"
+                    style="@style/button_img"/>
             </LinearLayout>
 
 

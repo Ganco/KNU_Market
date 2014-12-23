@@ -89,9 +89,7 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginLeft="10dp"
-                >
+                android:layout_margin="10dp">
 
                 <Button
                     android:layout_width="match_parent"
@@ -99,55 +97,48 @@
                     android:text="전공 전체"
                     android:id="@+id/btn_009"
                     android:layout_weight="1"
-                    android:onClick="onClick" />
+                    android:onClick="onClick"
+                    style="@style/button_no_img"/>
 
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="IT대"
                     android:drawableLeft="@drawable/pc6"
-                    android:gravity="left|center"
-                    android:paddingLeft="130dp"
-                    android:drawablePadding="10dp"
                     android:id="@+id/btn_000"
                     android:layout_weight="1"
-                    android:onClick="onClick" />
+                    android:onClick="onClick"
+                    style="@style/button_img"/>
 
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="공대"
                     android:drawableLeft="@drawable/engineering1"
-                    android:gravity="left|center"
-                    android:paddingLeft="130dp"
-                    android:drawablePadding="10dp"
                     android:id="@+id/btn_001"
                     android:layout_weight="1"
-                    android:onClick="onClick" />
+                    android:onClick="onClick"
+                    style="@style/button_img"/>
 
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="경상대"
                     android:drawableLeft="@drawable/businessman242"
-                    android:gravity="left|center"
-                    android:paddingLeft="130dp"
-                    android:drawablePadding="10dp"
                     android:id="@+id/btn_002"
                     android:layout_weight="1"
-                    android:onClick="onClick" />
+                    android:onClick="onClick"
+                    style="@style/button_img"/>
 
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="인문대"
                     android:drawableLeft="@drawable/group58"
-                    android:gravity="left|center"
-                    android:paddingLeft="130dp"
-                    android:drawablePadding="10dp"
                     android:id="@+id/btn_003"
                     android:layout_weight="1"
-                    android:onClick="onClick" />
+                    android:onClick="onClick"
+                    style="@style/button_img"/>
             </LinearLayout>
 
 

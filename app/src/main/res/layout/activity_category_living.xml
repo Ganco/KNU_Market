@@ -86,8 +86,7 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginLeft="10dp">
+                android:layout_margin="10dp">
 
                 <Button
                     android:layout_width="match_parent"
@@ -95,43 +94,39 @@
                     android:text="자취용품 전체"
                     android:id="@+id/btn_199"
                     android:layout_weight="1"
-                    android:onClick="onClick" />
+                    android:onClick="onClick"
+                    style="@style/button_no_img"
+                />
 
                 <Button
+                    style="@style/button_img"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="가전"
                     android:drawableLeft="@drawable/washing11"
-                    android:gravity="left|center"
-                    android:paddingLeft="130dp"
-                    android:drawablePadding="10dp"
                     android:id="@+id/btn_100"
                     android:layout_weight="1"
-                    android:onClick="onClick" />
+                    android:onClick="onClick"/>
 
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="주방"
                     android:drawableLeft="@drawable/bowl12"
-                    android:gravity="left|center"
-                    android:paddingLeft="130dp"
-                    android:drawablePadding="10dp"
                     android:id="@+id/btn_110"
                     android:layout_weight="1"
-                    android:onClick="onClick" />
+                    android:onClick="onClick"
+                    style="@style/button_img"/>
 
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="가구"
                     android:drawableLeft="@drawable/sofa9"
-                    android:gravity="left|center"
-                    android:paddingLeft="130dp"
-                    android:drawablePadding="10dp"
                     android:id="@+id/btn_120"
                     android:layout_weight="1"
-                    android:onClick="onClick" />
+                    android:onClick="onClick"
+                    style="@style/button_img"/>
 
             </LinearLayout>
         </LinearLayout>
